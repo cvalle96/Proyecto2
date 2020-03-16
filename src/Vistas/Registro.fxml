@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="937.0" style="-fx-background-color: #FAFAFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraRegistro">
+    <children>
+        <Button fx:id="isesion" defaultButton="true" layoutX="371.0" layoutY="475.0" mnemonicParsing="false" onAction="#registrar" prefHeight="45.0" prefWidth="196.0" style="-fx-background-color: #2AFF00;" text="REGISTRAR">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <effect>
+                <Lighting bumpInput="$null" diffuseConstant="2.0">
+                    <light>
+                        <Light.Distant>
+                            <color>
+                                <Color blue="0.14290936291217804" green="0.9078947305679321" red="0.16840887069702148" />
+                            </color>
+                        </Light.Distant>
+                    </light>
+                </Lighting>
+            </effect>
+        </Button>
+        <TextField id="userBox" fx:id="usuario" layoutX="371.0" layoutY="222.0" prefHeight="45.0" prefWidth="196.0" promptText="Usuario" />
+        <Text layoutX="1.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professional University System Intelligence" textAlignment="CENTER" wrappingWidth="937.0">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Text>
+        <Text layoutX="290.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce tu usuario y contraseña para registrarte:" wrappingWidth="358.595703125">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <PasswordField id="passwordBox" fx:id="contrasena" layoutX="371.0" layoutY="290.0" prefHeight="45.0" prefWidth="196.0" promptText="Contraseña" />
+        <Button fx:id="logButton" layoutX="675.0" layoutY="543.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="46.0" prefWidth="117.0" text="LOGIN">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <effect>
+                <Lighting bumpInput="$null" diffuseConstant="2.0">
+                    <light>
+                        <Light.Distant>
+                            <color>
+                                <Color blue="0.14290936291217804" green="0.9078947305679321" red="0.16840887069702148" />
+                            </color>
+                        </Light.Distant>
+                    </light>
+                </Lighting>
+            </effect></Button>
+      <CheckBox fx:id="soyProfeCheckbox" layoutX="371.0" layoutY="430.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="176.0" text="Soy Profesor" />
+        <Text layoutX="400.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Ya estás registrado? Haz login" wrappingWidth="289.5956726074219">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+      <PasswordField id="passwordBox" fx:id="grupo" layoutX="371.0" layoutY="362.0" prefHeight="45.0" prefWidth="196.0" promptText="Grupo" />
+    </children>
+</AnchorPane>
