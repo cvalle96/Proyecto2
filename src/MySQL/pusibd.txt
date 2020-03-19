@@ -1,4 +1,4 @@
-﻿create database if not exists pusidb;
+create database if not exists pusidb;
 
 
 CREATE TABLE pusidb.Usuario
@@ -36,7 +36,7 @@ asignatura varchar(50),
 prueba varchar(50));
 
 
-CREATE TABLE psuidb.Aula
+CREATE TABLE pusidb.Aula
 (idAula int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 idGrupo int,
 ordenadores boolean);
