@@ -1,0 +1,57 @@
+﻿create database if not exists pusidb;
+
+
+CREATE TABLE pusidb.Usuario
+(id_user int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+expediente varchar(50),
+contraseña varchar(50),
+nombre varchar(50),
+apellido varchar(25),
+telefono varchar(25),
+profesor boolean);
+
+
+CREATE TABLE pusidb.Alumno
+(idAlumno int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+idUser int,
+expediente int,
+contraseña varchar(50),
+nombre varchar(50),
+apellido varchar(25),
+telefono varchar(25));
+
+
+CREATE TABLE pusidb.Profesor
+(idProfesor int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+idUser int,
+grupos varchar(4),
+asignatura varchar(50));
+
+
+CREATE TABLE pusidb.Notas
+(idNotas int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+idAlumno int,
+nota int,
+asignatura varchar(50),
+prueba varchar(50));
+
+
+CREATE TABLE psuidb.Aula
+(idAula int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+idGrupo int,
+ordenadores boolean);
+
+
+CREATE TABLE pusidb.Registro
+(idRegistro int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+idAula int,
+temperatura int,
+ruido int,
+humedad int,
+hora Date);
+
+
+CREATE TABLE pusidb.Grupo
+(idGrupo int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+idAlumno int,
+carrera varchar(50));
