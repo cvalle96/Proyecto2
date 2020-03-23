@@ -33,8 +33,8 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="324.0" layoutX="14.0" layoutY="86.0" stroke="BLACK" strokeType="INSIDE" width="255.0" />
-                        <Label layoutX="6.0" layoutY="12.0" prefHeight="74.0" prefWidth="119.0" text="PERFIL">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="248.0" layoutX="14.0" layoutY="86.0" stroke="BLACK" strokeType="INSIDE" width="208.0" />
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="74.0" prefWidth="119.0" text="PERFIL">
                            <font>
                               <Font size="36.0" />
                            </font>

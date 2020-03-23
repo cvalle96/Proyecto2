@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -7,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraProfesor">
    <children>
-      <Button fx:id="volverButton" layoutX="215.0" layoutY="371.0" mnemonicParsing="false" onAction="#returnToLogin" prefHeight="27.0" prefWidth="77.0" text="Volver" />
+      <Button fx:id="volverButton" layoutX="215.0" layoutY="371.0" mnemonicParsing="false" onAction="#returnToLogin" prefHeight="27.0" prefWidth="77.0" style="-fx-background-color: #2AFF00;" text="Volver" />
       <ListView fx:id="listaUsuarios" layoutX="42.0" layoutY="75.0" onMouseClicked="#selectThisUser" prefHeight="277.0" prefWidth="250.0" />
       <Label layoutX="42.0" layoutY="41.0" prefHeight="18.0" prefWidth="166.0" text="Selecciona usuario de tu clase" />
       <Label fx:id="labelAlumnoModificar" contentDisplay="CENTER" layoutX="435.0" layoutY="50.0" prefHeight="48.0" prefWidth="200.0" text="esperando alumno" textAlignment="CENTER" textFill="#3d10f0">
@@ -17,7 +18,7 @@
       </Label>
       <TextField fx:id="textFieldExpediente" layoutX="443.0" layoutY="187.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
       <TextField fx:id="textFieldNombre" layoutX="443.0" layoutY="136.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
-      <Button fx:id="actualizarButton" layoutX="451.0" layoutY="313.0" mnemonicParsing="false" onAction="#actualizarValores" prefHeight="38.0" prefWidth="184.0" text="ENVIAR CAMBIOS" />
+      <Button fx:id="actualizarButton" layoutX="451.0" layoutY="313.0" mnemonicParsing="false" onAction="#actualizarValores" prefHeight="38.0" prefWidth="184.0" style="-fx-background-color: #2AFF00;" text="ENVIAR CAMBIOS" />
       <Button fx:id="actualizarButton1" layoutX="451.0" layoutY="365.0" mnemonicParsing="false" onAction="#borrarEsteUsuario" prefHeight="38.0" prefWidth="184.0" text="BORRAR USUARIO" textFill="#ea0101" />
       <TextField fx:id="textFieldGrupo" layoutX="443.0" layoutY="238.0" prefHeight="26.0" prefWidth="200.0" promptText="Clase" />
    </children>
