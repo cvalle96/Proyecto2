@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -15,7 +16,9 @@ public class Login {
     @FXML
     Button loginButton, registroButton;
     @FXML
-    TextField contrasena, usuario, consola;
+    TextField contrasena, usuario ;
+    @FXML
+    Label consola;
 
     String contrasenaString, username;
 
@@ -27,15 +30,16 @@ public class Login {
             if (!comprobarUsuario(username, contrasenaString)){
                 System.out.println("nombre no encontrado");
             }else{
+                // if aqui de comprobar si es profesor. si es asi, lanzar editorUsuarios y si no, perfilnotassensores
                 startApp();
-
             }
         }
     }
 
-    public boolean check(){
+    public boolean check() throws IOException {
         if (usuario.getText().equals("") ){
             consola.setText("falta nombre de usuario!");
+            startApp();
             return false;
         }else if (contrasena.getText().equals("") ){
             consola.setText("falta contraseña!");
