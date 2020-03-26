@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Login {
     @FXML
     Button loginButton, registroButton;
@@ -25,9 +27,8 @@ public class Login {
             if (!comprobarUsuario(username, contrasenaString)){
                 System.out.println("nombre no encontrado");
             }else{
-                startChat();
-                Stage newStage = (Stage) loginButton.getScene().getWindow();
-                newStage.close();
+                startApp();
+
             }
         }
     }
@@ -43,10 +44,16 @@ public class Login {
         return true;
     }
 
-    private void startChat() {
+    private void startApp() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/PerfilNotasSensores.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("App");
+        stage.show();
 
-        //este metodo lanza la siguiente pagina
-
+        Stage newStage = (Stage) loginButton.getScene().getWindow();
+        newStage.close();
     }
 
     private boolean comprobarUsuario(String username, String contrasenaString) {
