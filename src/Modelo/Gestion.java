@@ -3,6 +3,7 @@ package Modelo;
 import java.util.ArrayList;
 
 public class Gestion {
+
     private ArrayList<Usuario> listaUsuarios;
     private ArrayList<Usuario> listaProfesores;
     private ArrayList<Usuario> listaAdmins;

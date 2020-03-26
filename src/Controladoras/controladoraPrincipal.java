@@ -1,29 +1,23 @@
 package Controladoras;
 
-import javafx.event.ActionEvent;
+import Modelo.Usuario;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+import javafx.scene.control.Tab;
 
 public class controladoraPrincipal {
-
     @FXML
-    Button logOffButton;
+    Tab editorTab;
 
-    public void logOut(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Login.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Login");
-        stage.show();
+    Usuario currentUser = null;
 
-        Stage newStage = (Stage) logOffButton.getScene().getWindow();
-        newStage.close();
+    public controladoraPrincipal(){
+        if (currentUser.getRolUser().equals("profesor")){
+            editorTab.setDisable(true);
+        }else{
+            editorTab.setDisable(false);
+        }
+
+
     }
+
 }

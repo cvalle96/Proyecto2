@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraNotas">
+
+    <children>
+        <ListView layoutX="37.0" layoutY="191.0" prefHeight="287.0" prefWidth="729.0">
+            <cursor>
+                <Cursor fx:constant="CLOSED_HAND" />
+            </cursor>
+            <effect>
+                <DropShadow />
+            </effect>
+            <opaqueInsets>
+                <Insets left="2.0" top="2.0" />
+            </opaqueInsets>
+        </ListView>
+        <Label layoutX="92.0" layoutY="57.0" prefHeight="74.0" prefWidth="119.0" text="NOTAS">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+        <Label layoutX="356.0" layoutY="57.0" prefHeight="74.0" prefWidth="179.0" text="ACTUALIZADO:">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <TextField layoutX="548.0" layoutY="79.0" prefHeight="31.0" prefWidth="105.0" />
+    </children>
+
+
+</AnchorPane>

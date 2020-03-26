@@ -49,7 +49,7 @@ public class Login {
     }
 
     private void startApp() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/PerfilNotasSensores.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabControler.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

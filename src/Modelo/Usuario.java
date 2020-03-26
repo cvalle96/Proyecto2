@@ -1,7 +1,7 @@
 package Modelo;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 
 public class Usuario extends Gestion {
     // la clase usuario que inicializa los users de nuestra app
@@ -13,14 +13,14 @@ public class Usuario extends Gestion {
     private String contrasenia;
     private String clase;
 
-    public Usuario(String nombre, String contrasenia) throws FileNotFoundException {
+    public Usuario(String nombre, String contrasenia)  {
         this.nombreUser=nombre;
         this.rolUser="ESTUDIANTE";
         this.contrasenia =contrasenia;
         this.numeroExpediente= generarExpediente();
 
     }
-    public Usuario(String nombre, String contrasenia, String numExpediente, String clase) throws FileNotFoundException {
+    public Usuario(String nombre, String contrasenia, String numExpediente, String clase)  {
         this.nombreUser=nombre;
         this.rolUser="ESTUDIANTE";
         this.contrasenia =contrasenia;
