@@ -1,5 +1,5 @@
 package Controladoras;
 
-public class controladoraNotas {
+public class controladoraNotas extends controladoraPrincipal{
 
 }

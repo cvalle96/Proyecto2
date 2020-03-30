@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class controladoraPerfil {
+public class controladoraPerfil extends controladoraPrincipal{
 
     @FXML
     Button logOffButton;

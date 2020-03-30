@@ -6,7 +6,6 @@ public class Gestion {
 
     private ArrayList<Usuario> listaUsuarios;
     private ArrayList<Usuario> listaProfesores;
-    private ArrayList<Usuario> listaAdmins;
     private ArrayList<String> listaExpedientes;
     private Usuario currentUser;
 
@@ -14,7 +13,6 @@ public class Gestion {
     public Gestion(){
         listaUsuarios=new ArrayList<Usuario>();
         listaProfesores=new ArrayList<Usuario>();
-        listaAdmins = new ArrayList<Usuario>();
         listaExpedientes = new ArrayList<String>();
     }
 
@@ -38,16 +36,6 @@ public class Gestion {
         listaProfesores.add(user);
         listaExpedientes.add(user.getNumeroExpediente());
     }
-    public void añadirAdmin(Usuario user){
-        if (comprobadorUsuario(user))
-            return;
-        user.setRolUser("ADMIN");
-        while(comprobadorExpediente(user)){
-            user.setNumeroExpediente(user.generarExpediente());
-        }
-        listaAdmins.add(user);
-        listaExpedientes.add(user.getNumeroExpediente());
-    }
 
     public boolean comprobadorUsuario(Usuario user){
         //devuelve true si hay coincidencia
@@ -57,11 +45,6 @@ public class Gestion {
             }
         }
         for (Usuario x : listaProfesores){
-            if (user == x){
-                return true;
-            }
-        }
-        for (Usuario x : listaAdmins){
             if (user == x){
                 return true;
             }
@@ -95,10 +78,6 @@ public class Gestion {
 
     public ArrayList<Usuario> getListaProfesores() {
         return listaProfesores;
-    }
-
-    public ArrayList<Usuario> getListaAdmins() {
-        return listaAdmins;
     }
 
     public void setCurrentUser(Usuario user){ currentUser=user;}

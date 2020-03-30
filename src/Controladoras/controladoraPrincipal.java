@@ -16,8 +16,13 @@ public class controladoraPrincipal {
         }else{
             editorTab.setDisable(false);
         }
+    }
 
-
+    public void setCurrentUser(Usuario user){
+        currentUser=user;
+    }
+    public Usuario getCurrentUser(){
+        return currentUser;
     }
 
 }

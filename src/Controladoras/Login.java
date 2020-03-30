@@ -1,5 +1,6 @@
 package Controladoras;
 
+import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,22 +17,23 @@ public class Login {
     @FXML
     Button loginButton, registroButton;
     @FXML
-    TextField contrasena, usuario ;
+    TextField contrasenaField, usuario ;
     @FXML
     Label consola;
 
-    String contrasenaString, username;
+    String contrasena, username;
+    Usuario currentUser;
 
     
     public void login(ActionEvent actionEvent) throws Exception {
         if (check()){
             username = usuario.getText();
-            contrasenaString = contrasena.getText();
-            if (!comprobarUsuario(username, contrasenaString)){
-                System.out.println("nombre no encontrado");
-            }else{
-                // if aqui de comprobar si es profesor. si es asi, lanzar editorUsuarios y si no, perfilnotassensores
+            contrasena = contrasenaField.getText();
+            if (comprobarUsuario(username, contrasena)){
+                currentUser = new Usuario(username,contrasena);
                 startApp();
+            }else{
+                consola.setText("nombre no encontrado en al bbdd");
             }
         }
     }
@@ -40,10 +42,10 @@ public class Login {
         if (usuario.getText().equals("") ){
             consola.setText("falta nombre de usuario!");
             startApp();
-            return false;
-        }else if (contrasena.getText().equals("") ){
+            return true;
+        }else if (contrasenaField.getText().equals("") ){
             consola.setText("falta contraseña!");
-            return false;
+            return true;
         }
         return true;
     }
@@ -51,6 +53,10 @@ public class Login {
     private void startApp() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabControler.fxml"));
         Parent root = loader.load();
+
+        controladoraPrincipal controler = new controladoraPrincipal();
+        controler.setCurrentUser(currentUser);
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("App");
