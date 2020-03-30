@@ -22,11 +22,13 @@ public class controladoraSensores extends controladoraPrincipal{
     }
 
     Usuario currentUser;
-    String claseActual = currentUser.getClase();
+    String claseActual ;
 
     public controladoraSensores(){
+        claseActual = currentUser.getClase();
         connectBBDD();
         actualizar();
+
     }
 
     private void connectBBDD() {

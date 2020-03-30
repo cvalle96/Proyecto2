@@ -11,12 +11,17 @@ public class controladoraPrincipal {
     Usuario currentUser = null;
 
     public controladoraPrincipal(){
+        /*
         if (currentUser.getRolUser().equals("profesor")){
             editorTab.setDisable(true);
         }else{
             editorTab.setDisable(false);
         }
+        */
+
     }
+
+
 
     public void setCurrentUser(Usuario user){
         currentUser=user;

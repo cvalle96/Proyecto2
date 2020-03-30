@@ -28,6 +28,7 @@ public class Usuario extends Gestion {
         this.clase=clase;
     }
 
+
     public String generarExpediente(){
         String answer = Math.random() +"";
         answer = answer.substring(2,9);
