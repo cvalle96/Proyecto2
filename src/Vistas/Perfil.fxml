@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -10,8 +6,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.shape.Rectangle?>
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controladoras.controladoraPerfil" prefHeight="592.0" prefWidth="824.0">
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="592.0" prefWidth="824.0">
+<AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controladoras.controladoraPerfil" >
         <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6d8da" height="262.0" layoutX="35.0" layoutY="127.0" stroke="BLACK" strokeType="INSIDE" width="276.0" />
             <Label layoutX="369.0" layoutY="231.0" prefHeight="27.0" prefWidth="119.0" text="Carrera:">
@@ -60,6 +55,5 @@
                 </font>
             </Button>
         </children>
-    </AnchorPane>
 
 </AnchorPane>

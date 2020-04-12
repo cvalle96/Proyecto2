@@ -19,17 +19,20 @@ public class controladoraEditor extends controladoraPrincipal {
     Label labelAlumnoModificar;
     @FXML
     TextField textFieldExpediente,textFieldNombre, textFieldGrupo;
+    @FXML
+    Button borrarButton, actualizarButton;
 
     ArrayList<String> listaNombres;
     Usuario usuarioModificar;
     Usuario currentUser;
 
+    /*
     public controladoraEditor(){
         conectar();
         poblarListView();
 
     }
-
+*/
     @Override
     public void setCurrentUser(Usuario user) {
         currentUser = user;
@@ -86,23 +89,16 @@ public class controladoraEditor extends controladoraPrincipal {
     }
 
     public void borrarEsteUsuario(ActionEvent actionEvent) {
-        int index = getUserindex(usuarioModificar);
 
         //cargarnos usuarioModificar de la bbdd
         textFieldExpediente.clear();
         textFieldNombre.clear();
         textFieldGrupo.clear();
-
         try{
             escribirCambios();
+            poblarListView();
         } catch (IOException e){
             e.printStackTrace();
         }
-    }
-
-    public int getUserindex(Usuario user){
-        int index=0;
-        //obtener el index de alguna forma, nos e si es relevante ahora que trabajamos con bbdd
-        return index;
     }
 }

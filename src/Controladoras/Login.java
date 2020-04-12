@@ -32,16 +32,16 @@ public class Login {
 
     
     public void login(ActionEvent actionEvent) throws Exception {
-        //if (check()){
-            //username = usuario.getText();
-            //contrasena = contrasenaField.getText();
-            //if (comprobarUsuario(username, contrasena)){
-                //currentUser = new Usuario(username,contrasena);
+        if (check()){
+            username = usuario.getText();
+            contrasena = contrasenaField.getText();
+            if (comprobarUsuario(username, contrasena)){
+                currentUser = new Usuario(username,contrasena);
                 startApp();
-            //}else{
-                //consola.setText("nombre no encontrado en al bbdd");
-           // }
-       // }
+            }else{
+                consola.setText("nombre no encontrado en al bbdd");
+            }
+        }
     }
 
     public boolean check() throws IOException {

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -10,7 +9,7 @@
 <AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraNotas">
 
     <children>
-        <ListView layoutX="37.0" layoutY="191.0" prefHeight="287.0" prefWidth="729.0">
+        <ListView fx:id="notasListview" layoutX="37.0" layoutY="191.0" prefHeight="287.0" prefWidth="729.0">
             <cursor>
                 <Cursor fx:constant="CLOSED_HAND" />
             </cursor>
@@ -31,7 +30,7 @@
                 <Font size="24.0" />
             </font>
         </Label>
-        <TextField layoutX="548.0" layoutY="79.0" prefHeight="31.0" prefWidth="105.0" />
+        <TextField fx:id="horaTextfield" layoutX="548.0" layoutY="79.0" prefHeight="31.0" prefWidth="105.0" />
     </children>
 
 
