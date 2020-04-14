@@ -25,7 +25,7 @@
             </effect>
         </Button>
         <TextField fx:id="usernameBox" layoutX="371.0" layoutY="222.0" prefHeight="45.0" prefWidth="196.0" promptText="Usuario" />
-        <Text layoutX="1.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professional University System Intelligence" textAlignment="CENTER" wrappingWidth="937.0">
+        <Text layoutX="1.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professional University System Interface" textAlignment="CENTER" wrappingWidth="937.0">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>

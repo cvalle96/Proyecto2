@@ -4,8 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import BBDD.conexionBD;
-
 
 public class Main extends Application{
 
@@ -16,7 +14,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Vistas/Login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Vistas/tabController.fxml"));
             primaryStage.setTitle("Login");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();

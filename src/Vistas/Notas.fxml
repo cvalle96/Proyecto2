@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraNotas">
+
+    <children>
+        <ListView fx:id="notasListview" layoutX="37.0" layoutY="191.0" prefHeight="287.0" prefWidth="729.0">
+            <cursor>
+                <Cursor fx:constant="CLOSED_HAND" />
+            </cursor>
+            <effect>
+                <DropShadow />
+            </effect>
+            <opaqueInsets>
+                <Insets left="2.0" top="2.0" />
+            </opaqueInsets>
+        </ListView>
+        <Label layoutX="92.0" layoutY="57.0" prefHeight="74.0" prefWidth="119.0" text="NOTAS">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+        <Label layoutX="356.0" layoutY="57.0" prefHeight="74.0" prefWidth="179.0" text="ACTUALIZADO:">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="horaTextfield" layoutX="548.0" layoutY="79.0" prefHeight="31.0" prefWidth="105.0" />
+    </children>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="71.0" layoutY="71.0" prefHeight="74.0" prefWidth="217.0" text="NOTAS">
-         <font>
-            <Font size="62.0" />
-         </font>
-      </Label>
-      <Label layoutX="364.0" layoutY="144.0" prefHeight="21.0" prefWidth="413.0" text="ACTUALIZADA: fecha actual">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <ListView layoutX="325.0" layoutY="200.0" prefHeight="368.0" prefWidth="440.0">
-         <opaqueInsets>
-            <Insets left="2.0" top="2.0" />
-         </opaqueInsets>
-         <cursor>
-            <Cursor fx:constant="CLOSED_HAND" />
-         </cursor>
-         <effect>
-            <DropShadow />
-         </effect>
-      </ListView>
-      <Button fx:id="volverButton" layoutX="48.0" layoutY="537.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="97.0" text="VOLVER" textFill="#d30f0f" />
-   </children>
 </AnchorPane>

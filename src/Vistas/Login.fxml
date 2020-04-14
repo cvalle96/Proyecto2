@@ -23,8 +23,8 @@
                     </light>
                 </Lighting>
             </effect></Button>
-        <TextField id="userBox" fx:id="usuario" layoutX="371.0" layoutY="222.0" prefHeight="45.0" prefWidth="196.0" promptText="Usuario" />
-        <Text layoutX="1.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professional University System Intelligence" textAlignment="CENTER" wrappingWidth="937.0">
+        <TextField id="userBox" fx:id="usuarioField" layoutX="371.0" layoutY="222.0" prefHeight="45.0" prefWidth="196.0" promptText="Expediente" />
+        <Text layoutX="1.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professional University System Interface" textAlignment="CENTER" wrappingWidth="937.0">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
@@ -34,7 +34,7 @@
                 <Font size="16.0" />
             </font>
         </Text>
-        <PasswordField id="passwordBox" fx:id="contrasena" layoutX="371.0" layoutY="290.0" prefHeight="45.0" prefWidth="196.0" promptText="Contraseña" />
+        <PasswordField id="passwordBox" fx:id="contrasenaField" layoutX="371.0" layoutY="290.0" prefHeight="45.0" prefWidth="196.0" promptText="Contraseña" />
       <Button fx:id="registroButton" layoutX="697.0" layoutY="512.0" mnemonicParsing="false" onAction="#registro" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: #10FF00;" text="REGISTRO">
          <effect>
             <Lighting bumpInput="$null">
@@ -43,11 +43,11 @@
                </light>
             </Lighting>
          </effect></Button>
-      <Label layoutX="517.0" layoutY="519.0" text="NO ESTÁS REGISTRADO?">
+      <Label layoutX="517.0" layoutY="519.0" text="¿NO ESTÁS REGISTRADO?">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="377.0" layoutY="350.0" prefHeight="18.0" prefWidth="106.0" textFill="#e51111" />
+      <Label fx:id="consola" layoutX="377.0" layoutY="350.0" prefHeight="18.0" prefWidth="186.0" textAlignment="CENTER" textFill="#e51111" />
     </children>
 </AnchorPane>
