@@ -14,7 +14,7 @@ import java.sql.DatabaseMetaData;
 public class OracleBD {
     // The recommended format of a connection URL is the long format with the
     // connection descriptor.
-    final static String DB_URL= "jdbc:oracle:thin:@dbpusi_medium?TNS_ADMIN=src/Wallet_Conexion";
+    final static String DB_URL= "jdbc:oracle:thin:@tcps://adb.uk-london-1.oraclecloud.com:1522?TNS_ADMIN=src/Wallet_Conexion";
     // For ATP and ADW - use the TNS Alias name along with the TNS_ADMIN when using 18.3 JDBC driver
     // final static String DB_URL="jdbc:oracle:thin:@wallet_dbname?TNS_ADMIN=/Users/test/wallet_dbname";
     // In case of windows, use the following URL
