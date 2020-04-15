@@ -1,36 +1,20 @@
 package BBDD;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-
 import oracle.jdbc.pool.OracleDataSource;
 import oracle.jdbc.OracleConnection;
 import java.sql.DatabaseMetaData;
 
 public class OracleBD {
-    // The recommended format of a connection URL is the long format with the
-    // connection descriptor.
-    final static String DB_URL= "jdbc:oracle:thin:@tcps://adb.uk-london-1.oraclecloud.com:1522?TNS_ADMIN=src/Wallet_Conexion";
-    // For ATP and ADW - use the TNS Alias name along with the TNS_ADMIN when using 18.3 JDBC driver
-    // final static String DB_URL="jdbc:oracle:thin:@wallet_dbname?TNS_ADMIN=/Users/test/wallet_dbname";
-    // In case of windows, use the following URL
-    // final static String DB_URL="jdbc:oracle:thin:@wallet_dbname?TNS_ADMIN=C:\\Users\\test\\wallet_dbname";
+
+    final static String DB_URL= "jdbc:oracle:thin:@dbpusi_medium?TNS_ADMIN=src/Wallet_Conexion";
     final static String DB_USER = "admin";
     final static String DB_PASSWORD = "Proyecto2PUSI";
 
-    /*
-     * The method gets a database connection using
-     * oracle.jdbc.pool.OracleDataSource. It also sets some connection
-     * level properties, such as,
-     * OracleConnection.CONNECTION_PROPERTY_DEFAULT_ROW_PREFETCH,
-     * OracleConnection.CONNECTION_PROPERTY_THIN_NET_CHECKSUM_TYPES, etc.,
-     * There are many other connection related properties. Refer to
-     * the OracleConnection interface to find more.
-     */
     public static void main(String args[]) throws SQLException {
         Properties info = new Properties();
         info.put(OracleConnection.CONNECTION_PROPERTY_USER_NAME, DB_USER);
@@ -42,7 +26,7 @@ public class OracleBD {
         ods.setURL(DB_URL);
         ods.setConnectionProperties(info);
 
-        // With AutoCloseable, the connection is closed automatically.
+
         try (OracleConnection connection = (OracleConnection) ods.getConnection()) {
             // Get the JDBC driver name and version
             DatabaseMetaData dbmd = connection.getMetaData();
@@ -53,19 +37,15 @@ public class OracleBD {
                     connection.getDefaultRowPrefetch());
             System.out.println("Database Username is: " + connection.getUserName());
             System.out.println();
-            // Perform a database operation
-            printEmployees(connection);
+            pruebaConexion(connection);
         }
     }
-    /*
-     * Displays first_name and last_name from the employees table.
-     */
-    public static void printEmployees(Connection connection) throws SQLException {
-        // Statement and ResultSet are AutoCloseable and closed automatically.
+
+    public static void pruebaConexion(Connection connection) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement
-                    .executeQuery("select * from USUARIOS")) {
-                System.out.println("FIRST_NAME" + "  " + "LAST_NAME");
+                    .executeQuery("select nombre, apellido from alumno")) {
+                System.out.println("NOMBRE" + "  " + "APELLIDO");
                 System.out.println("---------------------");
                 while (resultSet.next())
                     System.out.println(resultSet.getString(1) + " "
