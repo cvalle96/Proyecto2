@@ -9,7 +9,7 @@ public class Usuario extends Gestion {
     private String apellidoUser;
     private String numeroExpediente;
     private String contrasenia;
-    private String clase;
+    private String grupo;
     private boolean esProfe;
 
     public Usuario(String nombre, String contrasenia)  {
@@ -18,15 +18,22 @@ public class Usuario extends Gestion {
         this.numeroExpediente= generarExpediente();
     }
 
-    public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)  {
+    public String getApellidoUser() {
+        return apellidoUser;
+    }
+
+    public Usuario(String nombre, String apellidos, String contrasenia, String grupo, String expediente, boolean profe)  {
         this.nombreUser=nombre;
         this.apellidoUser = apellidos;
         this.contrasenia =contrasenia;
         this.numeroExpediente= expediente;
-        this.clase=clase;
+        this.grupo = grupo;
         this.esProfe = profe;
     }
 
+    public boolean esProfesor(){
+        return esProfe;
+    }
 
     public String generarExpediente(){
         String answer = Math.random() +"";
@@ -64,7 +71,7 @@ public class Usuario extends Gestion {
         return "Nombre " + this.nombreUser +"\nExpediente: " + this.numeroExpediente + "\n";
     }
 
-    public String getClase() {
-        return clase;
+    public String getGrupo() {
+        return grupo;
     }
 }

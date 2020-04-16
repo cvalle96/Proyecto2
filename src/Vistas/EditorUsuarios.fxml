@@ -18,10 +18,11 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="textFieldExpediente" layoutX="476.0" layoutY="213.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
+      <TextField fx:id="textFieldExpediente" layoutX="476.0" layoutY="255.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
       <TextField fx:id="textFieldNombre" layoutX="476.0" layoutY="162.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
-      <Button fx:id="actualizarButton" layoutX="484.0" layoutY="339.0" mnemonicParsing="false" onAction="#actualizarValores" prefHeight="38.0" prefWidth="184.0" style="-fx-background-color: #2AFF00;" text="ENVIAR CAMBIOS" />
-      <Button fx:id="borrarButton" layoutX="484.0" layoutY="391.0" mnemonicParsing="false" onAction="#borrarEsteUsuario" prefHeight="38.0" prefWidth="184.0" text="BORRAR USUARIO" textFill="#ea0101" />
-      <TextField fx:id="textFieldGrupo" layoutX="476.0" layoutY="264.0" prefHeight="26.0" prefWidth="200.0" promptText="Clase" />
+      <Button fx:id="actualizarButton" layoutX="484.0" layoutY="350.0" mnemonicParsing="false" onAction="#modificarValores" prefHeight="38.0" prefWidth="184.0" style="-fx-background-color: #2AFF00;" text="ENVIAR CAMBIOS" />
+      <Button fx:id="borrarButton" layoutX="484.0" layoutY="405.0" mnemonicParsing="false" onAction="#borrarEsteUsuario" prefHeight="38.0" prefWidth="184.0" text="BORRAR USUARIO" textFill="#ea0101" />
+      <TextField fx:id="textFieldGrupo" layoutX="476.0" layoutY="303.0" prefHeight="26.0" prefWidth="200.0" promptText="Clase" />
+      <TextField fx:id="textFieldApellidos" layoutX="476.0" layoutY="206.0" prefHeight="26.0" prefWidth="200.0" promptText="Apellidos" />
    </children>
 </AnchorPane>

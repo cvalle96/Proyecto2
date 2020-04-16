@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import oracle.jdbc.pool.OracleDataSource;
 import oracle.jdbc.OracleConnection;
+
 import java.sql.DatabaseMetaData;
 
 public class OracleBD {
@@ -16,7 +17,11 @@ public class OracleBD {
     final static String DB_USER = "admin";
     final static String DB_PASSWORD = "Proyecto2PUSI";
 
-    public OracleBD() throws SQLException {
+    public OracleBD(){
+
+    }
+
+    public void test() throws SQLException {
         Properties info = new Properties();
         info.put(OracleConnection.CONNECTION_PROPERTY_USER_NAME, DB_USER);
         info.put(OracleConnection.CONNECTION_PROPERTY_PASSWORD, DB_PASSWORD);
@@ -39,6 +44,8 @@ public class OracleBD {
            // System.out.println("Database Username is: " + connection.getUserName());
            // System.out.println();
             pruebaConexion(connection);
+        } catch (SQLException e){
+            System.out.println(e.getErrorCode());
         }
     }
 
@@ -54,21 +61,26 @@ public class OracleBD {
         try (OracleConnection connection = (OracleConnection) ods.getConnection()) {
             // Get the JDBC driver name and version
             DatabaseMetaData dbmd = connection.getMetaData();
-
             return makeQuery(connection, query);
         }
     }
 
-    public ArrayList makeQuery(Connection connection, String query) throws SQLException {
+    private ArrayList makeQuery(Connection connection, String query) throws SQLException {
+        ArrayList<ArrayList> resultados = new ArrayList<ArrayList>();
         try (Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(query)) {
-                ArrayList<Object> resultados = new ArrayList<Object>();
                 while (resultSet.next()) {
-                    resultados.add(resultSet.getString(1) + " " + resultSet.getString(2) + " ");
+                    ArrayList aux = new ArrayList();
+                    for ( int i =0; resultSet.next(); i++){
+                        aux.add(resultSet.getString(i));
+                    }
+                    resultados.add(aux);
                 }
-                return resultados;
             }
+        } catch (SQLException e){
+            System.out.println(e.getErrorCode());
         }
+        return resultados;
     }
 
     public static void pruebaConexion(Connection connection) throws SQLException {
@@ -81,5 +93,4 @@ public class OracleBD {
             }
         }
     }
-
 }

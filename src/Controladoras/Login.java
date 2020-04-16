@@ -60,8 +60,8 @@ public class Login {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/EditorUsuarios.fxml"));
         Parent root = loader.load();
 
-        //controladoraPrincipal controler = new controladoraPrincipal();
-        //controler.setCurrentUser(currentUser);
+        controladoraPrincipal controler = new controladoraPrincipal();
+        controler.setCurrentUser(currentUser);
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
