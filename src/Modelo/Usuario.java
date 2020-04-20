@@ -10,6 +10,15 @@ public class Usuario extends Gestion {
     private String numeroExpediente;
     private String contrasenia;
     private String grupo;
+
+    public boolean isProfe() {
+        return esProfe;
+    }
+
+    public void setEsProfe(boolean esProfe) {
+        this.esProfe = esProfe;
+    }
+
     private boolean esProfe;
 
     public Usuario(String nombre, String contrasenia)  {

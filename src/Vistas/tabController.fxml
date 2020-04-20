@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraPrincipal">
     <children>
@@ -10,25 +10,24 @@
 
                 <Tab text="PERFIL">
                     <content>
-                        <fx:include fx:id="perfilTab" source="Perfil.fxml"/>
+                        <fx:include fx:id="perfilTab" source="Perfil.fxml" />
                     </content>
                 </Tab>
 
                 <Tab text="NOTAS">
                     <content>
-                        <fx:include fx:id="notasTab" source="Notas.fxml"/>
+                        <fx:include fx:id="notasTab" source="Notas.fxml" />
                     </content>
                 </Tab>
 
                 <Tab text="SENSORES">
                     <content>
-                        <fx:include fx:id="sensoresTab" source="Sensores.fxml"/>
+                        <fx:include fx:id="sensoresTab" source="Sensores.fxml" />
                     </content>
                 </Tab>
-
-                <Tab text="EDITOR">
+                <Tab  text="EDITOR">
                     <content>
-                        <fx:include fx:id="editorTab" source="EditorUsuarios.fxml"/>
+                        <fx:include fx:id="editorTab" source="Editor.fxml" />
                     </content>
                 </Tab>
 

@@ -6,19 +6,21 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class Main extends Application{
+public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
-        //OracleBD nueva = new OracleBD();
+        OracleBD nueva = new OracleBD();
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Vistas/tabController.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Vistas/Login.fxml"));
             primaryStage.setTitle("Login");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
@@ -27,4 +29,6 @@ public class Main extends Application{
             System.out.println(e.getCause());
         }
     }
+
+
 }

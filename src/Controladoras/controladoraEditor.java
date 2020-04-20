@@ -2,7 +2,6 @@ package Controladoras;
 
 import BBDD.OracleBD;
 import Modelo.Usuario;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,14 +29,15 @@ public class controladoraEditor extends controladoraPrincipal {
 
 
     public controladoraEditor(){
-        poblarListView();
+        //poblarListView();
     }
 
+    /*
     @Override
     public void setCurrentUser(Usuario user) {
         currentUser = user;
     }
-
+    */
 
     public void selectThisUser(MouseEvent mouseEvent) {
         int indexNombre=listaUsuarios.getSelectionModel().getSelectedIndex();
@@ -80,11 +80,12 @@ public class controladoraEditor extends controladoraPrincipal {
     }
 
     private void poblarListView() {
+        /*
         try {
-            listaNombres = new ArrayList<String>();
             String query = "select nombre, apellido from alumno where esProfe=false ;" ;
             OracleBD nueva = new OracleBD();
-            listaNombres = nueva.newQueryBD(query);
+            ArrayList<ArrayList> p =  nueva.newQueryBD(query);
+            listaNombres = p.get(0);
 
             observableUsuariosString = FXCollections.observableArrayList(listaNombres);
             listaUsuarios.setItems(observableUsuariosString);
@@ -93,6 +94,8 @@ public class controladoraEditor extends controladoraPrincipal {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+         */
     }
 
     public void modificarValores(ActionEvent actionEvent) throws SQLException {

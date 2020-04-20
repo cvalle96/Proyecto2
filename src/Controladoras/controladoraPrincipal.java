@@ -3,21 +3,16 @@ package Controladoras;
 import Modelo.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.AnchorPane;
 
 public class controladoraPrincipal {
-    @FXML
-    Tab editorTab;
-    Usuario currentUser = null;
+
+    Usuario currentUser ;
 
 
     public controladoraPrincipal(){
-        if (currentUser.esProfesor()){
-            editorTab.setDisable(false);
-            controladoraEditor editor = new controladoraEditor();
-            editor.setCurrentUser(currentUser);
-        }else{
-            editorTab.setDisable(true);
-        }
+
+
     }
 
     public void setCurrentUser(Usuario user){

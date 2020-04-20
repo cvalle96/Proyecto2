@@ -32,6 +32,8 @@ public class Login {
 
     
     public void login(ActionEvent actionEvent) throws Exception {
+        startApp();
+        /*
         if (check()){
             username = usuario.getText();
             contrasena = contrasenaField.getText();
@@ -42,6 +44,8 @@ public class Login {
                 consola.setText("nombre no encontrado en al bbdd");
             }
         }
+
+         */
     }
 
     public boolean check() throws IOException {
@@ -57,11 +61,11 @@ public class Login {
     }
 
     private void startApp() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/EditorUsuarios.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         Parent root = loader.load();
 
-        controladoraPrincipal controler = new controladoraPrincipal();
-        controler.setCurrentUser(currentUser);
+        //controladoraPrincipal controler = new controladoraPrincipal();
+        //controler.setCurrentUser(currentUser);
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

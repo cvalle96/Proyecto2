@@ -19,17 +19,18 @@ public class Gestion {
     public void añadirEstudiante(Usuario user){
         if (comprobadorUsuario(user))
             return;
-        user.setRolUser("ESTUDANTE");
+        user.setEsProfe(false);
         while(comprobadorExpediente(user)){
             user.setNumeroExpediente(user.generarExpediente());
         }
         listaUsuarios.add(user);
         listaExpedientes.add(user.getNumeroExpediente());
     }
+
     public void añadirProfesor(Usuario user){
         if (comprobadorUsuario(user))
             return;
-        user.setRolUser("PROFESOR");
+        user.setEsProfe(true);
         while(comprobadorExpediente(user)){
             user.setNumeroExpediente(user.generarExpediente());
         }
