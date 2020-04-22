@@ -1,5 +1,6 @@
 package Controladoras;
 
+import Modelo.Usuario;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -17,12 +18,15 @@ public class controladoraNotas extends controladoraPrincipal{
     @FXML
     ObservableList<String> observableNotas;
 
-    /*
+    Usuario currentUser;
+
+
     public controladoraNotas(){
-        actualizarHora();
-        actualizarNotas();
+        //actualizarHora();
+        //actualizarNotas();
+        currentUser = controladoraPrincipal.currentUser;
     }
-     */
+
     public void actualizarHora(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();

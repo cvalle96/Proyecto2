@@ -23,7 +23,7 @@ public class controladoraSensores extends controladoraPrincipal{
 
     @Override
     public void setCurrentUser(Usuario currentUser) {
-        this.currentUser = currentUser;
+        this.currentUser = controladoraPrincipal.currentUser;
     }
 
     Usuario currentUser = new Usuario("Miguel", "Fernandez", "jnjn", "jjnj", "77766", false);
@@ -39,7 +39,6 @@ public class controladoraSensores extends controladoraPrincipal{
             resultados.next();
         }
         actualizar();
-
     }
 
     public void setTemp() throws SQLException {

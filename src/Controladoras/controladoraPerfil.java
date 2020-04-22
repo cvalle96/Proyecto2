@@ -1,5 +1,6 @@
 package Controladoras;
 
+import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,12 @@ public class controladoraPerfil extends controladoraPrincipal{
 
     @FXML
     Button logOffButton;
+
+    Usuario currentUser;
+
+    public controladoraPerfil(){
+        currentUser = controladoraPrincipal.currentUser;
+    }
 
     public void logOut(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Login.fxml"));

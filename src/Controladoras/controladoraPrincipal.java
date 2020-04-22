@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class controladoraPrincipal {
 
-    Usuario currentUser ;
+    public static Usuario currentUser ;
 
 
     public controladoraPrincipal(){
