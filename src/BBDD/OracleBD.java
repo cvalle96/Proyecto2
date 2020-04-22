@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Properties;
 import oracle.jdbc.pool.OracleDataSource;
 import oracle.jdbc.OracleConnection;
@@ -21,7 +20,7 @@ public class OracleBD {
 
     }
 
-    public ArrayList newQueryBD(String query) throws SQLException {
+    public ResultSet newQueryBD(String query) throws SQLException {
         Properties info = new Properties();
         info.put(OracleConnection.CONNECTION_PROPERTY_USER_NAME, DB_USER);
         info.put(OracleConnection.CONNECTION_PROPERTY_PASSWORD, DB_PASSWORD);
@@ -37,21 +36,14 @@ public class OracleBD {
         }
     }
 
-    private ArrayList makeQuery(Connection connection, String query) throws SQLException {
-        ArrayList<ArrayList> resultados = new ArrayList<ArrayList>();
+    private ResultSet makeQuery(Connection connection, String query) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(query)) {
-                while (resultSet.next()) {
-                    ArrayList aux = new ArrayList();
-                    for ( int i =0; resultSet.next(); i++){
-                        aux.add(resultSet.getString(i));
-                    }
-                    resultados.add(aux);
-                }
+                return resultSet;
             }
         } catch (SQLException e){
-            System.out.println(e.getErrorCode());
+            System.out.println(e.getErrorCode() + "\n\n DEVOLVIENDO NULL...");
         }
-        return resultados;
+        return null;
     }
 }

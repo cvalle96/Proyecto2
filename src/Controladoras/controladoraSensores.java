@@ -1,10 +1,15 @@
 package Controladoras;
 
+import BBDD.OracleBD;
 import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class controladoraSensores extends controladoraPrincipal{
@@ -21,38 +26,37 @@ public class controladoraSensores extends controladoraPrincipal{
         this.currentUser = currentUser;
     }
 
-    Usuario currentUser;
+    Usuario currentUser = new Usuario("Miguel", "Fernandez", "jnjn", "jjnj", "77766", false);
     String claseActual ;
+    ResultSet resultados;
 
-    /*
-    public controladoraSensores(){
+    public controladoraSensores() throws SQLException {
         claseActual = currentUser.getClase();
-        connectBBDD();
+        OracleBD bd = new OracleBD();
+
+        resultados = bd.newQueryBD("SELECT * FROM registro WHERE clase = " + claseActual + " ;") ;
+        while (!resultados.isLast()){
+            resultados.next();
+        }
         actualizar();
 
     }
-*/
-    private void connectBBDD() {
-        //sentencia SQL que obtenga la clase del currentUser y la coloque en la variable global
 
-        //CONECTAR CON LA BBDD EN QUESTION
+    public void setTemp() throws SQLException {
+        temperaturaActual = resultados.getDouble(2);
     }
 
-    public void setTemp() {
-        //sentencia SQL que obtenga el ultimo temp
-        temperaturaActual = 0;
+    public void setRuido() throws SQLException {
+        temperaturaActual = resultados.getDouble(3);
+
     }
-    public void setRuido() {
-        //sentencia SQL que obtenga el ultimo ruido
-        ruidoActual = 0;
-        }
-    public void setHumedad(){
-        //sentencia SQL que obtenga el ultimo dato
-        humedadActual= 0;
+
+    public void setHumedad() throws SQLException {
+        temperaturaActual = resultados.getDouble(4);
     }
 
 
-    public void actualizar() {
+    public void actualizar() throws SQLException {
         setRuido();
         setTemp();
         setHumedad();
@@ -60,12 +64,12 @@ public class controladoraSensores extends controladoraPrincipal{
     }
 
     private void dibujar() {
-        progressHumedad.setProgress(temperaturaActual);
-        progressRuido.setProgress(ruidoActual);
-        progressTemperatura.setProgress(temperaturaActual);
+        progressHumedad.setProgress(humedadActual / 100);
+        progressRuido.setProgress((ruidoActual * 1.02) /100);         //voltios
+        progressTemperatura.setProgress((temperaturaActual *1.25) /100);
     }
 
-    public void act(ActionEvent actionEvent) {
+    public void act(ActionEvent actionEvent) throws SQLException {
         actualizar();
     }
 }

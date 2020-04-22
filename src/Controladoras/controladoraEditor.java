@@ -76,7 +76,7 @@ public class controladoraEditor extends controladoraPrincipal {
         labelAlumnoModificar.setText(usuario.getNombreUser());
         textFieldNombre.setText(usuario.getNombreUser());
         textFieldExpediente.setText(usuario.getNumeroExpediente());
-        textFieldGrupo.setText(usuario.getGrupo());
+        textFieldGrupo.setText(usuario.getClase());
     }
 
     private void poblarListView() {
