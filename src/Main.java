@@ -1,13 +1,19 @@
 
+import BBDD.OracleBD;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-public class Main extends Application{
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-    public static void main(String[] args) {
+public class Main extends Application {
+
+    public static void main(String[] args) throws SQLException {
+        OracleBD nueva = new OracleBD();
         launch(args);
     }
 
@@ -23,4 +29,6 @@ public class Main extends Application{
             System.out.println(e.getCause());
         }
     }
+
+
 }

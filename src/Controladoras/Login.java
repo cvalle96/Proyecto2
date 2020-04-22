@@ -17,8 +17,10 @@ public class Login {
 
     String contrasenaString, username;
 
-    
+
     public void login(ActionEvent actionEvent) throws Exception {
+        startApp();
+        /*
         if (check()){
             username = usuario.getText();
             contrasenaString = contrasena.getText();
@@ -30,6 +32,7 @@ public class Login {
                 newStage.close();
             }
         }
+         */
     }
 
     public boolean check(){
@@ -43,7 +46,13 @@ public class Login {
         return true;
     }
 
+<<<<<<< Updated upstream
     private void startChat() {
+=======
+    private void startApp() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
+        Parent root = loader.load();
+>>>>>>> Stashed changes
 
         //este metodo lanza la siguiente pagina
 

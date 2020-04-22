@@ -1,5 +1,6 @@
 package Controladoras;
 
+import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class Registro {
 
     @FXML
-    TextField usernameBox, groupBox;
+    TextField usernameBox, groupBox, apellidosBox, expedienteBox;
     @FXML
     Label consola;
     @FXML
@@ -34,22 +35,15 @@ public class Registro {
             }else{
 
                 //introducir en la bbdd como profesor
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Profesor.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Profesor");
-                stage.show();
-                Stage newStage = (Stage) usernameBox.getScene().getWindow();
-                newStage.close();
             }
+            Stage newStage = (Stage) usernameBox.getScene().getWindow();
+            newStage.close();
         }
     }
 
-    private boolean comprobarUsuario(String nombre, String contrasenia, String grupo) {
+    private boolean comprobarUsuario(Usuario user) {
 
-        //este metodo comprueba coincidencias en la bbdd
+        //este metodo comprueba coincidencias en la bbdd. Devuelve TRUE si existe y FALSE si no
 
         return true;
     }
@@ -64,9 +58,16 @@ public class Registro {
         }else if (groupBox.getText().equals("")) {
             consola.setText("falta grupo!");
             return false;
-        } else if (comprobarUsuario(usernameBox.getText(),passwordBox.getText(), groupBox.getText())){
-            consola.setText("coincidencia encontrada en la bbdd!");
+        }else if (apellidosBox.getText().equals("")) {
+            consola.setText("faltan apellidos!");
             return false;
+        } else {
+            Usuario aux = new Usuario(usernameBox.getText(), apellidosBox.getText(), passwordBox.getText(),
+                    groupBox.getText(), expedienteBox.getText(), soyProfeCheckbox.isSelected());
+            if(comprobarUsuario(aux)){
+                consola.setText("coincidencia encontrada en la bbdd!");
+                return false;
+            }
         }
         return true;
     }

@@ -24,18 +24,23 @@
                 </Lighting>
             </effect>
         </Button>
+<<<<<<< Updated upstream
         <TextField fx:id="usernameBox" layoutX="371.0" layoutY="222.0" prefHeight="45.0" prefWidth="196.0" promptText="Usuario" />
         <Text layoutX="1.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professional University System Intelligence" textAlignment="CENTER" wrappingWidth="937.0">
+=======
+        <TextField fx:id="usernameBox" layoutX="247.0" layoutY="221.0" prefHeight="45.0" prefWidth="196.0" promptText="Nombre" />
+        <Text layoutX="1.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professional University System Interface" textAlignment="CENTER" wrappingWidth="937.0">
+>>>>>>> Stashed changes
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
         </Text>
-        <Text layoutX="290.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce tu usuario y contraseña para registrarte:" wrappingWidth="358.595703125">
+        <Text layoutX="290.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce tus datos para el registro" textAlignment="CENTER" wrappingWidth="358.595703125">
             <font>
                 <Font size="16.0" />
             </font>
         </Text>
-        <PasswordField fx:id="passwordBox" layoutX="371.0" layoutY="290.0" prefHeight="45.0" prefWidth="196.0" promptText="Contraseña" />
+        <PasswordField fx:id="passwordBox" layoutX="247.0" layoutY="290.0" prefHeight="45.0" prefWidth="196.0" promptText="Contraseña" />
         <Button fx:id="logButton" layoutX="675.0" layoutY="543.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="46.0" prefWidth="117.0" text="LOGIN">
             <font>
                 <Font size="18.0" />
@@ -51,13 +56,18 @@
                     </light>
                 </Lighting>
             </effect></Button>
-      <CheckBox fx:id="soyProfeCheckbox" layoutX="371.0" layoutY="430.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="176.0" text="Soy Profesor" />
+        <CheckBox fx:id="soyProfeCheckbox" layoutX="512.0" layoutY="371.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Soy Profesor">
+            <font>
+                <Font size="14.0" />
+            </font></CheckBox>
         <Text layoutX="400.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Ya estás registrado? Haz login" wrappingWidth="289.5956726074219">
             <font>
                 <Font size="16.0" />
             </font>
         </Text>
-      <TextField fx:id="groupBox" layoutX="371.0" layoutY="362.0" prefHeight="45.0" prefWidth="196.0" promptText="Grupo" />
-      <Label fx:id="consola" layoutX="400.0" layoutY="534.0" prefHeight="18.0" prefWidth="161.0" textFill="#ed0a0a" />
+        <TextField fx:id="groupBox" layoutX="244.0" layoutY="362.0" prefHeight="45.0" prefWidth="196.0" promptText="Grupo" />
+        <Label fx:id="consola" layoutX="400.0" layoutY="534.0" prefHeight="18.0" prefWidth="161.0" textFill="#ed0a0a" />
+        <TextField fx:id="apellidosBox" layoutX="481.0" layoutY="220.0" prefHeight="45.0" prefWidth="196.0" promptText="Apellidos" />
+        <TextField fx:id="expedienteBox" layoutX="481.0" layoutY="290.0" prefHeight="45.0" prefWidth="196.0" promptText="expediente" />
     </children>
 </AnchorPane>

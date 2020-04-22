@@ -34,6 +34,7 @@
                 <Font size="16.0" />
             </font>
         </Text>
+<<<<<<< Updated upstream
         <PasswordField id="passwordBox" fx:id="contrasena" layoutX="371.0" layoutY="290.0" prefHeight="45.0" prefWidth="196.0" promptText="Contraseña" />
       <Button fx:id="registroButton" layoutX="697.0" layoutY="512.0" mnemonicParsing="false" onAction="#registro" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: #10FF00;" text="REGISTRO">
          <effect>
@@ -49,5 +50,22 @@
          </font>
       </Label>
       <Label layoutX="377.0" layoutY="350.0" prefHeight="18.0" prefWidth="106.0" textFill="#e51111" />
+=======
+        <PasswordField id="passwordBox" fx:id="contrasenaField" layoutX="371.0" layoutY="290.0" prefHeight="45.0" prefWidth="196.0" promptText="Contraseña" />
+        <Button fx:id="registroButton" layoutX="697.0" layoutY="512.0" mnemonicParsing="false" onAction="#registro" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: #10FF00;" text="REGISTRO">
+            <effect>
+                <Lighting bumpInput="$null">
+                    <light>
+                        <Light.Distant />
+                    </light>
+                </Lighting>
+            </effect></Button>
+        <Label layoutX="517.0" layoutY="519.0" text="¿NO ESTÁS REGISTRADO?">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="consola" layoutX="377.0" layoutY="350.0" prefHeight="18.0" prefWidth="186.0" textAlignment="CENTER" textFill="#e51111" />
+>>>>>>> Stashed changes
     </children>
 </AnchorPane>
