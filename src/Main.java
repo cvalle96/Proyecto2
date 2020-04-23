@@ -5,10 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class Main extends Application {
 

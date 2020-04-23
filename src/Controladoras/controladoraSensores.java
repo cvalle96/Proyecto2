@@ -33,12 +33,13 @@ public class controladoraSensores extends controladoraPrincipal{
     public controladoraSensores() throws SQLException {
         claseActual = currentUser.getClase();
         OracleBD bd = new OracleBD();
-
-        resultados = bd.newQueryBD("SELECT * FROM registro WHERE clase = " + claseActual + " ;") ;
+        bd.setConnection();
+        resultados = bd.makeQuery("SELECT * FROM registro WHERE clase = " + claseActual + " ;") ;
         while (!resultados.isLast()){
             resultados.next();
         }
         actualizar();
+        bd.closeConnection();
     }
 
     public void setTemp() throws SQLException {
