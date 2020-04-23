@@ -2,12 +2,14 @@ package Controladoras;
 
 import BBDD.OracleBD;
 import Modelo.Usuario;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -30,16 +32,10 @@ public class controladoraEditor extends controladoraPrincipal {
 
     public controladoraEditor(){
         //poblarListView();
+        //currentUser = controladoraPrincipal.currentUser;
     }
 
-    /*
-    @Override
-    public void setCurrentUser(Usuario user) {
-        currentUser = user;
-    }
-    */
-
-    public void selectThisUser(MouseEvent mouseEvent) {
+    public void selectThisUser(MouseEvent mouseEvent) throws SQLException {
         int indexNombre=listaUsuarios.getSelectionModel().getSelectedIndex();
         String username = listaNombres.get(indexNombre);
 
@@ -52,22 +48,24 @@ public class controladoraEditor extends controladoraPrincipal {
         seleccionarAlumnoModificar( obtenerUsuariodeBBDD(username, apellidos) );
     }
 
-    private Usuario obtenerUsuariodeBBDD(String username, String apellidos){
-        ArrayList<ArrayList> resultados = null;
+    private Usuario obtenerUsuariodeBBDD(String username, String apellidos) throws SQLException {
+        ResultSet resultados = null;
         try {
             OracleBD bd = new OracleBD();
             String query = "select * from alumno where nombre = '" + username + "' and apellido = '"+ apellidos + "';";
-            resultados = bd.newQueryBD(query);
+            bd.setConnection();
+            resultados = bd.makeQuery(query);
+            bd.closeConnection();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-//estos index habrá que ajustarlos
-        resultados = resultados.get(0);
-        String contrasena = resultados.get(2).toString();
-        String grupo = resultados.get(3).toString();
-        String expediente = resultados.get(4).toString();
+
+        String contrasena = resultados.getString(4);
+        //String grupo = resultados.getString()                       FALTA EL CAMPO DE CLASE
+        String expediente = resultados.getString(3);
 
         Usuario user = new Usuario(username, apellidos, contrasena, grupo, expediente, false );
+
         return user;
     }
 
@@ -80,12 +78,15 @@ public class controladoraEditor extends controladoraPrincipal {
     }
 
     private void poblarListView() {
-        /*
+        listaNombres = new ArrayList<String>();
         try {
             String query = "select nombre, apellido from alumno where esProfe=false ;" ;
-            OracleBD nueva = new OracleBD();
-            ArrayList<ArrayList> p =  nueva.newQueryBD(query);
-            listaNombres = p.get(0);
+            OracleBD bd = new OracleBD();
+            bd.setConnection();
+            ResultSet resultados =  bd.makeQuery(query);
+            bd.closeConnection();
+
+            listaNombres.add(resultados.getString(4) + " "+resultados.getString(5)) ;
 
             observableUsuariosString = FXCollections.observableArrayList(listaNombres);
             listaUsuarios.setItems(observableUsuariosString);
@@ -95,7 +96,6 @@ public class controladoraEditor extends controladoraPrincipal {
             e.printStackTrace();
         }
 
-         */
     }
 
     public void modificarValores(ActionEvent actionEvent) throws SQLException {
@@ -103,16 +103,20 @@ public class controladoraEditor extends controladoraPrincipal {
         String set = " set nombre = " +textFieldNombre.getText()+ ", apellido= " + textFieldApellidos.getText() + ", grupo = "+ textFieldGrupo.getText() + ", expediente ="+ textFieldExpediente.getText();
         String where = " where nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" ;
         String query = update+set+where;
-        OracleBD nueva = new OracleBD();
-        nueva.newQueryBD(query);
+
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        bd.makeQuery(query);
+        bd.closeConnection();
 
         poblarListView();
     }
 
     public void borrarEsteUsuario(ActionEvent actionEvent) throws SQLException {
-        OracleBD nueva = new OracleBD();
-        nueva.newQueryBD("DELETE FROM alumno WHERE nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" );
-
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        bd.makeQuery("DELETE FROM alumno WHERE nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" );
+        bd.closeConnection();
         textFieldExpediente.clear();
         textFieldNombre.clear();
         textFieldGrupo.clear();

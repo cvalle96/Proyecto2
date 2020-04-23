@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
-        OracleBD nueva = new OracleBD();
+
         launch(args);
     }
 
