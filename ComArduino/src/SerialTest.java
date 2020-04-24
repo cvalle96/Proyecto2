@@ -1,17 +1,24 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+
+import BBDD.OracleBD;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Enumeration;
+import java.time.LocalTime;
+import Utilidades.parsearFecha;
 
 
-public class SerialTest implements SerialPortEventListener {
+public class SerialTest extends parsearFecha implements SerialPortEventListener  {
     SerialPort serialPort;
     /** The port we're normally going to use. */
-    private static final String PORT_NAMES[] = {"COM3"};
+    private static final String PORT_NAMES[] = {"COM4"};
 
 
 
@@ -92,11 +99,37 @@ public class SerialTest implements SerialPortEventListener {
     public synchronized void serialEvent(SerialPortEvent oEvent) {
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
-                String inputLine=input.readLine();
-                System.out.println(inputLine);
+                String inputLine = input.readLine();
+                //System.out.println(inputLine);
+                String[] parts = inputLine.split("-");
+                String part1 = parts[0]; //humedad
+                String part2 = parts[1]; //temperatura
+                String part3 = parts[2]; //Ruido
+                Integer humedad = Integer.valueOf(part1);
+                Integer temperatura = Integer.valueOf(part2);
+                Float ruido = Float.valueOf(part3);
+                LocalTime time = LocalTime.now();
+                // String hora = parsearFechaSQL(time);
+                //Formatear hora para que se lo coma el sql
+
+                //System.out.println("Humedad = " + humedad);
+                //System.out.println("Temperatura = " + temperatura);
+                //System.out.println("Ruido = "+ ruido);
+                //System.out.println("Hora = "+ hora);
+                String id_aula;
+                //String query = "SELECT * FROM usuario;";
+
+                String query = "INSERT INTO registro (id_aula, temperatura, ruido, humedad,hora) VALUES ("+10+"," + temperatura + ", " + ruido + ", " + humedad + ", "+ "null" +");";
+                //String query = "SELECT * FROM registro";
+                System.out.println(query);
+                OracleBD bbdd = new OracleBD(query);
+                //System.out.println(query);
+
             } catch (Exception e) {
-                System.err.println(e.toString());
+                //System.err.println(e.toString());
+                e.printStackTrace();
             }
+
         }
         // Ignore all the other eventTypes, but you should consider the other ones.
     }
