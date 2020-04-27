@@ -17,6 +17,8 @@ import Utilidades.parsearFecha;
 
 public class SerialTest extends parsearFecha implements SerialPortEventListener  {
     SerialPort serialPort;
+    int idAula=1;
+    static OracleBD bd;
     /** The port we're normally going to use. */
     private static final String PORT_NAMES[] = {"COM4"};
 
@@ -116,15 +118,15 @@ public class SerialTest extends parsearFecha implements SerialPortEventListener 
                 //System.out.println("Temperatura = " + temperatura);
                 //System.out.println("Ruido = "+ ruido);
                 //System.out.println("Hora = "+ hora);
-                String id_aula;
-                //String query = "SELECT * FROM usuario;";
 
-                String query = "INSERT INTO registro (id_aula, temperatura, ruido, humedad,hora) VALUES ("+10+"," + temperatura + ", " + ruido + ", " + humedad + ", "+ "null" +");";
-                //String query = "SELECT * FROM registro";
+                if (idAula >= 6){
+                    idAula=1;
+                }
+
+                String query = "INSERT INTO registro (id_aula, temperatura, ruido, humedad,hora) VALUES ("+idAula+", " + temperatura + ", " + ruido + ", " + humedad + ", "+ "null" +")";
                 System.out.println(query);
-                OracleBD bbdd = new OracleBD(query);
-                //System.out.println(query);
-
+                bd.makeInsert(query);
+                idAula++;
             } catch (Exception e) {
                 //System.err.println(e.toString());
                 e.printStackTrace();
@@ -135,6 +137,8 @@ public class SerialTest extends parsearFecha implements SerialPortEventListener 
     }
 
     public static void main(String[] args) throws Exception {
+        bd= new OracleBD();
+        bd.setConnection();
         SerialTest main = new SerialTest();
         main.initialize();
         Thread t=new Thread() {
@@ -145,6 +149,6 @@ public class SerialTest extends parsearFecha implements SerialPortEventListener 
             }
         };
         t.start();
-        System.out.println("Started");
+        System.out.println("Comienza la insercción de datos en la BBDD");
     }
 }

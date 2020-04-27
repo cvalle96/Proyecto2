@@ -1,52 +1,89 @@
 package BBDD;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 import oracle.jdbc.pool.OracleDataSource;
 import oracle.jdbc.OracleConnection;
-import java.sql.DatabaseMetaData;
 
 public class OracleBD {
 
     final static String DB_URL= "jdbc:oracle:thin:@dbpusi_medium?TNS_ADMIN=src/Wallet_Conexion";
     final static String DB_USER = "admin";
     final static String DB_PASSWORD = "Proyecto2PUSI";
+    private Connection con;
+    private Properties info;
 
-    public OracleBD(String query) throws SQLException {
-        Properties info = new Properties();
-        info.put(OracleConnection.CONNECTION_PROPERTY_USER_NAME, DB_USER);
-        info.put(OracleConnection.CONNECTION_PROPERTY_PASSWORD, DB_PASSWORD);
-        info.put(OracleConnection.CONNECTION_PROPERTY_DEFAULT_ROW_PREFETCH, "20");
+    public OracleBD(){
+        con = null;
+        info = null;
+    }
+    public boolean setConnection(){
+        boolean bRet=false;
+        try {
+            con = setOds().getConnection();
+            bRet=true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bRet;
+    }
 
-
-        OracleDataSource ods = new OracleDataSource();
-        ods.setURL(DB_URL);
-        ods.setConnectionProperties(info);
-
-        try (OracleConnection connection = (OracleConnection) ods.getConnection()) {
-            // Get the JDBC driver name and version
-            DatabaseMetaData dbmd = connection.getMetaData();
-            //System.out.println("Driver Name: " + dbmd.getDriverName());
-            //System.out.println("Driver Version: " + dbmd.getDriverVersion());
-            // Print some connection properties
-            //System.out.println("Default Row Prefetch Value is: " + connection.getDefaultRowPrefetch());
-            //System.out.println("Database Username is: " + connection.getUserName());
-            //System.out.println();
-            nuevaQuery(connection,query);
-            System.out.println("Querry enviada");
+    public void closeConnection() {
+        try {
+            if (con != null)
+                con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    private void nuevaQuery(Connection connection, String query) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
+    private OracleDataSource setOds() throws SQLException {
+        info = new Properties();
+        info.put(OracleConnection.CONNECTION_PROPERTY_USER_NAME, DB_USER);
+        info.put(OracleConnection.CONNECTION_PROPERTY_PASSWORD, DB_PASSWORD);
+        info.put(OracleConnection.CONNECTION_PROPERTY_DEFAULT_ROW_PREFETCH, "20");
+        OracleDataSource ods = new OracleDataSource();
+        ods.setURL(DB_URL);
+        ods.setConnectionProperties(info);
+        return ods;
+    }
+
+    public ResultSet makeQuery(String query) throws SQLException {
+        try (Statement statement = con.createStatement()) {
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()){
+                return rs;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Double> getDoubleList(String query) throws SQLException{
+        ArrayList<Double> resultados = new ArrayList<>();
+        try (Statement statement = con.createStatement()) {
+            ResultSet rs = statement.executeQuery(query);
+            ResultSetMetaData rsmd =rs.getMetaData();
+            int max = rsmd.getColumnCount();
+
+            while(rs.next()){
+                //no se deja pillar la primera columna ¿error en el tipo de dato?
+                for(int i =1; i<max;i++){
+                    resultados.add( rs.getDouble(i));
+                }
+            }
+        }
+        return resultados;
+    }
+
+    public void makeInsert(String query) throws SQLException{
+        try (Statement statement = con.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(query)) {
-                while (resultSet.next())
-                    System.out.println(resultSet.getString(0));
+                System.out.println("insertado");
+            }catch (SQLException e){
+                System.out.println(e.getSQLState() + "\n" + e.getMessage() );
+            }
         }
-        }
-        System.out.println("Recibido");
+
     }
 }

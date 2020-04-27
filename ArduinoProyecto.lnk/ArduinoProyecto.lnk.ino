@@ -13,7 +13,7 @@ void setup() {
  
 void loop() {
    //Establecemos que lea datos cada MINUTO
-   delay(1000); //un minuto son 60000 segundos
+   delay(12000); //un minuto son 60000 segundos
    unsigned long startMillis= millis();
  
    unsigned int signalMax = 0;
@@ -49,16 +49,15 @@ void loop() {
    } 
    //Serial.print("Humedad: ");
    Serial.print(h);
-   Serial.print(" , ");
+   Serial.print("-");     
    //Serial.print("% ");
    //Serial.print("Temperatura: ");
    Serial.print(t);
-   Serial.print(" , ");
+   Serial.print("-");
    //Serial.print("ºC ");   
    //Serial.print("Ruido: ");
-   Serial.print(volts);
-   Serial.print("\n");   
-   //Serial.print('\n');
+   Serial.print(volts);     
+   Serial.print("\n");
 
 
    
