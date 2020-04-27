@@ -1,6 +1,7 @@
 package BBDD;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 import oracle.jdbc.pool.OracleDataSource;
 import oracle.jdbc.OracleConnection;
@@ -50,12 +51,39 @@ public class OracleBD {
 
     public ResultSet makeQuery(String query) throws SQLException {
         try (Statement statement = con.createStatement()) {
-            try (ResultSet resultSet = statement.executeQuery(query)) {
-                return resultSet;
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()){
+                return rs;
             }
-        } catch (SQLException e){
-            System.out.println(e.getErrorCode() + "\n\n DEVOLVIENDO NULL...");
         }
         return null;
+    }
+
+    public ArrayList<Double> getDoubleList(String query) throws SQLException{
+        ArrayList<Double> resultados = new ArrayList<>();
+        try (Statement statement = con.createStatement()) {
+            ResultSet rs = statement.executeQuery(query);
+            ResultSetMetaData rsmd =rs.getMetaData();
+            int max = rsmd.getColumnCount();
+
+            while(rs.next()){
+                //a traves de un bucle, obtener los double del rs y pasarlos al arraylist resultados
+                for(int i =3; i<max;i++){
+                    resultados.add(rs.getDouble(i));
+                }
+            }
+        }
+        return resultados;
+    }
+
+    public void makeInsert(String query) throws SQLException{
+        try (Statement statement = con.createStatement()) {
+            try (ResultSet resultSet = statement.executeQuery(query)) {
+                System.out.println("insertado");
+            }catch (SQLException e){
+                System.out.println(e.getSQLState() + "\n" + e.getMessage() );
+            }
+        }
+
     }
 }

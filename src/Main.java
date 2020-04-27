@@ -5,13 +5,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
 
-        launch(args);
+        ResultSet rs = bd.makeQuery("SELECT * FROM registro");
+
+        bd.closeConnection();
     }
 
     @Override

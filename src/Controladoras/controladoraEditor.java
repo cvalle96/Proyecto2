@@ -49,6 +49,7 @@ public class controladoraEditor extends controladoraPrincipal {
     }
 
     private Usuario obtenerUsuariodeBBDD(String username, String apellidos) throws SQLException {
+
         ResultSet resultados = null;
         try {
             OracleBD bd = new OracleBD();
@@ -64,7 +65,7 @@ public class controladoraEditor extends controladoraPrincipal {
         //String grupo = resultados.getString()                       FALTA EL CAMPO DE CLASE
         String expediente = resultados.getString(3);
 
-        Usuario user = new Usuario(username, apellidos, contrasena, grupo, expediente, false );
+        Usuario user = new Usuario(username, apellidos, contrasena, "0", expediente, false );
 
         return user;
     }
@@ -79,7 +80,9 @@ public class controladoraEditor extends controladoraPrincipal {
 
     private void poblarListView() {
         listaNombres = new ArrayList<String>();
+
         try {
+
             String query = "select nombre, apellido from alumno where esProfe=false ;" ;
             OracleBD bd = new OracleBD();
             bd.setConnection();
@@ -95,7 +98,6 @@ public class controladoraEditor extends controladoraPrincipal {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void modificarValores(ActionEvent actionEvent) throws SQLException {
