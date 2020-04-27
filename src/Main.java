@@ -13,12 +13,7 @@ import java.util.ArrayList;
 public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
-        OracleBD bd = new OracleBD();
-        bd.setConnection();
-
-        ResultSet rs = bd.makeQuery("SELECT * FROM registro");
-
-        bd.closeConnection();
+        launch(args);
     }
 
     @Override

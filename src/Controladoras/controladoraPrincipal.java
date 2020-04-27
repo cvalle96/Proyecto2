@@ -1,9 +1,6 @@
 package Controladoras;
 
 import Modelo.Usuario;
-import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
-import javafx.scene.layout.AnchorPane;
 
 public class controladoraPrincipal {
 
@@ -11,8 +8,7 @@ public class controladoraPrincipal {
 
 
     public controladoraPrincipal(){
-
-
+        currentUser = new Usuario("Miguel", "Fernandez Paradela", "1234", "3", "12345", false);
     }
 
     public void setCurrentUser(Usuario user){

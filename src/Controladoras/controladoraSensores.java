@@ -10,66 +10,51 @@ import javafx.scene.control.ProgressBar;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 
 public class controladoraSensores extends controladoraPrincipal{
-
-    double temperaturaActual, ruidoActual, humedadActual;
 
     @FXML
     Button actualizarButton;
     @FXML
     ProgressBar progressRuido, progressTemperatura, progressHumedad;
 
-    @Override
-    public void setCurrentUser(Usuario currentUser) {
-        this.currentUser = controladoraPrincipal.currentUser;
-    }
-
-    Usuario currentUser = new Usuario("Miguel", "Fernandez", "jnjn", "jjnj", "77766", false);
+    Double temperaturaActual, ruidoActual, humedadActual;
+    Usuario currentUser =  controladoraPrincipal.currentUser;
     String claseActual ;
-    ResultSet resultados;
+    ArrayList<Double> resultados;
 
     public controladoraSensores() throws SQLException {
-
+        progressRuido = new ProgressBar();
+        progressTemperatura = new ProgressBar();
+        progressHumedad = new ProgressBar();
         claseActual = currentUser.getClase();
-        OracleBD bd = new OracleBD();
-        bd.setConnection();
-        resultados = bd.makeQuery("SELECT * FROM registro WHERE clase = " + claseActual) ;
-        while (!resultados.isLast()){
-            resultados.next();
-        }
+
         actualizar();
-        bd.closeConnection();
-
-
-    }
-
-    public void setTemp() throws SQLException {
-        temperaturaActual = resultados.getDouble(2);
-    }
-
-    public void setRuido() throws SQLException {
-        temperaturaActual = resultados.getDouble(3);
-
-    }
-
-    public void setHumedad() throws SQLException {
-        temperaturaActual = resultados.getDouble(4);
     }
 
 
     public void actualizar() throws SQLException {
-        setRuido();
-        setTemp();
-        setHumedad();
+
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        resultados = bd.getDoubleList("SELECT temperatura, ruido, humedad FROM registro ") ;
+        Collections.reverse(resultados);
+        temperaturaActual = resultados.get(0);
+        ruidoActual = resultados.get(1);
+        humedadActual = resultados.get(2);
+        bd.closeConnection();
+
         dibujar();
     }
 
     private void dibujar() {
         progressHumedad.setProgress(humedadActual / 100);
-        progressRuido.setProgress((ruidoActual * 1.02) /100);         //voltios
+        progressRuido.setProgress((ruidoActual * 102) /100);         //voltios
         progressTemperatura.setProgress((temperaturaActual *1.25) /100);
+
     }
 
     public void act(ActionEvent actionEvent) throws SQLException {

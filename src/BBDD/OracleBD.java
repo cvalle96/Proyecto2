@@ -67,9 +67,9 @@ public class OracleBD {
             int max = rsmd.getColumnCount();
 
             while(rs.next()){
-                //a traves de un bucle, obtener los double del rs y pasarlos al arraylist resultados
-                for(int i =3; i<max;i++){
-                    resultados.add(rs.getDouble(i));
+                //no se deja pillar la primera columna ¿error en el tipo de dato?
+                for(int i =1; i<max;i++){
+                    resultados.add( rs.getDouble(i));
                 }
             }
         }
