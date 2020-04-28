@@ -8,8 +8,6 @@ import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Enumeration;
 import java.time.LocalTime;
 import Utilidades.parsearFecha;
@@ -17,7 +15,7 @@ import Utilidades.parsearFecha;
 
 public class SerialTest extends parsearFecha implements SerialPortEventListener  {
     SerialPort serialPort;
-    int idAula=1;
+    int clase =1;
     static OracleBD bd;
     /** The port we're normally going to use. */
     private static final String PORT_NAMES[] = {"COM4"};
@@ -119,14 +117,14 @@ public class SerialTest extends parsearFecha implements SerialPortEventListener 
                 //System.out.println("Ruido = "+ ruido);
                 //System.out.println("Hora = "+ hora);
 
-                if (idAula >= 6){
-                    idAula=1;
+                if (clase >= 6){
+                    clase =1;
                 }
 
-                String query = "INSERT INTO registro (id_aula, temperatura, ruido, humedad,hora) VALUES ("+idAula+", " + temperatura + ", " + ruido + ", " + humedad + ", "+ "null" +")";
+                String query = "INSERT INTO registro (clase, temperatura, ruido, humedad,hora) VALUES ("+clase+", " + temperatura + ", " + ruido + ", " + humedad + ", "+ "null" +")";
                 System.out.println(query);
                 bd.makeInsert(query);
-                idAula++;
+                clase++;
             } catch (Exception e) {
                 //System.err.println(e.toString());
                 e.printStackTrace();
