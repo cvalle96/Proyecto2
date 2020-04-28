@@ -44,17 +44,20 @@ public class Registro {
                     bd.ejecutarQuery(insertarAlumno);
                     bd.closeConnection();
             }
+            else{
+                String expediente = Usuario.generarExpediente();
+                OracleBD bd = new OracleBD();
+                String insertUsuario = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText() + "','" + passwordBox.getText() + "', '1')";
+                bd.setConnection();
+                bd.ejecutarQuery(insertUsuario);
+                String id = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText() + "'";
+                int id_user = bd.selectQuery(id);
+                String insertarProfesor = "insert into profesor (id_user, nombre, apellido, expediente, carrera, clase) values (" + id_user + ",'" + nombreBox.getText() + "','" + apellidoBox.getText() +"','" + expediente +"','" + careerBox.getText() +"','" + aulaBox.getText() +"')";
+                bd.ejecutarQuery(insertarProfesor);
+                bd.closeConnection();
+            }
             }else{
-            String expediente = Usuario.generarExpediente();
-            OracleBD bd = new OracleBD();
-            String insertUsuario = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText() + "','" + passwordBox.getText() + "', '1')";
-            bd.setConnection();
-            bd.ejecutarQuery(insertUsuario);
-            String id = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText() + "'";
-            int id_user = bd.selectQuery(id);
-            String insertarProfesor = "insert into profesor (id_user, nombre, apellido, expediente, carrera, clase) values (" + id_user + ",'" + nombreBox.getText() + "','" + apellidoBox.getText() +"','" + expediente +"','" + careerBox.getText() +"','" + aulaBox.getText() +"')";
-            bd.ejecutarQuery(insertarProfesor);
-            bd.closeConnection();
+            System.out.println("El usuario existe en la base de datos");
 
             }
         return 0;
@@ -63,16 +66,16 @@ public class Registro {
 
     public  boolean comprobarUsuario(String usuario, String contrasenia) throws SQLException {
         boolean existeUsuario = false;
-
-        String query = "SELECT * FROM usuario WHERE usuario='" + usernameBox.getText() + "'";
+        String query = "SELECT * FROM usuario WHERE username='" + usernameBox.getText() + "'";
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        bd.selectQuery(query);
+        int id_usuario = bd.selectQuery(query);
         bd.closeConnection();
-        if (Sentencia()) {
-            if (Sentencia.getRow() > 0) {
-                existeUsuario = true;
-            }
+        if (id_usuario==0) {
+            existeUsuario = false;
+        }
+        else{
+            existeUsuario = true;
         }
         return existeUsuario;
 
@@ -98,10 +101,10 @@ public class Registro {
         } else if (apellidoBox.getText().equals("")) {
             consola.setText("falta apellido!");
             return false;
-        } /*else if (comprobarUsuario(usernameBox.getText(),passwordBox.getText())){
-            consola.setText("coincidencia encontrada en la bbdd!");
+        }else if (comprobarUsuario(usernameBox.getText(),passwordBox.getText())){
+            consola.setText("El usuario " + usernameBox.getText() + " ya existe");
             return false;
-        }*/
+        }
         return true;
     }
 

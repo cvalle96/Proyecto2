@@ -61,7 +61,6 @@ public class OracleBD {
             e.printStackTrace();
             return -1;
         }
-
     }
 
     public int selectQuery(String query) throws SQLException {
