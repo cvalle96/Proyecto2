@@ -1,56 +1,81 @@
 package BBDD;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Properties;
 import oracle.jdbc.pool.OracleDataSource;
 import oracle.jdbc.OracleConnection;
-import java.sql.DatabaseMetaData;
 
 public class OracleBD {
 
     final static String DB_URL= "jdbc:oracle:thin:@dbpusi_medium?TNS_ADMIN=src/Wallet_Conexion";
     final static String DB_USER = "admin";
     final static String DB_PASSWORD = "Proyecto2PUSI";
+    private Connection con;
+    private Properties info;
 
-    public static void main(String args[]) throws SQLException {
-        Properties info = new Properties();
-        info.put(OracleConnection.CONNECTION_PROPERTY_USER_NAME, DB_USER);
-        info.put(OracleConnection.CONNECTION_PROPERTY_PASSWORD, DB_PASSWORD);
-        info.put(OracleConnection.CONNECTION_PROPERTY_DEFAULT_ROW_PREFETCH, "20");
+    public OracleBD(){
+        con = null;
+        info = null;
+    }
+    public boolean setConnection(){
+        boolean bRet=false;
+        try {
+            con = setOds().getConnection();
+            System.out.println(con);
+            bRet=true;
+            System.out.println("conexion realizada");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bRet;
+    }
 
-
-        OracleDataSource ods = new OracleDataSource();
-        ods.setURL(DB_URL);
-        ods.setConnectionProperties(info);
-
-
-        try (OracleConnection connection = (OracleConnection) ods.getConnection()) {
-            // Get the JDBC driver name and version
-            DatabaseMetaData dbmd = connection.getMetaData();
-            System.out.println("Driver Name: " + dbmd.getDriverName());
-            System.out.println("Driver Version: " + dbmd.getDriverVersion());
-            // Print some connection properties
-            System.out.println("Default Row Prefetch Value is: " +
-                    connection.getDefaultRowPrefetch());
-            System.out.println("Database Username is: " + connection.getUserName());
-            System.out.println();
-            pruebaConexion(connection);
+    public void closeConnection() {
+        try {
+            if (con != null)
+                System.out.println(con);
+                con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public static void pruebaConexion(Connection connection) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            try (ResultSet resultSet = statement
-                    .executeQuery("select nombre, apellido from alumno")) {
-                System.out.println("NOMBRE" + "  " + "APELLIDO");
-                System.out.println("---------------------");
-                while (resultSet.next())
-                    System.out.println(resultSet.getString(1) + " "
-                            + resultSet.getString(2) + " ");
-            }
+    private OracleDataSource setOds() throws SQLException {
+        info = new Properties();
+        info.put(OracleConnection.CONNECTION_PROPERTY_USER_NAME, DB_USER);
+        info.put(OracleConnection.CONNECTION_PROPERTY_PASSWORD, DB_PASSWORD);
+        info.put(OracleConnection.CONNECTION_PROPERTY_DEFAULT_ROW_PREFETCH, "20");
+        OracleDataSource ods = new OracleDataSource();
+        ods.setURL(DB_URL);
+        ods.setConnectionProperties(info);
+        return ods;
+    }
+
+    public int ejecutarQuery(String query) throws SQLException {
+        try(Statement statement = con.createStatement()){
+            PreparedStatement stmt = con.prepareStatement(query);
+            return stmt.executeUpdate();
+        }
+        catch(SQLException e){
+            System.out.println("Error ejecutando consulta");
+            e.printStackTrace();
+            return -1;
+        }
+
+    }
+
+    public int selectQuery(String query) throws SQLException {
+        try(Statement statement = con.createStatement()){
+            ResultSet sentencia = statement.executeQuery(query);
+            int resultado = 0;
+            if(sentencia.next())
+                resultado = sentencia.getInt(1);
+            return resultado;
+        }
+        catch(SQLException e){
+            System.out.println("Error ejecutando consulta");
+            e.printStackTrace();
+            return -1;
         }
     }
 }

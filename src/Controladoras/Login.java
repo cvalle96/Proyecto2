@@ -1,5 +1,6 @@
 package Controladoras;
 
+import BBDD.OracleBD;
 import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class Login {
     @FXML
@@ -23,33 +26,45 @@ public class Login {
 
     String contrasena, username;
     Usuario currentUser;
+    boolean logueo;
 
-    public Login(){
-        username="profesor";
-        contrasena = "1234";
-        currentUser= new Usuario(username,contrasena);
-    }
+
 
     
     public void login(ActionEvent actionEvent) throws Exception {
         if (check()){
+            boolean logueo;
             username = usuario.getText();
             contrasena = contrasenaField.getText();
             if (comprobarUsuario(username, contrasena)){
-                currentUser = new Usuario(username,contrasena);
+
+                    try {
+                        OracleBD bd = new OracleBD();
+                        bd.setConnection();
+                        String login = "select username, password from usuario where username='"+username+"' and password='"+contrasena+"'";
+                        bd.selectQuery(login);
+                        System.out.println(bd.selectQuery(login));
+                        logueo = true;
+                        currentUser = new Usuario(username, contrasena);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
                 startApp();
             }else{
                 consola.setText("nombre no encontrado en al bbdd");
             }
         }
-    }
+
 
     public boolean check() throws IOException {
-        if (usuario.getText().equals("") ){
+        if (usuario.equals("") ){
             consola.setText("falta nombre de usuario!");
             startApp();
             return true;
-        }else if (contrasenaField.getText().equals("") ){
+        }else if (contrasena.equals("") ){
             consola.setText("falta contraseña!");
             return true;
         }

@@ -2,7 +2,7 @@ package Modelo;
 
 import java.util.ArrayList;
 
-public class Gestion {
+public class Gestion {/*
 
     private ArrayList<Usuario> listaUsuarios;
     private ArrayList<Usuario> listaProfesores;
@@ -19,7 +19,7 @@ public class Gestion {
     public void añadirEstudiante(Usuario user){
         if (comprobadorUsuario(user))
             return;
-        user.setRolUser("ESTUDANTE");
+        user.setRolUser("ESTUDIANTE");
         while(comprobadorExpediente(user)){
             user.setNumeroExpediente(user.generarExpediente());
         }
@@ -81,4 +81,4 @@ public class Gestion {
     }
 
     public void setCurrentUser(Usuario user){ currentUser=user;}
-}
+*/}

@@ -1,5 +1,6 @@
 package Controladoras;
 
+import BBDD.OracleBD;
 import Modelo.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,10 +8,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import java.io.*;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class controladoraEditor extends controladoraPrincipal {
+    /*
     @FXML
     ObservableList<String> observableUsuariosString;
     @FXML
@@ -18,7 +22,7 @@ public class controladoraEditor extends controladoraPrincipal {
     @FXML
     Label labelAlumnoModificar;
     @FXML
-    TextField textFieldExpediente,textFieldNombre, textFieldGrupo;
+    TextField textFieldExpediente,textFieldNombre, textFieldGrupo, textFieldApellidos;
     @FXML
     Button borrarButton, actualizarButton;
 
@@ -26,46 +30,64 @@ public class controladoraEditor extends controladoraPrincipal {
     Usuario usuarioModificar;
     Usuario currentUser;
 
-    /*
+
     public controladoraEditor(){
-        conectar();
-        poblarListView();
-
-    }
-*/
-    @Override
-    public void setCurrentUser(Usuario user) {
-        currentUser = user;
+        //poblarListView();
+        //currentUser = controladoraPrincipal.currentUser;
     }
 
-    public void selectThisUser(MouseEvent mouseEvent) {
-
+    public void selectThisUser(MouseEvent mouseEvent) throws SQLException {
         int indexNombre=listaUsuarios.getSelectionModel().getSelectedIndex();
         String username = listaNombres.get(indexNombre);
 
-        //buscar la coincidencia en la bbdd y obtener el usuario en forma de Usuario()
-        //dummy line next
-        seleccionarAlumnoModificar(new Usuario(null,null,null,null));
+        String[] lista = username.split(" ");
+        username = lista[0];
+        String apellidos = "";
+        for (int i = 1; i< lista.length; i++){
+            apellidos += lista[i];
+        }
+        seleccionarAlumnoModificar( obtenerUsuariodeBBDD(nombre, apellidos) );
+    }
 
+    private Usuario obtenerUsuariodeBBDD(String username, String apellidos, String carrera, int profesor) throws SQLException {
+        ResultSet resultados = null;
+        try {
+            OracleBD bd = new OracleBD();
+            String query = "select * from alumno where nombre = '" + username + "' and apellido = '"+ apellidos + "';";
+            bd.setConnection();
+            resultados = bd.makeQuery(query);
+            bd.closeConnection();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        String contrasena = resultados.getString(4);
+        //String grupo = resultados.getString()                       FALTA EL CAMPO DE CLASE
+        //String expediente = resultados.getString(3);
+
+        Usuario user = new Usuario (String nombre, String apellidos, String contrasenia, String carrera, String usuario, boolean profe)
+
+        return user;
     }
 
     private void seleccionarAlumnoModificar(Usuario usuario) {
         usuarioModificar = usuario;
         labelAlumnoModificar.setText(usuario.getNombreUser());
         textFieldNombre.setText(usuario.getNombreUser());
-        textFieldExpediente.setText(usuario.getNumeroExpediente());
+        //textFieldExpediente.setText(usuario.getNumeroExpediente());
         textFieldGrupo.setText(usuario.getClase());
     }
 
-    private void conectar() {
-        //crear conexion con la bbdd
-    }
-
     private void poblarListView() {
+        listaNombres = new ArrayList<String>();
         try {
-            listaNombres = new ArrayList<String>();
+            String query = "select nombre, apellido from alumno where esProfe=false ;" ;
+            OracleBD bd = new OracleBD();
+            bd.setConnection();
+            ResultSet resultados =  bd.makeQuery(query);
+            bd.closeConnection();
 
-            //introducir en listaNombres los usuarios de la BBDD
+            listaNombres.add(resultados.getString(4) + " "+resultados.getString(5)) ;
 
             observableUsuariosString = FXCollections.observableArrayList(listaNombres);
             listaUsuarios.setItems(observableUsuariosString);
@@ -74,31 +96,31 @@ public class controladoraEditor extends controladoraPrincipal {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void actualizarValores(ActionEvent actionEvent) {
-
-        //pillar usuarioModificar, obtenerlo de la bbdd y hacer select + insert para actualizar los valores
 
     }
 
-    private void escribirCambios() throws IOException {
-        //guardar cambios en la bbdd si necesario
+    public void modificarValores(ActionEvent actionEvent) throws SQLException {
+        String update = "update alumno";
+        String set = " set nombre = " +textFieldNombre.getText()+ ", apellido= " + textFieldApellidos.getText() + ", grupo = "+ textFieldGrupo.getText() + ", expediente ="+ textFieldExpediente.getText();
+        String where = " where nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" ;
+        String query = update+set+where;
+
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        bd.makeQuery(query);
+        bd.closeConnection();
 
         poblarListView();
     }
 
-    public void borrarEsteUsuario(ActionEvent actionEvent) {
-
-        //cargarnos usuarioModificar de la bbdd
+    public void borrarEsteUsuario(ActionEvent actionEvent) throws SQLException {
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        bd.makeQuery("DELETE FROM alumno WHERE nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" );
+        bd.closeConnection();
         textFieldExpediente.clear();
         textFieldNombre.clear();
         textFieldGrupo.clear();
-        try{
-            escribirCambios();
-            poblarListView();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        poblarListView();
     }
-}
+*/}

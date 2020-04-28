@@ -1,5 +1,7 @@
 package Controladoras;
 
+import BBDD.OracleBD;
+import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,11 +11,15 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
+
 
 public class Registro {
-
+    public static Connection conexion;
+    PreparedStatement stmt = null;
+    PreparedStatement id_user = null;
     @FXML
-    TextField usernameBox, groupBox;
+    TextField usernameBox, careerBox, nombreBox, apellidoBox, aulaBox;
     @FXML
     Label consola;
     @FXML
@@ -24,50 +30,78 @@ public class Registro {
     Button registrarButton;
 
 
-    public void registrar(ActionEvent actionEvent) throws IOException {
+    public int registrar(ActionEvent actionEvent) throws SQLException, IOException {
         if (check()){
-            if (! soyProfeCheckbox.isSelected()){
-                //introducir en la bbdd como alumno
-
-                //cargar vista de perfil personal
-
+            if (!soyProfeCheckbox.isSelected()){
+                    String expediente = Usuario.generarExpediente();
+                    OracleBD bd = new OracleBD();
+                    String insertUsuario = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText() + "','" + passwordBox.getText() + "', '0')";
+                    bd.setConnection();
+                    bd.ejecutarQuery(insertUsuario);
+                    String id = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText() + "'";
+                    int id_user = bd.selectQuery(id);
+                    String insertarAlumno = "insert into alumno (id_user, nombre, apellido, expediente, carrera, clase) values (" + id_user + ",'" + nombreBox.getText() + "','" + apellidoBox.getText() +"','" + expediente +"','" + careerBox.getText() +"','" + aulaBox.getText() +"')";
+                    bd.ejecutarQuery(insertarAlumno);
+                    bd.closeConnection();
+            }
             }else{
+            String expediente = Usuario.generarExpediente();
+            OracleBD bd = new OracleBD();
+            String insertUsuario = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText() + "','" + passwordBox.getText() + "', '1')";
+            bd.setConnection();
+            bd.ejecutarQuery(insertUsuario);
+            String id = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText() + "'";
+            int id_user = bd.selectQuery(id);
+            String insertarProfesor = "insert into profesor (id_user, nombre, apellido, expediente, carrera, clase) values (" + id_user + ",'" + nombreBox.getText() + "','" + apellidoBox.getText() +"','" + expediente +"','" + careerBox.getText() +"','" + aulaBox.getText() +"')";
+            bd.ejecutarQuery(insertarProfesor);
+            bd.closeConnection();
 
-                //introducir en la bbdd como profesor
+            }
+        return 0;
+    }
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Profesor.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Profesor");
-                stage.show();
-                Stage newStage = (Stage) usernameBox.getScene().getWindow();
-                newStage.close();
+
+    public  boolean comprobarUsuario(String usuario, String contrasenia) throws SQLException {
+        boolean existeUsuario = false;
+
+        String query = "SELECT * FROM usuario WHERE usuario='" + usernameBox.getText() + "'";
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        bd.selectQuery(query);
+        bd.closeConnection();
+        if (Sentencia()) {
+            if (Sentencia.getRow() > 0) {
+                existeUsuario = true;
             }
         }
+        return existeUsuario;
+
     }
 
-    private boolean comprobarUsuario(String nombre, String contrasenia, String grupo) {
 
-        //este metodo comprueba coincidencias en la bbdd
-
-        return true;
-    }
-
-    private boolean check() {
+    private boolean check() throws SQLException {
         if (usernameBox.getText().equals("")){
             consola.setText("falta nombre!");
             return false;
         }else if (passwordBox.getText().equals("")){
             consola.setText("falta contraseña!");
             return false;
-        }else if (groupBox.getText().equals("")) {
-            consola.setText("falta grupo!");
+        }else if (careerBox.getText().equals("")) {
+            consola.setText("falta carrera!");
             return false;
-        } else if (comprobarUsuario(usernameBox.getText(),passwordBox.getText(), groupBox.getText())){
+        }else if (aulaBox.getText().equals("")) {
+            consola.setText("falta aula!");
+            return false;
+        } else if (nombreBox.getText().equals("")) {
+            consola.setText("falta nombre!");
+            return false;
+        } else if (apellidoBox.getText().equals("")) {
+            consola.setText("falta apellido!");
+            return false;
+        } /*else if (comprobarUsuario(usernameBox.getText(),passwordBox.getText())){
             consola.setText("coincidencia encontrada en la bbdd!");
             return false;
-        }
+        }*/
         return true;
     }
 
