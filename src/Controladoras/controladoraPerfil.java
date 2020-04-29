@@ -10,7 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +26,9 @@ public class controladoraPerfil extends controladoraPrincipal{
     Usuario currentUser;
 
     @FXML
-    Label n;
+    TextField nombreTextfield, apellidosTextfield, carreraTextfield, expedienteTextfield, grupoTextfield;
+
+    ArrayList listaPrincipal;
 
     public controladoraPerfil() throws SQLException {
         currentUser = new Usuario("Miguel", "Fernandez", "123", "1","21726301", false);
@@ -38,21 +44,7 @@ public class controladoraPerfil extends controladoraPrincipal{
         String query = "SELECT * FROM alumno WHERE id_user = " + idUsuario;
         ArrayList <String> resultaditos = bd.getList(query);
         bd.closeConnection();
-        poblarDatos(resultaditos);
-    }
-
-    public void poblarDatos(ArrayList resultados){
-        System.out.println(resultados.toString());
-        System.out.println("Nombre: " + (String) resultados.get(2));
-        System.out.println("Apellidos: " + (String) resultados.get(3));
-        System.out.println("Carrera: " + (String) resultados.get(5));
-        System.out.println("Expediente: " + (String) resultados.get(4));
-        System.out.println("Grupo: " + (String) resultados.get(6));
-
-        String nombre = (String) resultados.get(2);
-        n = new Label();
-        n.setText(nombre);
-        //nombreTextField.appendText((String) resultados.get(2));
+        listaPrincipal = resultaditos;
     }
 
     public void logOut(ActionEvent actionEvent) throws IOException {
@@ -65,4 +57,13 @@ public class controladoraPerfil extends controladoraPrincipal{
         Stage newStage = (Stage) logOffButton.getScene().getWindow();
         newStage.close();
     }
+
+    public void pintar(ActionEvent actionEvent) {
+        nombreTextfield.setText((String) listaPrincipal.get(2));
+        apellidosTextfield.setText((String) listaPrincipal.get(3));
+        carreraTextfield.setText((String) listaPrincipal.get(5));
+        expedienteTextfield.setText((String) listaPrincipal.get(4));
+        grupoTextfield.setText((String) listaPrincipal.get(6));
+    }
+
 }

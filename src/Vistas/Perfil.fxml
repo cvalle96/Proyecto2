@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
@@ -40,25 +38,17 @@
                 <Font size="18.0" />
             </font>
         </Label>
+        <TextField fx:id="nombreTextfield" layoutX="503.0" layoutY="125.0" prefHeight="31.0" prefWidth="232.0" />
         <TextField fx:id="apellidosTextfield" layoutX="503.0" layoutY="177.0" prefHeight="31.0" prefWidth="232.0" />
         <TextField fx:id="carreraTextfield" layoutX="503.0" layoutY="233.0" prefHeight="31.0" prefWidth="232.0" />
         <TextField fx:id="expedienteTextfield" layoutX="503.0" layoutY="285.0" prefHeight="31.0" prefWidth="232.0" />
         <TextField fx:id="grupoTextfield" layoutX="503.0" layoutY="340.0" prefHeight="31.0" prefWidth="232.0" />
-        <ImageView fitHeight="253.0" fitWidth="237.0" layoutX="55.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
-            <effect>
-                <DropShadow />
-            </effect>
-        </ImageView>
         <Button fx:id="logOffButton" layoutX="35.0" layoutY="448.0" mnemonicParsing="false" onAction="#logOut" prefHeight="49.0" prefWidth="92.0" text="LogOff" textFill="#fd3a3a">
             <font>
                 <Font size="21.0" />
             </font>
         </Button>
-      <Label fx:id="n" layoutX="503.0" layoutY="122.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: black;">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <Button fx:id="actualizar" layoutX="689.0" layoutY="448.0" mnemonicParsing="false" onAction="#pintar" prefHeight="49.0" prefWidth="92.0" text="ACTUALIZAR" />
     </children>
 
 </AnchorPane>
