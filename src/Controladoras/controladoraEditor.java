@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,9 +18,7 @@ public class controladoraEditor extends controladoraPrincipal {
     @FXML
     ListView listaUsuarios;
     @FXML
-    Label labelAlumnoModificar;
-    @FXML
-    TextField textFieldExpediente,textFieldNombre, textFieldGrupo, textFieldApellidos;
+    TextField textFieldNombre, textFieldGrupo, textFieldExpediente, textFieldCarrera;
     @FXML
     Button borrarButton, actualizarButton;
 
@@ -33,57 +30,54 @@ public class controladoraEditor extends controladoraPrincipal {
     public controladoraEditor(){
         currentUser = controladoraPrincipal.currentUser;
         listaUsuarios = new ListView();
-        poblarListView();
-        seleccionarAlumnoModificar(new Usuario("miguel","Fernandez","1221", "1","35678",false));
+        getAlumnos();
     }
 
     public void selectThisUser(MouseEvent mouseEvent) throws SQLException {
         int indexNombre=listaUsuarios.getSelectionModel().getSelectedIndex();
-        String username = listaNombres.get(indexNombre);
+        String nombre = listaNombres.get(indexNombre);
 
-        String[] lista = username.split(" ");
-        username = lista[0];
+        String[] lista = nombre.split(" ");
+        nombre = lista[0];
         String apellidos = "";
         for (int i = 1; i< lista.length; i++){
             apellidos += lista[i];
         }
-        seleccionarAlumnoModificar( obtenerUsuariodeBBDD(username, apellidos) );
+        seleccionarAlumnoModificar( obtenerUsuariodeBBDD(nombre, apellidos) );
     }
 
-    private Usuario obtenerUsuariodeBBDD(String username, String apellidos) throws SQLException {
+    private Usuario obtenerUsuariodeBBDD(String nombre, String apellidos) throws SQLException {
 
         ArrayList resultados = null;
         try {
             OracleBD bd = new OracleBD();
-            String query = "select * from alumno where nombre = '" + username + "' and apellido = '"+ apellidos + "';";
+            String query = "select * from alumno where nombre = '" + nombre + "' and apellido = '"+ apellidos + "'";
             bd.setConnection();
             resultados = bd.getArrayList(query);
             bd.closeConnection();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
+        String carrera = (String) resultados.get(5);
+        String grupo = (String) resultados.get(6);
+        String expediente =(String) resultados.get(4);
+        System.out.println(resultados.toString());
 
-        String contrasena =(String) resultados.get(4);
-        //String grupo = resultados.getString()                       FALTA EL CAMPO DE CLASE
-        String expediente =(String) resultados.get(3);
-
-        Usuario user = new Usuario(username, apellidos, contrasena, "0", expediente, false );
+        //le estoy pasando la carrera como si fuera la contraseña porque no tengo el campo en el constructor y contraseña no se utilizaba
+        Usuario user = new Usuario(nombre, apellidos, carrera, grupo, expediente, false );
 
         return user;
     }
 
     private void seleccionarAlumnoModificar(Usuario usuario) {
-        textFieldNombre = new TextField();
-        textFieldExpediente= new TextField();
-        textFieldGrupo= new TextField();
         usuarioModificar = usuario;
-        //labelAlumnoModificar.setText(usuario.getNombreUser());
         textFieldNombre.setText(usuario.getNombreUser());
+        textFieldCarrera.setText(usuario.getContrasenia());
         textFieldExpediente.setText(usuario.getNumeroExpediente());
         textFieldGrupo.setText(usuario.getClase());
     }
 
-    private void poblarListView() {
+    private void getAlumnos() {
         listaNombres = new ArrayList<String>();
         try {
 
@@ -96,12 +90,6 @@ public class controladoraEditor extends controladoraPrincipal {
             for(int i =0; i<resultados.size(); i=i+2){
                 listaNombres.add(resultados.get(i) + " "+resultados.get(i+1)) ;
             }
-            System.out.println(listaNombres.toString());
-
-            observableUsuariosString = FXCollections.observableArrayList(listaNombres);
-            listaUsuarios.setItems(observableUsuariosString);
-            System.out.println(listaUsuarios.toString());
-            listaUsuarios.refresh();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,9 +97,10 @@ public class controladoraEditor extends controladoraPrincipal {
     }
 
     public void modificarValores(ActionEvent actionEvent) throws SQLException {
+
         String update = "update alumno";
-        String set = " set nombre = " +textFieldNombre.getText()+ ", apellido= " + textFieldApellidos.getText() + ", grupo = "+ textFieldGrupo.getText() + ", expediente ="+ textFieldExpediente.getText();
-        String where = " where nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" ;
+        String set = " set nombre = '" +textFieldNombre.getText()+ "', carrera= '" + textFieldCarrera.getText() + "', clase = '"+ textFieldGrupo.getText() + "', expediente ='"+ textFieldExpediente.getText() + "'";
+        String where = " where expediente='" + usuarioModificar.getNumeroExpediente() +"'";
         String query = update+set+where;
 
         OracleBD bd = new OracleBD();
@@ -119,17 +108,24 @@ public class controladoraEditor extends controladoraPrincipal {
         bd.makeInsert(query);
         bd.closeConnection();
 
-        poblarListView();
+        getAlumnos();
+
     }
 
     public void borrarEsteUsuario(ActionEvent actionEvent) throws SQLException {
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        bd.makeInsert("DELETE FROM alumno WHERE nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" );
+        bd.makeInsert("DELETE FROM alumno WHERE expediente='" + usuarioModificar.getNumeroExpediente() );
         bd.closeConnection();
         textFieldExpediente.clear();
         textFieldNombre.clear();
         textFieldGrupo.clear();
-        poblarListView();
+        getAlumnos();
+    }
+
+    public void pintarAlumnos(ActionEvent actionEvent) {
+        observableUsuariosString = FXCollections.observableArrayList(listaNombres);
+        listaUsuarios.setItems(observableUsuariosString);
+        listaUsuarios.refresh();
     }
 }

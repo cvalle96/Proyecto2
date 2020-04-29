@@ -8,6 +8,7 @@ public class controladoraPrincipal {
 
 
     public controladoraPrincipal(){
+        //deberia llegar desde el login a traves de el setter
         currentUser = new Usuario("Miguel", "Fernandez Paradela", "1234", "3", "12345", false);
     }
 
