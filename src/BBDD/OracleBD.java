@@ -49,14 +49,21 @@ public class OracleBD {
         return ods;
     }
 
-    public ResultSet makeQuery(String query) throws SQLException {
+    public ArrayList getArrayList(String query) throws SQLException{
+        ArrayList resultados = new ArrayList<>();
         try (Statement statement = con.createStatement()) {
             ResultSet rs = statement.executeQuery(query);
+            ResultSetMetaData rsmd =rs.getMetaData();
+            int max = rsmd.getColumnCount();
+
             while(rs.next()){
-                return rs;
+                //no se deja pillar la primera columna ¿error en el tipo de dato?
+                for(int i =1; i<=max;i++){
+                    resultados.add( rs.getString(i));
+                }
             }
         }
-        return null;
+        return resultados;
     }
 
     public ArrayList<Double> getDoubleList(String query) throws SQLException{
@@ -68,7 +75,7 @@ public class OracleBD {
 
             while(rs.next()){
                 //no se deja pillar la primera columna ¿error en el tipo de dato?
-                for(int i =1; i<max;i++){
+                for(int i =1; i<=max;i++){
                     resultados.add( rs.getDouble(i));
                 }
             }

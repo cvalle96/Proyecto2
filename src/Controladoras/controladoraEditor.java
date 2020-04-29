@@ -31,8 +31,10 @@ public class controladoraEditor extends controladoraPrincipal {
 
 
     public controladoraEditor(){
-        //poblarListView();
-        //currentUser = controladoraPrincipal.currentUser;
+        currentUser = controladoraPrincipal.currentUser;
+        listaUsuarios = new ListView();
+        poblarListView();
+        seleccionarAlumnoModificar(new Usuario("miguel","Fernandez","1221", "1","35678",false));
     }
 
     public void selectThisUser(MouseEvent mouseEvent) throws SQLException {
@@ -50,20 +52,20 @@ public class controladoraEditor extends controladoraPrincipal {
 
     private Usuario obtenerUsuariodeBBDD(String username, String apellidos) throws SQLException {
 
-        ResultSet resultados = null;
+        ArrayList resultados = null;
         try {
             OracleBD bd = new OracleBD();
             String query = "select * from alumno where nombre = '" + username + "' and apellido = '"+ apellidos + "';";
             bd.setConnection();
-            resultados = bd.makeQuery(query);
+            resultados = bd.getArrayList(query);
             bd.closeConnection();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
 
-        String contrasena = resultados.getString(4);
+        String contrasena =(String) resultados.get(4);
         //String grupo = resultados.getString()                       FALTA EL CAMPO DE CLASE
-        String expediente = resultados.getString(3);
+        String expediente =(String) resultados.get(3);
 
         Usuario user = new Usuario(username, apellidos, contrasena, "0", expediente, false );
 
@@ -71,8 +73,11 @@ public class controladoraEditor extends controladoraPrincipal {
     }
 
     private void seleccionarAlumnoModificar(Usuario usuario) {
+        textFieldNombre = new TextField();
+        textFieldExpediente= new TextField();
+        textFieldGrupo= new TextField();
         usuarioModificar = usuario;
-        labelAlumnoModificar.setText(usuario.getNombreUser());
+        //labelAlumnoModificar.setText(usuario.getNombreUser());
         textFieldNombre.setText(usuario.getNombreUser());
         textFieldExpediente.setText(usuario.getNumeroExpediente());
         textFieldGrupo.setText(usuario.getClase());
@@ -80,19 +85,22 @@ public class controladoraEditor extends controladoraPrincipal {
 
     private void poblarListView() {
         listaNombres = new ArrayList<String>();
-
         try {
 
-            String query = "select nombre, apellido from alumno where esProfe=false ;" ;
+            String query = "select nombre, apellido from alumno " ;
             OracleBD bd = new OracleBD();
             bd.setConnection();
-            ResultSet resultados =  bd.makeQuery(query);
+            ArrayList resultados =  bd.getArrayList(query);
             bd.closeConnection();
 
-            listaNombres.add(resultados.getString(4) + " "+resultados.getString(5)) ;
+            for(int i =0; i<resultados.size(); i=i+2){
+                listaNombres.add(resultados.get(i) + " "+resultados.get(i+1)) ;
+            }
+            System.out.println(listaNombres.toString());
 
             observableUsuariosString = FXCollections.observableArrayList(listaNombres);
             listaUsuarios.setItems(observableUsuariosString);
+            System.out.println(listaUsuarios.toString());
             listaUsuarios.refresh();
 
         } catch (Exception e) {
@@ -108,7 +116,7 @@ public class controladoraEditor extends controladoraPrincipal {
 
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        bd.makeQuery(query);
+        bd.makeInsert(query);
         bd.closeConnection();
 
         poblarListView();
@@ -117,7 +125,7 @@ public class controladoraEditor extends controladoraPrincipal {
     public void borrarEsteUsuario(ActionEvent actionEvent) throws SQLException {
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        bd.makeQuery("DELETE FROM alumno WHERE nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" );
+        bd.makeInsert("DELETE FROM alumno WHERE nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" );
         bd.closeConnection();
         textFieldExpediente.clear();
         textFieldNombre.clear();

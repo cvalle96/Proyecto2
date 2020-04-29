@@ -9,6 +9,8 @@ import javafx.scene.control.ProgressBar;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -59,5 +61,19 @@ public class controladoraSensores extends controladoraPrincipal{
 
     public void act(ActionEvent actionEvent) throws SQLException {
         actualizar();
+    }
+
+    public void howtoinsert() throws SQLException {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        dtf.format(now);
+
+        OracleBD BD = new OracleBD();
+        BD.setConnection();
+        String query = "insert into registro (aula, temperatura,ruido,humedad,hora) VALUES (1,30,0.8,32,'"+dtf.format(now) +"')";
+        BD.makeInsert(query);
+        System.out.println(query);
+        BD.closeConnection();
     }
 }

@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraEditor">
 
@@ -14,11 +13,6 @@
             </effect>
         </ListView>
         <Label layoutX="84.0" layoutY="89.0" prefHeight="18.0" prefWidth="166.0" text="Selecciona usuario de tu clase" />
-        <Label fx:id="labelAlumnoModificar" alignment="CENTER" contentDisplay="CENTER" layoutX="476.0" layoutY="83.0" prefHeight="48.0" prefWidth="200.0" textFill="#3d10f0">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Label>
         <TextField fx:id="textFieldExpediente" layoutX="476.0" layoutY="214.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
         <TextField fx:id="textFieldNombre" layoutX="476.0" layoutY="107.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
         <Button fx:id="actualizarButton" layoutX="484.0" layoutY="330.0" mnemonicParsing="false" onAction="#modificarValores" prefHeight="38.0" prefWidth="184.0" style="-fx-background-color: #2AFF00;" text="ENVIAR CAMBIOS" />
