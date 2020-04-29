@@ -43,7 +43,12 @@ public class controladoraPerfil extends controladoraPrincipal{
 
     public void poblarDatos(ArrayList resultados){
         System.out.println(resultados.toString());
-        System.out.println((String) resultados.get(2));
+        System.out.println("Nombre: " + (String) resultados.get(2));
+        System.out.println("Apellidos: " + (String) resultados.get(3));
+        System.out.println("Carrera: " + (String) resultados.get(5));
+        System.out.println("Expediente: " + (String) resultados.get(4));
+        System.out.println("Grupo: " + (String) resultados.get(6));
+
         String nombre = (String) resultados.get(2);
         n = new Label();
         n.setText(nombre);
