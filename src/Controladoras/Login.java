@@ -1,21 +1,34 @@
 package Controladoras;
 
+import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Login {
     @FXML
     Button loginButton, registroButton;
     @FXML
-    TextField contrasena, usuario, consola;
+    TextField contrasenaField, usuario ;
+    @FXML
+    Label consola;
 
-    String contrasenaString, username;
+    String contrasena, username;
+    Usuario currentUser;
+
+    public Login(){
+        username="profesor";
+        contrasena = "1234";
+        currentUser= new Usuario(username,contrasena);
+    }
 
 
     public void login(ActionEvent actionEvent) throws Exception {
@@ -23,39 +36,43 @@ public class Login {
         /*
         if (check()){
             username = usuario.getText();
-            contrasenaString = contrasena.getText();
-            if (!comprobarUsuario(username, contrasenaString)){
-                System.out.println("nombre no encontrado");
+            contrasena = contrasenaField.getText();
+            if (comprobarUsuario(username, contrasena)){
+                currentUser = new Usuario(username,contrasena);
+                startApp();
             }else{
-                startChat();
-                Stage newStage = (Stage) loginButton.getScene().getWindow();
-                newStage.close();
+                consola.setText("nombre no encontrado en al bbdd");
             }
         }
          */
     }
 
-    public boolean check(){
+    public boolean check() throws IOException {
         if (usuario.getText().equals("") ){
             consola.setText("falta nombre de usuario!");
-            return false;
-        }else if (contrasena.getText().equals("") ){
+            startApp();
+            return true;
+        }else if (contrasenaField.getText().equals("") ){
             consola.setText("falta contraseña!");
-            return false;
+            return true;
         }
         return true;
     }
 
-<<<<<<< Updated upstream
-    private void startChat() {
-=======
     private void startApp() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         Parent root = loader.load();
->>>>>>> Stashed changes
 
-        //este metodo lanza la siguiente pagina
+        //controladoraPrincipal controler = new controladoraPrincipal();
+        //controler.setCurrentUser(currentUser);
 
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("App");
+        stage.show();
+
+        Stage newStage = (Stage) loginButton.getScene().getWindow();
+        newStage.close();
     }
 
     private boolean comprobarUsuario(String username, String contrasenaString) {

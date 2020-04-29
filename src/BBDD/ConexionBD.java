@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
 public class ConexionBD {
 
 	public static Connection conexion;
@@ -13,11 +12,9 @@ public class ConexionBD {
 		this.conexion=conexion();
 	}
 
-
 	public static Connection getConexion() {
 		return conexion;
 	}
-
 
 	public static void setConexion(Connection conexion) {
 		BBDD.ConexionBD.conexion = conexion;
@@ -45,5 +42,4 @@ public class ConexionBD {
 		}
 		return null;
 	}
-
 }

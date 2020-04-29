@@ -57,7 +57,7 @@ public class controladoraEditor extends controladoraPrincipal {
         try {
             OracleBD bd = new OracleBD();
             String query = "select * from alumno where nombre = '" + username + "' and apellido = '"+ apellidos + "';";
-            resultados = bd.newQueryBD(query);
+            resultados = (ArrayList<ArrayList>) bd.makeQuery(query);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -76,7 +76,7 @@ public class controladoraEditor extends controladoraPrincipal {
         labelAlumnoModificar.setText(usuario.getNombreUser());
         textFieldNombre.setText(usuario.getNombreUser());
         textFieldExpediente.setText(usuario.getNumeroExpediente());
-        textFieldGrupo.setText(usuario.getGrupo());
+        textFieldGrupo.setText(usuario.getClase());
     }
 
     private void poblarListView() {
@@ -101,14 +101,14 @@ public class controladoraEditor extends controladoraPrincipal {
         String where = " where nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" ;
         String query = update+set+where;
         OracleBD nueva = new OracleBD();
-        nueva.newQueryBD(query);
+        nueva.makeQuery(query);
 
         poblarListView();
     }
 
     public void borrarEsteUsuario(ActionEvent actionEvent) throws SQLException {
         OracleBD nueva = new OracleBD();
-        nueva.newQueryBD("DELETE FROM alumno WHERE nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" );
+        nueva.makeInsert("DELETE FROM alumno WHERE nombre='" + usuarioModificar.getNombreUser() + "' and apellido='" + usuarioModificar.getApellidoUser() + "';" );
 
         textFieldExpediente.clear();
         textFieldNombre.clear();

@@ -1,5 +1,7 @@
 
 import BBDD.OracleBD;
+import Controladoras.controladoraPrincipal;
+import Modelo.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -13,22 +15,20 @@ import java.util.ResourceBundle;
 public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
-        OracleBD nueva = new OracleBD();
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Vistas/Login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Vistas/tabController.fxml"));
             primaryStage.setTitle("Login");
+            controladoraPrincipal controladoraPrincipal = new controladoraPrincipal();
+            controladoraPrincipal.setCurrentUser(new Usuario("Miguel", "Fernandez", "123", "1","21726301", false));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch (Exception e ){
-            System.out.println(e.getMessage());
-            System.out.println(e.getCause());
+            e.printStackTrace();
         }
     }
-
-
 }

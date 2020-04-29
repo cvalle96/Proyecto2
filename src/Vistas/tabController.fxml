@@ -25,11 +25,8 @@
                         <fx:include fx:id="sensoresTab" source="Sensores.fxml" />
                     </content>
                 </Tab>
-                <Tab  text="EDITOR">
-                    <content>
-                        <fx:include fx:id="editorTab" source="Editor.fxml" />
-                    </content>
-                </Tab>
+
+
 
             </tabs>
         </TabPane>

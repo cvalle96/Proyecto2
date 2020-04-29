@@ -9,7 +9,7 @@ public class Usuario extends Gestion {
     private String apellidoUser;
     private String numeroExpediente;
     private String contrasenia;
-    private String grupo;
+    private String clase;
 
     public boolean isProfe() {
         return esProfe;
@@ -31,12 +31,12 @@ public class Usuario extends Gestion {
         return apellidoUser;
     }
 
-    public Usuario(String nombre, String apellidos, String contrasenia, String grupo, String expediente, boolean profe)  {
+    public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)  {
         this.nombreUser=nombre;
         this.apellidoUser = apellidos;
         this.contrasenia =contrasenia;
         this.numeroExpediente= expediente;
-        this.grupo = grupo;
+        this.clase = clase;
         this.esProfe = profe;
     }
 
@@ -80,7 +80,7 @@ public class Usuario extends Gestion {
         return "Nombre " + this.nombreUser +"\nExpediente: " + this.numeroExpediente + "\n";
     }
 
-    public String getGrupo() {
-        return grupo;
+    public String getClase() {
+        return clase;
     }
 }
