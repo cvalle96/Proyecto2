@@ -100,7 +100,7 @@ public class SerialTest extends parsearFecha implements SerialPortEventListener 
                 Integer humedad = Integer.valueOf(part1);
                 Integer temperatura = Integer.valueOf(part2);
                 Float ruido = Float.valueOf(part3);
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                 LocalDateTime now = LocalDateTime.now();
                 String hora = dtf.format(now);
                 if (aula >= 6){
