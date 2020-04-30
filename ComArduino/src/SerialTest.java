@@ -8,6 +8,8 @@ import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 import java.time.LocalTime;
 import Utilidades.parsearFecha;
@@ -15,7 +17,7 @@ import Utilidades.parsearFecha;
 
 public class SerialTest extends parsearFecha implements SerialPortEventListener  {
     SerialPort serialPort;
-    int clase =1;
+    int aula =1;
     static OracleBD bd;
     /** The port we're normally going to use. */
     private static final String PORT_NAMES[] = {"COM4"};
@@ -108,25 +110,17 @@ public class SerialTest extends parsearFecha implements SerialPortEventListener 
                 Integer humedad = Integer.valueOf(part1);
                 Integer temperatura = Integer.valueOf(part2);
                 Float ruido = Float.valueOf(part3);
-                LocalTime time = LocalTime.now();
-                // String hora = parsearFechaSQL(time);
-                //Formatear hora para que se lo coma el sql
-
-                //System.out.println("Humedad = " + humedad);
-                //System.out.println("Temperatura = " + temperatura);
-                //System.out.println("Ruido = "+ ruido);
-                //System.out.println("Hora = "+ hora);
-
-                if (clase >= 6){
-                    clase =1;
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                String hora = dtf.format(now);
+                if (aula >= 6){
+                    aula =1;
                 }
-
-                String query = "INSERT INTO registro (clase, temperatura, ruido, humedad,hora) VALUES ("+clase+", " + temperatura + ", " + ruido + ", " + humedad + ", "+ "null" +")";
+                String query = "INSERT INTO registro (aula, temperatura, ruido, humedad,hora) VALUES ("+aula+", " + temperatura + ", " + ruido + ", " + humedad + ", "+ "null" +")";
                 System.out.println(query);
                 bd.makeInsert(query);
-                clase++;
+                aula++;
             } catch (Exception e) {
-                //System.err.println(e.toString());
                 e.printStackTrace();
             }
 
