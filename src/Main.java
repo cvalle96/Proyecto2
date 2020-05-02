@@ -7,16 +7,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
 
         launch(args);
-
 
     }
 

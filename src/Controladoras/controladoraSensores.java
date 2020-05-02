@@ -67,7 +67,7 @@ public class controladoraSensores extends controladoraPrincipal{
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        dtf.format(now);
+        String hora = dtf.format(now);
 
         OracleBD BD = new OracleBD();
         BD.setConnection();
