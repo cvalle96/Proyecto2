@@ -130,6 +130,6 @@ public class SerialTest extends parsearFecha implements SerialPortEventListener 
             }
         };
         t.start();
-        System.out.println("Comienza la insercción de datos en la BBDD");
+        System.out.println("Comienza la inserción de datos en la BBDD");
     }
 }
