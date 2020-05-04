@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraProfesor">
+
+    <children>
+        <ListView fx:id="listaUsuarios" layoutX="42.0" layoutY="125.0" onMouseClicked="#selectThisUser" prefHeight="321.0" prefWidth="332.0">
+            <effect>
+                <DropShadow />
+            </effect>
+        </ListView>
+        <TextField fx:id="textFieldExpediente" layoutX="476.0" layoutY="149.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
+        <TextField fx:id="textFieldNombre" layoutX="476.0" layoutY="107.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
+        <Button fx:id="actualizarButton" layoutX="484.0" layoutY="358.0" mnemonicParsing="false" onAction="#modificarValores" prefHeight="38.0" prefWidth="184.0" text="ENVIAR CAMBIOS" textFill="#3fa255">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <TextField fx:id="textFieldInformacion" layoutX="476.0" layoutY="237.0" prefHeight="26.0" prefWidth="200.0" promptText="Información" />
+        <TextField fx:id="textFieldNota" layoutX="476.0" layoutY="197.0" prefHeight="26.0" prefWidth="200.0" promptText="Nota" />
+      <Button fx:id="obtenerButton" alignment="CENTER" layoutX="154.0" layoutY="81.0" mnemonicParsing="false" onAction="#pintarAlumnos" text="Obtener alumnos" textFill="#001cff" />
+      <TextField fx:id="textFieldAula" layoutX="476.0" layoutY="283.0" prefHeight="26.0" prefWidth="200.0" promptText="Aula" />
+    </children>
+</AnchorPane>
