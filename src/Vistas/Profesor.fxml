@@ -9,20 +9,25 @@
 <AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraProfesor">
 
     <children>
-        <ListView fx:id="listaUsuarios" layoutX="42.0" layoutY="125.0" onMouseClicked="#selectThisUser" prefHeight="321.0" prefWidth="332.0">
+        <ListView fx:id="listaUsuarios" layoutX="35.0" layoutY="134.0" onMouseClicked="#selectThisUser" prefHeight="325.0" prefWidth="184.0">
             <effect>
                 <DropShadow />
             </effect>
         </ListView>
-        <TextField fx:id="textFieldExpediente" layoutX="476.0" layoutY="149.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
-        <TextField fx:id="textFieldNombre" layoutX="476.0" layoutY="107.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
-        <Button fx:id="actualizarButton" layoutX="484.0" layoutY="358.0" mnemonicParsing="false" onAction="#modificarValores" prefHeight="38.0" prefWidth="184.0" text="ENVIAR CAMBIOS" textFill="#3fa255">
+        <TextField fx:id="textFieldExpediente" layoutX="554.0" layoutY="193.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
+        <TextField fx:id="textFieldNombre" layoutX="554.0" layoutY="151.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
+        <Button fx:id="actualizarButton" layoutX="562.0" layoutY="402.0" mnemonicParsing="false" onAction="#modificarValores" prefHeight="38.0" prefWidth="184.0" text="ENVIAR CAMBIOS" textFill="#3fa255">
          <font>
             <Font size="18.0" />
          </font></Button>
-        <TextField fx:id="textFieldInformacion" layoutX="476.0" layoutY="237.0" prefHeight="26.0" prefWidth="200.0" promptText="Información" />
-        <TextField fx:id="textFieldNota" layoutX="476.0" layoutY="197.0" prefHeight="26.0" prefWidth="200.0" promptText="Nota" />
-      <Button fx:id="obtenerButton" alignment="CENTER" layoutX="154.0" layoutY="81.0" mnemonicParsing="false" onAction="#pintarAlumnos" text="Obtener alumnos" textFill="#001cff" />
-      <TextField fx:id="textFieldAula" layoutX="476.0" layoutY="283.0" prefHeight="26.0" prefWidth="200.0" promptText="Aula" />
+        <TextField fx:id="textFieldNota" layoutX="554.0" layoutY="241.0" prefHeight="26.0" prefWidth="200.0" promptText="Nota" />
+      <Button fx:id="obtenerButton" alignment="CENTER" layoutX="157.0" layoutY="70.0" mnemonicParsing="false" onAction="#pintarAlumnos" prefHeight="39.0" prefWidth="142.0" text="Obtener alumnos" textFill="#001cff" />
+      <TextField fx:id="textFieldAula" layoutX="554.0" layoutY="284.0" prefHeight="26.0" prefWidth="200.0" promptText="Aula" />
+      <ListView fx:id="listaAsignatura" layoutX="237.0" layoutY="134.0" onMouseClicked="#selectThisUser" prefHeight="325.0" prefWidth="184.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </ListView>
+      <ComboBox fx:id="comboBoxPrueba" layoutX="553.0" layoutY="334.0" prefHeight="25.0" prefWidth="200.0" />
     </children>
 </AnchorPane>

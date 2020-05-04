@@ -10,6 +10,7 @@ public class Usuario extends Gestion {
     private String numeroExpediente;
     private String contrasenia;
     private String clase;
+    private String carrera;
 
     public boolean isProfe() {
         return esProfe;
@@ -31,13 +32,14 @@ public class Usuario extends Gestion {
         return apellidoUser;
     }
 
-    public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)  {
+    public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente,String carrera ,boolean profe)  {
         this.nombreUser=nombre;
         this.apellidoUser = apellidos;
         this.contrasenia =contrasenia;
         this.numeroExpediente= expediente;
         this.clase = clase;
         this.esProfe = profe;
+        this.carrera = carrera;
     }
 
     public boolean esProfesor(){
@@ -82,5 +84,11 @@ public class Usuario extends Gestion {
 
     public String getClase() {
         return clase;
+    }
+
+    public String getCarrera(){return carrera;}
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
     }
 }

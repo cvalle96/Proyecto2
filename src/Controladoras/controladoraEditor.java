@@ -64,7 +64,7 @@ public class controladoraEditor extends controladoraPrincipal {
         System.out.println(resultados.toString());
 
         //le estoy pasando la carrera como si fuera la contraseña porque no tengo el campo en el constructor y contraseña no se utilizaba
-        Usuario user = new Usuario(nombre, apellidos, carrera, grupo, expediente, false );
+        Usuario user = new Usuario(nombre, apellidos, carrera, grupo, expediente,carrera, false );
 
         return user;
     }

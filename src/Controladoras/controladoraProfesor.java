@@ -16,13 +16,15 @@ public class controladoraProfesor extends controladoraPrincipal {
     @FXML
     ObservableList<String> observableUsuariosString;
     @FXML
-    ListView listaUsuarios;
+    ListView listaUsuarios, listaAsignatura;
     @FXML
     TextField textFieldNombre, textFieldGrupo, textFieldExpediente, textFieldCarrera;
     @FXML
     Button actualizarButton;
+    @FXML
+    ComboBox comboBoxPrueba;
 
-    ArrayList<String> listaNombres;
+    ArrayList<String> listaNombres, listaAsignaturas;
     Usuario usuarioModificar;
     Usuario currentUser;
 
@@ -30,6 +32,7 @@ public class controladoraProfesor extends controladoraPrincipal {
     public controladoraProfesor(){
         currentUser = controladoraPrincipal.currentUser;
         listaUsuarios = new ListView();
+        listaAsignatura = new ListView();
         getAlumnos();
     }
 
@@ -64,7 +67,7 @@ public class controladoraProfesor extends controladoraPrincipal {
         System.out.println(resultados.toString());
 
         //le estoy pasando la carrera como si fuera la contraseña porque no tengo el campo en el constructor y contraseña no se utilizaba
-        Usuario user = new Usuario(nombre, apellidos, carrera, grupo, expediente, false );
+        Usuario user = new Usuario(nombre, apellidos, carrera, grupo, expediente,carrera, false );
 
         return user;
     }
@@ -76,8 +79,15 @@ public class controladoraProfesor extends controladoraPrincipal {
         textFieldExpediente.setText(usuario.getNumeroExpediente());
         textFieldGrupo.setText(usuario.getClase());
     }
+    private void seleccionarAsignaturaModificar(Usuario usuario) {
+        usuarioModificar = usuario;
+        textFieldNombre.setText(usuario.getNombreUser());
+        textFieldCarrera.setText(usuario.getContrasenia());
+        textFieldExpediente.setText(usuario.getNumeroExpediente());
+        textFieldGrupo.setText(usuario.getClase());
+    }
 
-    private void getAlumnos() {
+    private void getAlumnos(Usuario usuario) {
         listaNombres = new ArrayList<String>();
         try {
 
@@ -95,6 +105,25 @@ public class controladoraProfesor extends controladoraPrincipal {
             e.printStackTrace();
         }
     }
+    private void getAsignaturas(Usuario usuario) {
+        listaAsignaturas = new ArrayList<String>();
+
+        try {
+            String query = "select asignatura from asignaturas join carrera on asignaturas.id_carrera = carrera.id_carrera where carrera = 'Ingeniería Informática';" ;
+            OracleBD bd = new OracleBD();
+            bd.setConnection();
+            ArrayList resultados =  bd.getArrayList(query);
+            bd.closeConnection();
+
+            for(int i =0; i<resultados.size(); i=i+2){
+                listaAsignaturas.add(resultados.get(i) + " "+resultados.get(i+1)) ;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void modificarValores(ActionEvent actionEvent) throws SQLException {
 
