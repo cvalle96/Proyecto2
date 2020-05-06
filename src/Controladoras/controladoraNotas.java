@@ -3,7 +3,9 @@ package Controladoras;
 import BBDD.OracleBD;
 import Modelo.Usuario;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
@@ -20,49 +22,70 @@ public class controladoraNotas extends controladoraPrincipal{
     ListView notasListview;
     @FXML
     ObservableList<String> observableNotas;
+    @FXML
+    Button actualizarButton;
 
     Usuario currentUser;
 
 
-    public controladoraNotas() throws SQLException {
-        actualizarHora();
-        getNotas();
+    public controladoraNotas() {
         currentUser = controladoraPrincipal.currentUser;
+        notasListview = new ListView();
+        labelHora = new Label();
+
     }
 
     public void actualizarHora(){
-        labelHora = new Label();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
+        System.out.println(dtf.format(now));
         labelHora.setText(dtf.format(now));
     }
 
     private void getNotas() throws SQLException {
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        //hacer el expediente una variable
-        String query = "SELECT id_user FROM alumno WHERE EXPEDIENTE = '0256022' ";
+        String query = "SELECT id_alumno FROM alumno WHERE EXPEDIENTE = '" + currentUser.getNumeroExpediente() + "'";
         ArrayList rs = bd.getArrayList(query);
-        System.out.println(rs.get(0));
         String idAlumno = (String) rs.get(0);
         query = "SELECT nota, asignatura, prueba FROM notas ";
-        String query2 = "WHERE id_alumno = "+  8  ;
+        String query2 = "WHERE id_alumno = "+  idAlumno  + " ORDER BY asignatura";
         query += query2;
-        System.out.println(query);
         rs = bd.getArrayList(query);
-        actualizarNotas(rs);
+        bd.closeConnection();
+        pintarNotas(rs);
     }
 
-    public void actualizarNotas(ArrayList rs){
-        System.out.println(rs.toString());
+    private void pintarNotas(ArrayList rs){
         ArrayList<String> arrayNotas = new ArrayList<String>();
-        for(int i =0; i<rs.size(); i+=3){
-            arrayNotas.add(rs.get(i) + " --> " + rs.get(i+2) + " en la asignatura: " + rs.get(i+1));
+        if(rs.isEmpty()){
+            arrayNotas.add("No hay notas por mostrar para este alumno");
+        }else{
+            for(int i =0; i<rs.size(); i+=3) {
+                String tupla = rs.get(i+1) + getEspacios((String) rs.get(i+1));
+                tupla += rs.get(i+2) + getEspacios((String) rs.get(i+2));
+                tupla += rs.get(i) + getEspacios((String) rs.get(i));
+                arrayNotas.add(tupla);
+            }
         }
-        System.out.println(arrayNotas);
         observableNotas = FXCollections.observableArrayList(arrayNotas);
         notasListview.setItems(observableNotas);
         notasListview.refresh();
 
+    }
+
+    private String getEspacios(String palabra){
+        int numero = 50 - palabra.length();
+        String espacio = "";
+        for(; numero>=0; numero--){
+            espacio += " ";
+        }
+        return espacio;
+    }
+
+
+    public void actualizar(ActionEvent actionEvent) throws SQLException {
+        actualizarHora();
+        getNotas();
     }
 }
