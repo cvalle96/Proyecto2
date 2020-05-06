@@ -38,7 +38,6 @@ public class controladoraNotas extends controladoraPrincipal{
     public void actualizarHora(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        System.out.println(dtf.format(now));
         labelHora.setText(dtf.format(now));
     }
 

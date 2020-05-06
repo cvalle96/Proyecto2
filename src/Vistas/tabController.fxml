@@ -8,26 +8,26 @@
         <TabPane layoutX="6.0" layoutY="6.0" prefHeight="582.0" prefWidth="807.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
 
-                <Tab text="PERFIL">
+                <Tab fx:id="perfilTab" text="PERFIL">
                     <content>
-                        <fx:include fx:id="perfilTab" source="Perfil.fxml" />
+                        <fx:include source="Perfil.fxml" />
                     </content>
                 </Tab>
 
-                <Tab text="NOTAS">
+                <Tab fx:id="notasTab" text="NOTAS">
                     <content>
-                        <fx:include fx:id="notasTab" source="Notas.fxml" />
+                        <fx:include fx:id="notasAP" source="Notas.fxml" />
                     </content>
                 </Tab>
 
-                <Tab text="SENSORES">
+                <Tab fx:id="sensoresTab" text="SENSORES">
                     <content>
-                        <fx:include fx:id="sensoresTab" source="Sensores.fxml" />
+                        <fx:include  source="Sensores.fxml" />
                     </content>
                 </Tab>
-                <Tab  text="EDITOR">
+                <Tab fx:id = "editorTab" text="EDITOR">
                     <content>
-                        <fx:include fx:id="editorTab" source="Editor.fxml" />
+                        <fx:include fx:id="editorAP" source="Editor.fxml" />
                     </content>
                 </Tab>
 
