@@ -18,6 +18,7 @@ public class Usuario extends Gestion {
 
 
     public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)  {
+        //mdjsns
         this.nombreUser=nombre;
         this.apellidoUser = apellidos;
         this.contrasenia =contrasenia;
