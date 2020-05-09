@@ -23,11 +23,11 @@
         <TextField fx:id="textFieldNota" layoutX="554.0" layoutY="241.0" prefHeight="26.0" prefWidth="200.0" promptText="Nota" />
       <Button fx:id="obtenerButton" alignment="CENTER" layoutX="157.0" layoutY="70.0" mnemonicParsing="false" onAction="#pintarAlumnos" prefHeight="39.0" prefWidth="142.0" text="Obtener alumnos" textFill="#001cff" />
       <TextField fx:id="textFieldAula" layoutX="554.0" layoutY="284.0" prefHeight="26.0" prefWidth="200.0" promptText="Aula" />
-      <ListView fx:id="listaAsignatura" layoutX="237.0" layoutY="134.0" onMouseClicked="#selectThisUser" prefHeight="325.0" prefWidth="184.0">
+      <ListView fx:id="listaAsignatura" layoutX="237.0" layoutY="134.0" onMouseClicked="#selectThisAsignatura" prefHeight="325.0" prefWidth="184.0">
          <effect>
             <DropShadow />
          </effect>
       </ListView>
-      <ComboBox fx:id="comboBoxPrueba" layoutX="553.0" layoutY="334.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="textFieldComentario" layoutX="554.0" layoutY="324.0" prefHeight="26.0" prefWidth="200.0" promptText="Comentario" />
     </children>
 </AnchorPane>

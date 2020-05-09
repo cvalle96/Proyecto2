@@ -2,24 +2,12 @@ package Modelo;
 
 
 public class Usuario extends Gestion {
-    // la clase usuario que inicializa los users de nuestra app
-    //el rol es estudiante por defecto, se cambia con el set despues de inicializar el objeto
 
     private String nombreUser;
     private String apellidoUser;
     private String numeroExpediente;
     private String contrasenia;
     private String clase;
-    private String carrera;
-
-    public boolean isProfe() {
-        return esProfe;
-    }
-
-    public void setEsProfe(boolean esProfe) {
-        this.esProfe = esProfe;
-    }
-
     private boolean esProfe;
 
     public Usuario(String nombre, String contrasenia)  {
@@ -28,18 +16,15 @@ public class Usuario extends Gestion {
         this.numeroExpediente= generarExpediente();
     }
 
-    public String getApellidoUser() {
-        return apellidoUser;
-    }
 
-    public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente,String carrera ,boolean profe)  {
+    public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)  {
+        //mdjsns
         this.nombreUser=nombre;
         this.apellidoUser = apellidos;
         this.contrasenia =contrasenia;
         this.numeroExpediente= expediente;
         this.clase = clase;
         this.esProfe = profe;
-        this.carrera = carrera;
     }
 
     public boolean esProfesor(){
@@ -52,7 +37,13 @@ public class Usuario extends Gestion {
         return answer;
     }
 
-    //las string de los roles en mayusculas
+    public void setEsProfe(boolean esProfe) {
+        this.esProfe = esProfe;
+    }
+
+    public String getApellidoUser() {
+        return apellidoUser;
+    }
 
     public String getNombreUser() {
         return nombreUser;
@@ -84,11 +75,5 @@ public class Usuario extends Gestion {
 
     public String getClase() {
         return clase;
-    }
-
-    public String getCarrera(){return carrera;}
-
-    public void setCarrera(String carrera) {
-        this.carrera = carrera;
     }
 }

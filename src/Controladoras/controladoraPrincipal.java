@@ -9,7 +9,8 @@ public class controladoraPrincipal {
 
     public controladoraPrincipal(){
         //deberia llegar desde el login a traves de el setter
-        currentUser = new Usuario("Miguel", "Fernandez Paradela", "1234", "3", "12345", false);
+        //String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe
+        currentUser = new Usuario("Carlos", "Valle","1234","1","12345678",true );
     }
 
     public void setCurrentUser(Usuario user){

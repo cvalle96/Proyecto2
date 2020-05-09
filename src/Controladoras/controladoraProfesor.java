@@ -18,11 +18,10 @@ public class controladoraProfesor extends controladoraPrincipal {
     @FXML
     ListView listaUsuarios, listaAsignatura;
     @FXML
-    TextField textFieldNombre, textFieldGrupo, textFieldExpediente, textFieldCarrera;
+    TextField textFieldNombre, textFieldGrupo, textFieldExpediente, textFieldCarrera, texFieldComentario;
     @FXML
     Button actualizarButton;
-    @FXML
-    ComboBox comboBoxPrueba;
+
 
     ArrayList<String> listaNombres, listaAsignaturas;
     Usuario usuarioModificar;
@@ -50,7 +49,7 @@ public class controladoraProfesor extends controladoraPrincipal {
     }
 
     private Usuario obtenerUsuariodeBBDD(String nombre, String apellidos) throws SQLException {
-
+        System.out.println(nombre + apellidos);
         ArrayList resultados = null;
         try {
             OracleBD bd = new OracleBD();
@@ -61,24 +60,25 @@ public class controladoraProfesor extends controladoraPrincipal {
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
+        System.out.println(resultados.toString());
         String carrera = (String) resultados.get(5);
         String grupo = (String) resultados.get(6);
         String expediente =(String) resultados.get(4);
         System.out.println(resultados.toString());
 
         //le estoy pasando la carrera como si fuera la contraseña porque no tengo el campo en el constructor y contraseña no se utilizaba
-        Usuario user = new Usuario(nombre, apellidos, carrera, grupo, expediente,carrera, false );
+        Usuario user = new Usuario(nombre, apellidos, carrera, grupo, expediente, false );
 
         return user;
     }
 
     private void seleccionarAlumnoModificar(Usuario usuario) {
         usuarioModificar = usuario;
-        textFieldNombre.setText(usuario.getNombreUser());
-        textFieldCarrera.setText(usuario.getContrasenia());
-        textFieldExpediente.setText(usuario.getNumeroExpediente());
-        textFieldGrupo.setText(usuario.getClase());
+        getAsignaturas(usuario);
     }
+
+
+
     private void seleccionarAsignaturaModificar(Usuario usuario) {
         usuarioModificar = usuario;
         textFieldNombre.setText(usuario.getNombreUser());
@@ -87,7 +87,7 @@ public class controladoraProfesor extends controladoraPrincipal {
         textFieldGrupo.setText(usuario.getClase());
     }
 
-    private void getAlumnos(Usuario usuario) {
+    private void getAlumnos() {
         listaNombres = new ArrayList<String>();
         try {
 
@@ -109,16 +109,19 @@ public class controladoraProfesor extends controladoraPrincipal {
         listaAsignaturas = new ArrayList<String>();
 
         try {
-            String query = "select asignatura from asignaturas join carrera on asignaturas.id_carrera = carrera.id_carrera where carrera = 'Ingeniería Informática';" ;
+            String query = "SELECT A.ASIGNATURA FROM ASIGNATURAS A, CARRERA C, ALUMNO AL WHERE A.ID_CARRERA = C.ID_CARRERA AND C.CARRERA = AL.CARRERA AND AL.EXPEDIENTE = " + usuario.getNumeroExpediente();
+            System.out.println(query);
             OracleBD bd = new OracleBD();
             bd.setConnection();
             ArrayList resultados =  bd.getArrayList(query);
             bd.closeConnection();
 
-            for(int i =0; i<resultados.size(); i=i+2){
-                listaAsignaturas.add(resultados.get(i) + " "+resultados.get(i+1)) ;
+            for(int i =0; i<resultados.size(); i++){
+                listaAsignaturas.add((String)resultados.get(i));
             }
-
+            observableUsuariosString = FXCollections.observableArrayList(listaAsignaturas);
+            listaAsignatura.setItems(observableUsuariosString);
+            listaAsignatura.refresh();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -141,6 +144,18 @@ public class controladoraProfesor extends controladoraPrincipal {
 
     }
 
+
+    public void selectThisAsignatura(MouseEvent mouseEvent) throws SQLException {
+        int indexNombre=listaAsignatura.getSelectionModel().getSelectedIndex();
+        String nombre = listaAsignaturas.get(indexNombre);
+        System.out.println(indexNombre+nombre);
+        // textFieldNombre, textFieldGrupo, textFieldExpediente, textFieldCarrera, texFieldComentario
+        textFieldNombre=new TextField();
+        textFieldNombre.setText(usuarioModificar.getNombreUser());
+
+
+
+    }
 
 
     public void pintarAlumnos(ActionEvent actionEvent) {

@@ -30,6 +30,11 @@
                         <fx:include fx:id="editorTab" source="Editor.fxml" />
                     </content>
                 </Tab>
+                <Tab  text="PROFESOR">
+                    <content>
+                        <fx:include fx:id="profesorTab" source="Profesor.fxml" />
+                    </content>
+                </Tab>
 
             </tabs>
         </TabPane>
