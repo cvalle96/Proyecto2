@@ -18,9 +18,9 @@ public class controladoraProfesor extends controladoraPrincipal {
     @FXML
     ListView listaUsuarios, listaAsignatura;
     @FXML
-    TextField textFieldNombre, textFieldGrupo, textFieldExpediente, textFieldCarrera, texFieldComentario;
+    TextField textFieldNombre, textFieldAula, textFieldExpediente, textFieldCarrera, texFieldComentario, textFieldNota;
     @FXML
-    Button actualizarButton;
+    Button actualizarButton, buttonEnviarNota;
 
 
     ArrayList<String> listaNombres, listaAsignaturas;
@@ -32,7 +32,13 @@ public class controladoraProfesor extends controladoraPrincipal {
         currentUser = controladoraPrincipal.currentUser;
         listaUsuarios = new ListView();
         listaAsignatura = new ListView();
+        textFieldNombre=new TextField();
+        textFieldAula = new TextField();
+        textFieldExpediente = new TextField();
+        textFieldNota = new TextField();
+        texFieldComentario = new TextField();
         getAlumnos();
+
     }
 
     public void selectThisUser(MouseEvent mouseEvent) throws SQLException {
@@ -75,6 +81,7 @@ public class controladoraProfesor extends controladoraPrincipal {
     private void seleccionarAlumnoModificar(Usuario usuario) {
         usuarioModificar = usuario;
         getAsignaturas(usuario);
+
     }
 
 
@@ -84,7 +91,7 @@ public class controladoraProfesor extends controladoraPrincipal {
         textFieldNombre.setText(usuario.getNombreUser());
         textFieldCarrera.setText(usuario.getContrasenia());
         textFieldExpediente.setText(usuario.getNumeroExpediente());
-        textFieldGrupo.setText(usuario.getClase());
+        textFieldAula.setText(usuario.getClase());
     }
 
     private void getAlumnos() {
@@ -122,16 +129,18 @@ public class controladoraProfesor extends controladoraPrincipal {
             observableUsuariosString = FXCollections.observableArrayList(listaAsignaturas);
             listaAsignatura.setItems(observableUsuariosString);
             listaAsignatura.refresh();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
 
     public void modificarValores(ActionEvent actionEvent) throws SQLException {
 
         String update = "update alumno";
-        String set = " set nombre = '" +textFieldNombre.getText()+ "', carrera= '" + textFieldCarrera.getText() + "', clase = '"+ textFieldGrupo.getText() + "', expediente ='"+ textFieldExpediente.getText() + "'";
+        String set = " set nombre = '" +textFieldNombre.getText()+ "', carrera= '" + textFieldCarrera.getText() + "', clase = '"+ textFieldAula.getText() + "', expediente ='"+ textFieldExpediente.getText() + "'";
         String where = " where expediente='" + usuarioModificar.getNumeroExpediente() +"'";
         String query = update+set+where;
 
@@ -149,18 +158,24 @@ public class controladoraProfesor extends controladoraPrincipal {
         int indexNombre=listaAsignatura.getSelectionModel().getSelectedIndex();
         String nombre = listaAsignaturas.get(indexNombre);
         System.out.println(indexNombre+nombre);
-        // textFieldNombre, textFieldGrupo, textFieldExpediente, textFieldCarrera, texFieldComentario
-        textFieldNombre=new TextField();
+        System.out.println(usuarioModificar.getClase());
+        System.out.println(usuarioModificar.getNombreUser());
         textFieldNombre.setText(usuarioModificar.getNombreUser());
-
-
-
+        textFieldAula.setText(usuarioModificar.getClase());
+        textFieldExpediente.setText(usuarioModificar.getNumeroExpediente());
     }
-
 
     public void pintarAlumnos(ActionEvent actionEvent) {
         observableUsuariosString = FXCollections.observableArrayList(listaNombres);
         listaUsuarios.setItems(observableUsuariosString);
         listaUsuarios.refresh();
     }
+
+    public void enviaNota(ActionEvent actionEvent){
+        String nota = textFieldNota.getText();
+        String comentario = texFieldComentario.getText();
+        
+
+    }
+
 }

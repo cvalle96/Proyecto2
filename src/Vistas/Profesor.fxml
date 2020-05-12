@@ -14,20 +14,25 @@
                 <DropShadow />
             </effect>
         </ListView>
-        <TextField fx:id="textFieldExpediente" layoutX="554.0" layoutY="193.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
-        <TextField fx:id="textFieldNombre" layoutX="554.0" layoutY="151.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
-        <Button fx:id="actualizarButton" layoutX="562.0" layoutY="402.0" mnemonicParsing="false" onAction="#modificarValores" prefHeight="38.0" prefWidth="184.0" text="ENVIAR CAMBIOS" textFill="#3fa255">
+        <TextField fx:id="textFieldExpediente" layoutX="558.0" layoutY="151.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
+        <TextField fx:id="textFieldNombre" layoutX="558.0" layoutY="109.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
+        <Button fx:id="actualizarButton" layoutX="566.0" layoutY="266.0" mnemonicParsing="false" onAction="#modificarValores" prefHeight="38.0" prefWidth="184.0" text="ENVIAR CAMBIOS" textFill="#3fa255">
          <font>
             <Font size="18.0" />
          </font></Button>
-        <TextField fx:id="textFieldNota" layoutX="554.0" layoutY="241.0" prefHeight="26.0" prefWidth="200.0" promptText="Nota" />
-      <Button fx:id="obtenerButton" alignment="CENTER" layoutX="157.0" layoutY="70.0" mnemonicParsing="false" onAction="#pintarAlumnos" prefHeight="39.0" prefWidth="142.0" text="Obtener alumnos" textFill="#001cff" />
-      <TextField fx:id="textFieldAula" layoutX="554.0" layoutY="284.0" prefHeight="26.0" prefWidth="200.0" promptText="Aula" />
+        <TextField fx:id="textFieldNota" layoutX="558.0" layoutY="344.0" prefHeight="26.0" prefWidth="200.0" promptText="Nota" />
+      <Button fx:id="obtenerButton" alignment="CENTER" layoutX="158.0" layoutY="52.0" mnemonicParsing="false" onAction="#pintarAlumnos" prefHeight="39.0" prefWidth="142.0" text="CARGAR DATOS" textFill="#001cff" />
+      <TextField fx:id="textFieldAula" layoutX="558.0" layoutY="194.0" prefHeight="26.0" prefWidth="200.0" promptText="Aula" />
       <ListView fx:id="listaAsignatura" layoutX="237.0" layoutY="134.0" onMouseClicked="#selectThisAsignatura" prefHeight="325.0" prefWidth="184.0">
          <effect>
             <DropShadow />
          </effect>
       </ListView>
-      <TextField fx:id="textFieldComentario" layoutX="554.0" layoutY="324.0" prefHeight="26.0" prefWidth="200.0" promptText="Comentario" />
+      <TextField fx:id="textFieldComentario" layoutX="558.0" layoutY="384.0" prefHeight="26.0" prefWidth="200.0" promptText="Comentario" />
+      <Button fx:id="buttonEnviarNota" layoutX="566.0" layoutY="446.0" mnemonicParsing="false" onAction="#enviaNota" prefHeight="38.0" prefWidth="184.0" text="ENVIAR NOTA" textFill="#3fa255">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
