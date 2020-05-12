@@ -16,11 +16,7 @@
         </ListView>
         <TextField fx:id="textFieldExpediente" layoutX="558.0" layoutY="151.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
         <TextField fx:id="textFieldNombre" layoutX="558.0" layoutY="109.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
-        <Button fx:id="actualizarButton" layoutX="566.0" layoutY="266.0" mnemonicParsing="false" onAction="#modificarValores" prefHeight="38.0" prefWidth="184.0" text="ENVIAR CAMBIOS" textFill="#3fa255">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <TextField fx:id="textFieldNota" layoutX="558.0" layoutY="344.0" prefHeight="26.0" prefWidth="200.0" promptText="Nota" />
+        <TextField fx:id="textFieldNota" layoutX="558.0" layoutY="257.0" prefHeight="26.0" prefWidth="200.0" promptText="Nota" />
       <Button fx:id="obtenerButton" alignment="CENTER" layoutX="158.0" layoutY="52.0" mnemonicParsing="false" onAction="#pintarAlumnos" prefHeight="39.0" prefWidth="142.0" text="CARGAR DATOS" textFill="#001cff" />
       <TextField fx:id="textFieldAula" layoutX="558.0" layoutY="194.0" prefHeight="26.0" prefWidth="200.0" promptText="Aula" />
       <ListView fx:id="listaAsignatura" layoutX="237.0" layoutY="134.0" onMouseClicked="#selectThisAsignatura" prefHeight="325.0" prefWidth="184.0">
@@ -28,8 +24,8 @@
             <DropShadow />
          </effect>
       </ListView>
-      <TextField fx:id="textFieldComentario" layoutX="558.0" layoutY="384.0" prefHeight="26.0" prefWidth="200.0" promptText="Comentario" />
-      <Button fx:id="buttonEnviarNota" layoutX="566.0" layoutY="446.0" mnemonicParsing="false" onAction="#enviaNota" prefHeight="38.0" prefWidth="184.0" text="ENVIAR NOTA" textFill="#3fa255">
+      <TextField fx:id="textFieldComentario" layoutX="558.0" layoutY="297.0" prefHeight="26.0" prefWidth="200.0" promptText="Comentario" />
+      <Button fx:id="buttonEnviarNota" layoutX="566.0" layoutY="359.0" mnemonicParsing="false" onAction="#enviaNota" prefHeight="38.0" prefWidth="184.0" text="ENVIAR NOTA" textFill="#3fa255">
          <font>
             <Font size="18.0" />
          </font>

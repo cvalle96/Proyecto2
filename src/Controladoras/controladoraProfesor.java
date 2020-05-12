@@ -1,6 +1,7 @@
 package Controladoras;
 
 import BBDD.OracleBD;
+import Modelo.Asignatura;
 import Modelo.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +19,7 @@ public class controladoraProfesor extends controladoraPrincipal {
     @FXML
     ListView listaUsuarios, listaAsignatura;
     @FXML
-    TextField textFieldNombre, textFieldAula, textFieldExpediente, textFieldCarrera, texFieldComentario, textFieldNota;
+    TextField textFieldNombre, textFieldAula, textFieldExpediente, textFieldCarrera, textFieldComentario, textFieldNota;
     @FXML
     Button actualizarButton, buttonEnviarNota;
 
@@ -26,6 +27,7 @@ public class controladoraProfesor extends controladoraPrincipal {
     ArrayList<String> listaNombres, listaAsignaturas;
     Usuario usuarioModificar;
     Usuario currentUser;
+    Asignatura currentAsignatura;
 
 
     public controladoraProfesor(){
@@ -36,7 +38,7 @@ public class controladoraProfesor extends controladoraPrincipal {
         textFieldAula = new TextField();
         textFieldExpediente = new TextField();
         textFieldNota = new TextField();
-        texFieldComentario = new TextField();
+        textFieldComentario = new TextField();
         getAlumnos();
 
     }
@@ -157,12 +159,14 @@ public class controladoraProfesor extends controladoraPrincipal {
     public void selectThisAsignatura(MouseEvent mouseEvent) throws SQLException {
         int indexNombre=listaAsignatura.getSelectionModel().getSelectedIndex();
         String nombre = listaAsignaturas.get(indexNombre);
-        System.out.println(indexNombre+nombre);
-        System.out.println(usuarioModificar.getClase());
-        System.out.println(usuarioModificar.getNombreUser());
         textFieldNombre.setText(usuarioModificar.getNombreUser());
         textFieldAula.setText(usuarioModificar.getClase());
         textFieldExpediente.setText(usuarioModificar.getNumeroExpediente());
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        ArrayList rs=bd.getArrayList("select id_asignaturas from asignaturas where asignatura = '" + nombre+"'");
+        currentAsignatura=new Asignatura(nombre, (String) rs.get(0));
+
     }
 
     public void pintarAlumnos(ActionEvent actionEvent) {
@@ -171,10 +175,20 @@ public class controladoraProfesor extends controladoraPrincipal {
         listaUsuarios.refresh();
     }
 
-    public void enviaNota(ActionEvent actionEvent){
+    public void enviaNota(ActionEvent actionEvent) throws SQLException {
         String nota = textFieldNota.getText();
-        String comentario = texFieldComentario.getText();
-        
+        String comentario = textFieldComentario.getText();
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        String query = "select id_alumno from alumno where expediente ="+ usuarioModificar.getNumeroExpediente();
+        ArrayList rs= bd.getArrayList(query);
+        String id_alumno = (String) rs.get(0);
+
+        String insert = "insert into notas (id_alumno, id_asignatura, nota, asignatura, prueba)";
+        String values = " values ("+id_alumno+", "+currentAsignatura.getId_asignatura()+", "+nota+", '"+currentAsignatura.getNombre()+"', '"+comentario+"')";
+        bd.makeInsert(insert+values);
+        System.out.println(insert+values);
+        bd.closeConnection();
 
     }
 
