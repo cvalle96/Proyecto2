@@ -104,18 +104,19 @@ public class controladoraEditor extends controladoraPrincipal {
         bd.closeConnection();
 
         getAlumnos();
-
+        listaUsuarios.refresh();
     }
 
     public void borrarEsteUsuario(ActionEvent actionEvent) throws SQLException {
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        bd.makeInsert("DELETE FROM alumno WHERE expediente='" + usuarioModificar.getNumeroExpediente() );
+        bd.makeInsert("DELETE FROM alumno WHERE expediente='" + usuarioModificar.getNumeroExpediente() + "'");
         bd.closeConnection();
         textFieldExpediente.clear();
         textFieldNombre.clear();
         textFieldGrupo.clear();
         getAlumnos();
+        listaUsuarios.refresh();
     }
 
     public void pintarAlumnos(ActionEvent actionEvent) {
