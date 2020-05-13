@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="937.0" style="-fx-background-color: #FAFAFA;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.Login">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="937.0" style="-fx-background-color: #FAFAFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.Login">
     <children>
         <Button fx:id="loginButton" defaultButton="true" layoutX="371.0" layoutY="376.0" mnemonicParsing="false" onAction="#login" prefHeight="45.0" prefWidth="196.0" style="-fx-background-color: #2AFF00;" text="INICIAR SESION">
             <font>
@@ -17,7 +18,7 @@
                     <light>
                         <Light.Distant>
                             <color>
-                                <Color red="0.16840887069702148" green="0.9078947305679321" blue="0.14290936291217804" />
+                                <Color blue="0.14290936291217804" green="0.9078947305679321" red="0.16840887069702148" />
                             </color>
                         </Light.Distant>
                     </light>
