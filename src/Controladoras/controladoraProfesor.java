@@ -101,7 +101,6 @@ public class controladoraProfesor extends controladoraPrincipal {
     }
     private void getAsignaturas(Usuario usuario) {
         listaAsignaturas = new ArrayList<String>();
-
         try {
             String query = "SELECT A.ASIGNATURA FROM ASIGNATURAS A, CARRERA C, ALUMNO AL WHERE A.ID_CARRERA = C.ID_CARRERA AND C.CARRERA = AL.CARRERA AND AL.EXPEDIENTE = " + usuario.getNumeroExpediente();
             OracleBD bd = new OracleBD();
