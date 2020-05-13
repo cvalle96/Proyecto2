@@ -1,10 +1,6 @@
 package Controladoras;
 
 import Modelo.Usuario;
-import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import sun.plugin.javascript.navig.Anchor;
 
 
 public class controladoraPrincipal {
@@ -13,7 +9,7 @@ public class controladoraPrincipal {
 
     public controladoraPrincipal(){
         //deberia llegar desde el login a traves de el setter
-        currentUser = new Usuario("Miguel", "Fernandez Paradela", "1234", "3", "6422765", false);
+        currentUser = new Usuario("alejandro", "salas", null, "12", "4796869", true );
     }
 
     public void setCurrentUser(Usuario user){

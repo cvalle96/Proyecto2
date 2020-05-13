@@ -32,7 +32,6 @@ public class controladoraNotas extends controladoraPrincipal{
         currentUser = controladoraPrincipal.currentUser;
         notasListview = new ListView();
         labelHora = new Label();
-
     }
 
     public void actualizarHora(){

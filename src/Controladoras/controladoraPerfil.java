@@ -32,5 +32,6 @@ public class controladoraPerfil extends controladoraPrincipal{
 
         Stage newStage = (Stage) logOffButton.getScene().getWindow();
         newStage.close();
+
     }
 }

@@ -39,7 +39,7 @@ public class controladoraSensores extends controladoraPrincipal{
 
 
     public void actualizar() throws SQLException {
-
+//falta que discrimine clases, que solo muestre la clase del usuario logueado
         OracleBD bd = new OracleBD();
         bd.setConnection();
         resultados = bd.getDoubleList("SELECT temperatura, ruido, humedad FROM registro ") ;
