@@ -24,14 +24,11 @@ import java.util.ArrayList;
 public class controladoraPerfil extends controladoraPrincipal{
 
     @FXML
-    Button logOffButton, buttonImagen;
+    Button logOffButton;
     Usuario currentUser;
 
     @FXML
     TextField nombreTextfield, apellidosTextfield, carreraTextfield, expedienteTextfield, grupoTextfield;
-
-    @FXML
-    Label labelImagen;
 
     ArrayList listaPrincipal;
 
