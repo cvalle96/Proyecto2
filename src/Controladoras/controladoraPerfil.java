@@ -15,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,11 +24,14 @@ import java.util.ArrayList;
 public class controladoraPerfil extends controladoraPrincipal{
 
     @FXML
-    Button logOffButton;
+    Button logOffButton, buttonImagen;
     Usuario currentUser;
 
     @FXML
     TextField nombreTextfield, apellidosTextfield, carreraTextfield, expedienteTextfield, grupoTextfield;
+
+    @FXML
+    Label labelImagen;
 
     ArrayList listaPrincipal;
 
