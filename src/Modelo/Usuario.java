@@ -1,43 +1,29 @@
 package Modelo;
 
 
-public class Usuario extends Gestion {
-    // la clase usuario que inicializa los users de nuestra app
-    //el rol es estudiante por defecto, se cambia con el set despues de inicializar el objeto
+public class Usuario {
 
     private String nombreUser;
     private String apellidoUser;
-    //private String numeroExpediente;
+    private String numeroExpediente;
     private String contrasenia;
-    private String carrera;
-
-
-    public boolean isProfe() {
-        return esProfe;
-    }
-
-    public void setEsProfe(boolean esProfe) {
-        this.esProfe = esProfe;
-    }
-
+    private String clase;
     private boolean esProfe;
 
     public Usuario(String nombre, String contrasenia)  {
         this.nombreUser=nombre;
         this.contrasenia =contrasenia;
-        //this.numeroExpediente= generarExpediente();
+        this.numeroExpediente= generarExpediente();
     }
 
-    public String getApellidoUser() {
-        return apellidoUser;
-    }
 
-    public Usuario(String nombre, String apellidos, String contrasenia, String carrera, String usuario, boolean profe)  {
+    public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)  {
+
         this.nombreUser=nombre;
         this.apellidoUser = apellidos;
         this.contrasenia =contrasenia;
-        //this.numeroExpediente= expediente;
-        this.carrera = carrera;
+        this.numeroExpediente= expediente;
+        this.clase = clase;
         this.esProfe = profe;
     }
 
@@ -51,23 +37,29 @@ public class Usuario extends Gestion {
         return answer;
     }
 
-    //las string de los roles en mayusculas
+    public void setEsProfe(boolean esProfe) {
+        this.esProfe = esProfe;
+    }
+
+    public String getApellidoUser() {
+        return apellidoUser;
+    }
 
     public String getNombreUser() {
         return nombreUser;
     }
 
-    /*public String getNumeroExpediente() {
+    public String getNumeroExpediente() {
         return numeroExpediente;
-    }*/
+    }
 
     public void setNombreUser(String nombreUser) {
         this.nombreUser = nombreUser;
     }
 
-    /*public void setNumeroExpediente(String numeroExpediente) {
+    public void setNumeroExpediente(String numeroExpediente) {
         this.numeroExpediente = numeroExpediente;
-    }*/
+    }
 
     public void setContrasenia(String contra){
         this.contrasenia =contra;
@@ -78,10 +70,10 @@ public class Usuario extends Gestion {
     }
 
     public String toString(){
-        return "Nombre " + this.nombreUser +"";
+        return "Nombre " + this.nombreUser +"\nExpediente: " + this.numeroExpediente + "\n";
     }
 
     public String getClase() {
-        return carrera;
+        return clase;
     }
 }

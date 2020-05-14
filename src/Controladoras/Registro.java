@@ -30,54 +30,44 @@ public class Registro {
     @FXML
     Button registrarButton;
     @FXML
-    ComboBox careerBox, aulaBox;
+    TextField careerBox, aulaBox;
 
-    String password = DigestUtils.sha1Hex(passwordBox.getText());
-
-    public void initialize() {
-        careerBox.getItems().removeAll(careerBox.getItems());
-        careerBox.getItems().addAll("Ingeniería Informática", "Ingeniería Matemática", "Administración y Dirección de Empresas", "Medicina");
-        aulaBox.getItems().removeAll(aulaBox.getItems());
-        aulaBox.getItems().addAll(1,2,3);
-    }
-
-
-
-
-
-    public int registrar(ActionEvent actionEvent) throws SQLException, IOException {
-        String carrera = (String) careerBox.getSelectionModel().getSelectedItem();
+    public int registrar() throws SQLException, IOException {
         String password= DigestUtils.sha1Hex(passwordBox.getText());
         if (check()){
             if (!soyProfeCheckbox.isSelected()){
 
-                    String expediente = Usuario.generarExpediente();
-                    OracleBD bd = new OracleBD();
-                    String insertUsuario = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText() + "','" + password + "', '0')";
-                    bd.setConnection();
-                    bd.ejecutarQuery(insertUsuario);
-                    String id = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText() + "'";
-                    int id_user = bd.selectQuery(id);
-                    String insertarAlumno = "insert into alumno (id_user, nombre, apellido, expediente, carrera, clase) values (" + id_user + ",'" + nombreBox.getText() + "','" + apellidoBox.getText() +"','" + expediente +"','" + carrera +"','" + aulaBox.getText() +"')";
-                    bd.ejecutarQuery(insertarAlumno);
-                    bd.closeConnection();
+                String expediente = Usuario.generarExpediente();
+                OracleBD bd = new OracleBD();
+                String insertUsuario = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText().trim() + "','" + password.trim() + "', '0')";
+                bd.setConnection();
+                bd.ejecutarQuery(insertUsuario);
+                String id = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText().trim() + "'";
+                int id_user = bd.selectQuery(id);
+                String insertarAlumno = "insert into alumno (id_user, nombre, apellido, expediente, carrera, clase) values (" + id_user + ",'" + nombreBox.getText().trim() + "','" + apellidoBox.getText() +"','" + expediente +"','" + careerBox.getText() +"','" + aulaBox.getText() +"')";
+                bd.ejecutarQuery(insertarAlumno);
+                System.out.println("Alumno insertado");
+                bd.closeConnection();
+                goLogin();
             }
             else{
                 String expediente = Usuario.generarExpediente();
                 OracleBD bd = new OracleBD();
-                String insertUsuario = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText() + "','" + password + "', '1')";
+                String insertUsuario = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText().trim() + "','" + password.trim() + "', '1')";
                 bd.setConnection();
                 bd.ejecutarQuery(insertUsuario);
-                String id = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText() + "'";
+                String id = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText().trim() + "'";
                 int id_user = bd.selectQuery(id);
-                String insertarProfesor = "insert into profesor (id_user, nombre, apellido, expediente, carrera, clase) values (" + id_user + ",'" + nombreBox.getText() + "','" + apellidoBox.getText() +"','" + expediente +"','" + carrera +"','" + aulaBox.getText() +"')";
+                String insertarProfesor = "insert into profesor (id_user, nombre, apellido, expediente, carrera, clase) values (" + id_user + ",'" + nombreBox.getText().trim() + "','" + apellidoBox.getText() +"','" + expediente +"','" + careerBox.getText() +"','" + aulaBox.getText() +"')";
                 bd.ejecutarQuery(insertarProfesor);
+                System.out.println("Profesor insertado");
                 bd.closeConnection();
+                goLogin();
             }
-            }else{
+        }else{
             System.out.println("El usuario existe en la base de datos");
 
-            }
+        }
         return 0;
     }
 
@@ -108,10 +98,10 @@ public class Registro {
         }else if (passwordBox.getText().equals("")){
             consola.setText("falta contraseña!");
             return false;
-        }/*else if (carrera.equals("")) {
+        }else if (careerBox.getText().equals("")) {
             consola.setText("falta carrera!");
             return false;
-        }*/else if (aulaBox.getText().equals("")) {
+        }else if (aulaBox.getText().equals("")) {
             consola.setText("falta aula!");
             return false;
         } else if (nombreBox.getText().equals("")) {
@@ -127,9 +117,9 @@ public class Registro {
         return true;
     }
 
-    public void goLogin(ActionEvent actionEvent) {
+    public void goLogin() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Vistas/Login.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

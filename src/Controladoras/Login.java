@@ -11,74 +11,62 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Login {
     @FXML
-    Button loginButton, registroButton;
+    private Button loginButton, registroButton;
     @FXML
-    TextField contrasenaField, usuarioField ;
+    private TextField contrasenaField, usuarioField ;
     @FXML
-    Label consola;
+    private Label consola;
 
-    Usuario currentUser;
+    private Usuario currentUser;
 
-    String username = usuarioField.getText();
-    String contrasena = contrasenaField.getText();
-
+    private String user, psw;
 
 
-
-    public  boolean comprobarUsuario(String usuario, String contrasena) throws SQLException {
+    public  boolean comprobarUsuario(String usuario, String contrasenia) throws SQLException {
         boolean existeUsuario;
-        String query = "SELECT * FROM usuario WHERE username='" + username + "' and password = '" + contrasena + "'";
+        String query = "SELECT * FROM usuario WHERE username='" + usuario + "' and password='" + contrasenia + "'";
         OracleBD bd = new OracleBD();
         bd.setConnection();
+
         int id_usuario = bd.selectQuery(query);
         bd.closeConnection();
         if (id_usuario==0) {
-            existeUsuario = true;
+            existeUsuario = false;
         }
         else{
-            existeUsuario = false;
+            existeUsuario = true;
         }
         return existeUsuario;
     }
 
-    public void login(ActionEvent actionEvent) throws Exception {
-        if (check()){
-            boolean logueo;
-            if (comprobarUsuario(username, contrasena)){
-                System.out.println("Usuario logueado correctamente");
-                startApp();
-                }
-            }else{
-                consola.setText("nombre no encontrado en la bbdd");
-            }
-        }
+    public void log_in() throws SQLException, IOException {
+        user = usuarioField.getText().trim();
+        psw = contrasenaField.getText().trim();
+        String pswCod = DigestUtils.sha1Hex(psw);
 
-
-    public boolean check() throws SQLException {
-        if (usuarioField.getText().equals("") ){
+        if (usuarioField.getText().isEmpty() || contrasenaField.getText().isEmpty()){
             System.out.println(usuarioField.getText());
-            consola.setText("falta nombre de usuario!");
-            return false;
-        }else if (contrasenaField.getText().equals("") ){
-            consola.setText("falta contraseña!");
-            return false;
+            consola.setText("Debes rellenar los campos");
+        } else if(comprobarUsuario(user,pswCod)){
+            System.out.println("Usuario Logueado");
+            startApp();
+
+        }else{
+            consola.setText("Usuario/Contraseña incorrectos");
         }
-        else if (comprobarUsuario(usuarioField.getText(),contrasenaField.getText())){
-            consola.setText("El usuario " + username + " no existe en la base de datos");
-            return true;
-        }
-        return true;
     }
 
     private void startApp() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/EditorUsuarios.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         Parent root = loader.load();
 
         controladoraPrincipal controler = new controladoraPrincipal();

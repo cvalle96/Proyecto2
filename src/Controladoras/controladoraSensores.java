@@ -1,71 +1,79 @@
 package Controladoras;
 
+import BBDD.OracleBD;
 import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 
 public class controladoraSensores extends controladoraPrincipal{
-
-    double temperaturaActual, ruidoActual, humedadActual;
 
     @FXML
     Button actualizarButton;
     @FXML
     ProgressBar progressRuido, progressTemperatura, progressHumedad;
 
-    @Override
-    public void setCurrentUser(Usuario currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    Usuario currentUser;
+    Double temperaturaActual, ruidoActual, humedadActual;
+    Usuario currentUser =  controladoraPrincipal.currentUser;
     String claseActual ;
+    ArrayList<Double> resultados;
 
-    /*
-    public controladoraSensores(){
+    public controladoraSensores() throws SQLException {
+        progressRuido = new ProgressBar();
+        progressTemperatura = new ProgressBar();
+        progressHumedad = new ProgressBar();
         claseActual = currentUser.getClase();
-        connectBBDD();
+
         actualizar();
-
-    }
-*/
-    private void connectBBDD() {
-        //sentencia SQL que obtenga la clase del currentUser y la coloque en la variable global
-
-        //CONECTAR CON LA BBDD EN QUESTION
-    }
-
-    public void setTemp() {
-        //sentencia SQL que obtenga el ultimo temp
-        temperaturaActual = 0;
-    }
-    public void setRuido() {
-        //sentencia SQL que obtenga el ultimo ruido
-        ruidoActual = 0;
-        }
-    public void setHumedad(){
-        //sentencia SQL que obtenga el ultimo dato
-        humedadActual= 0;
     }
 
 
-    public void actualizar() {
-        setRuido();
-        setTemp();
-        setHumedad();
+    public void actualizar() throws SQLException {
+//falta que discrimine clases, que solo muestre la clase del usuario logueado
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        resultados = bd.getDoubleList("SELECT temperatura, ruido, humedad FROM registro ") ;
+        Collections.reverse(resultados);
+        temperaturaActual = resultados.get(0);
+        ruidoActual = resultados.get(1);
+        humedadActual = resultados.get(2);
+        bd.closeConnection();
+
         dibujar();
     }
 
     private void dibujar() {
-        progressHumedad.setProgress(temperaturaActual);
-        progressRuido.setProgress(ruidoActual);
-        progressTemperatura.setProgress(temperaturaActual);
+        progressHumedad.setProgress(humedadActual / 100);
+        progressRuido.setProgress((ruidoActual * 102) /100);         //voltios
+        progressTemperatura.setProgress((temperaturaActual *1.25) /100);
+
     }
 
-    public void act(ActionEvent actionEvent) {
+    public void act(ActionEvent actionEvent) throws SQLException {
         actualizar();
+    }
+
+    public void howtoinsert() throws SQLException {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String hora = dtf.format(now);
+
+        OracleBD BD = new OracleBD();
+        BD.setConnection();
+        String query = "insert into registro (aula, temperatura,ruido,humedad,hora) VALUES (1,30,0.8,32,'"+dtf.format(now) +"')";
+        BD.makeInsert(query);
+        System.out.println(query);
+        BD.closeConnection();
     }
 }
