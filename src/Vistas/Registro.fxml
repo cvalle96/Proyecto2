@@ -57,7 +57,7 @@
                     </light>
                 </Lighting>
             </effect></Button>
-        <CheckBox fx:id="soyProfeCheckbox" layoutX="631.0" layoutY="372.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Soy Profesor">
+        <CheckBox fx:id="soyProfeCheckbox" layoutX="733.0" layoutY="373.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Soy Profesor">
             <font>
                 <Font size="14.0" />
             </font></CheckBox>
@@ -81,5 +81,6 @@
         </Text>
       <TextField fx:id="careerBox" layoutX="694.0" layoutY="220.0" prefHeight="45.0" prefWidth="196.0" promptText="Carrera" />
       <TextField fx:id="aulaBox" layoutX="694.0" layoutY="290.0" prefHeight="45.0" prefWidth="196.0" promptText="Aula" />
+      <Button fx:id="botonImagen" layoutX="508.0" layoutY="374.0" mnemonicParsing="false" onAction="#imagen" text="Seleccionar imagen" />
     </children>
 </AnchorPane>

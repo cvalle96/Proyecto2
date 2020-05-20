@@ -6,6 +6,8 @@ import java.util.Properties;
 import oracle.jdbc.pool.OracleDataSource;
 import oracle.jdbc.OracleConnection;
 
+import javax.xml.transform.Result;
+
 public class OracleBD {
 
     final static String DB_URL= "jdbc:oracle:thin:@dbpusi_medium?TNS_ADMIN=src/Wallet_Conexion";
@@ -105,7 +107,7 @@ public class OracleBD {
         }
     }
 
-    public int selectQuery(String query) throws SQLException {
+    public int idAlumno(String query) throws SQLException {
         try(Statement statement = con.createStatement()){
             ResultSet sentencia = statement.executeQuery(query);
             int resultado = 0;
@@ -118,5 +120,20 @@ public class OracleBD {
             e.printStackTrace();
             return -1;
         }
+    }
+
+    public PreparedStatement prepareStatement(String s) {
+        try (Statement statement = con.createStatement()) {
+            PreparedStatement stmt = con.prepareStatement(s);
+            return stmt;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public void ejecutarst(PreparedStatement stmt) throws SQLException {
+         stmt.executeUpdate();
+
     }
 }

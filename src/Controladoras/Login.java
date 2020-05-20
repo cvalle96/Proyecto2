@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.commons.codec.digest.DigestUtils;
-
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -28,18 +27,19 @@ public class Login {
 
     private Usuario currentUser;
 
+    private int logueo;
+
     private String user, psw;
 
 
     public  boolean comprobarUsuario(String usuario, String contrasenia) throws SQLException {
         boolean existeUsuario;
-        String query = "SELECT * FROM usuario WHERE username='" + usuario + "' and password='" + contrasenia + "'";
+        String query = "SELECT id_user FROM usuario WHERE username='" + usuario + "' and password='" + contrasenia + "'";
         OracleBD bd = new OracleBD();
         bd.setConnection();
-
-        int id_usuario = bd.selectQuery(query);
+        logueo = bd.idAlumno(query);
         bd.closeConnection();
-        if (id_usuario==0) {
+        if (logueo==0) {
             existeUsuario = false;
         }
         else{
@@ -58,6 +58,14 @@ public class Login {
             consola.setText("Debes rellenar los campos");
         } else if(comprobarUsuario(user,pswCod)){
             System.out.println("Usuario Logueado");
+            String alumno = "SELECT nombre, apellido, clase, expediente FROM alumno where id_user=" + logueo + "";
+            OracleBD bd = new OracleBD();
+            bd.setConnection();
+            ArrayList resultados = bd.getArrayList(alumno);
+            //public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)
+            currentUser = new Usuario((String) resultados.get(0), (String) resultados.get(1),(String) resultados.get(2), (String) resultados.get(3), false);
+            System.out.println(currentUser.getNumeroExpediente());
+            bd.closeConnection();
             startApp();
 
         }else{
@@ -66,11 +74,10 @@ public class Login {
     }
 
     private void startApp() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
-        Parent root = loader.load();
-
         controladoraPrincipal controler = new controladoraPrincipal();
         controler.setCurrentUser(currentUser);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
+        Parent root = loader.load();
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

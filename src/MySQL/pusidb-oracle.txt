@@ -12,7 +12,8 @@ nombre varchar(50),
 apellido varchar(25),
 expediente varchar(8),
 carrera varchar(50),
-clase number);
+clase number
+foto blob);
 
 
 CREATE TABLE Profesor
@@ -22,7 +23,8 @@ nombre varchar(25),
 apellido varchar(25),
 expediente varchar(8),
 carrera varchar(50),
-clase number);
+clase number
+foto blob);
 
 
 CREATE TABLE Notas

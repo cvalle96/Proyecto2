@@ -34,7 +34,7 @@ public class controladoraPerfil extends controladoraPrincipal{
     private void getDatos() throws SQLException {
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        String query = "SELECT * FROM alumno WHERE expediente = " + currentUser.getNumeroExpediente();
+        String query = "SELECT * FROM alumno WHERE expediente = '" + currentUser.getNumeroExpediente() +"'";
         listaPrincipal = bd.getArrayList(query);
         bd.closeConnection();
     }
