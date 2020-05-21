@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -78,10 +80,10 @@ public class Login {
         controler.setCurrentUser(currentUser);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         Parent root = loader.load();
-
         Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("App");
+        JMetro Jmetro = new JMetro(root, Style.DARK);
+        Scene sc = new Scene(root);
+        stage.setScene(sc);
         stage.show();
 
         Stage newStage = (Stage) loginButton.getScene().getWindow();
@@ -94,8 +96,9 @@ public class Login {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Registro.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Registro");
+            JMetro Jmetro = new JMetro(root, Style.DARK);
+            Scene sc = new Scene(root);
+            stage.setScene(sc);
             stage.show();
         } catch (Exception e ){
             System.out.println(e.getMessage());

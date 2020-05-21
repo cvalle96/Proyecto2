@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/8" styleClass="background" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane layoutX="6.0" layoutY="6.0" prefHeight="631.0" prefWidth="833.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>

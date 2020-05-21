@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="937.0" style="-fx-background-color: #FAFAFA;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.Login">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="937.0" styleClass="background" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.Login">
     <children>
         <Button fx:id="loginButton" defaultButton="true" layoutX="371.0" layoutY="376.0" mnemonicParsing="false" onAction="#log_in" prefHeight="45.0" prefWidth="196.0" style="-fx-background-color: #2AFF00;" text="INICIAR SESION">
             <font>

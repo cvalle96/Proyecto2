@@ -8,9 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import org.apache.commons.codec.digest.DigestUtils;
+import sun.plugin.javascript.navig.Anchor;
 
 import java.io.*;
 import java.sql.*;
@@ -32,6 +36,8 @@ public class Registro {
     Button registrarButton, botonImagen;
     @FXML
     TextField careerBox, aulaBox;
+    @FXML
+    AnchorPane panelPrueba;
 
     InputStream imagen;
 
@@ -139,8 +145,9 @@ public class Registro {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Vistas/Login.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Login");
+            JMetro Jmetro = new JMetro(root, Style.DARK);
+            Scene sc = new Scene(root);
+            stage.setScene(sc);
             stage.show();
         } catch (Exception e ){
             System.out.println(e.getMessage());

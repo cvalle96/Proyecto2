@@ -10,6 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +25,6 @@ public class controladoraPerfil extends controladoraPrincipal{
 
     @FXML
     TextField nombreTextfield, apellidosTextfield, carreraTextfield, expedienteTextfield, grupoTextfield;
-
 
     ArrayList listaPrincipal;
 
@@ -43,8 +45,9 @@ public class controladoraPerfil extends controladoraPrincipal{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Login.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Login");
+        JMetro Jmetro = new JMetro(root, Style.DARK);
+        Scene sc = new Scene(root);
+        stage.setScene(sc);
         stage.show();
         Stage newStage = (Stage) logOffButton.getScene().getWindow();
         newStage.close();

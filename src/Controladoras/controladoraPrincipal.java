@@ -14,7 +14,6 @@ public class controladoraPrincipal {
 
     public void setCurrentUser(Usuario user){
         currentUser=user;
-        System.out.println(currentUser.getNumeroExpediente());
 
     }
     public Usuario getCurrentUser(){

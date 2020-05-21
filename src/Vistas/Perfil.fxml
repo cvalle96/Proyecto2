@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraPerfil">
+<AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" styleClass="background" fx:controller="Controladoras.controladoraPerfil">
     <children>
         <Label layoutX="369.0" layoutY="231.0" prefHeight="27.0" prefWidth="119.0" text="Carrera:">
             <font>
