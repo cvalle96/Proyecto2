@@ -106,6 +106,21 @@ public class OracleBD {
             return -1;
         }
     }
+    public Blob getImagen(String query) throws SQLException {
+        try(Statement statement = con.createStatement()){
+            ResultSet sentencia = statement.executeQuery(query);
+            Blob foto = null;
+            if(sentencia.next())
+                foto = sentencia.getBlob(1);
+            return foto;
+        }
+        catch(SQLException e){
+            System.out.println("Error ejecutando consulta");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     public int idAlumno(String query) throws SQLException {
         try(Statement statement = con.createStatement()){
@@ -133,7 +148,7 @@ public class OracleBD {
     }
 
     public void ejecutarst(PreparedStatement stmt) throws SQLException {
-         stmt.executeUpdate();
+        stmt.executeUpdate();
 
     }
 }
