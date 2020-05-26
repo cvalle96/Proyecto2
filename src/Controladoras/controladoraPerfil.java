@@ -34,7 +34,7 @@ public class controladoraPerfil extends controladoraPrincipal{
     private void getDatos() throws SQLException {
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        String query = "SELECT * FROM alumno WHERE expediente = " + currentUser.getNumeroExpediente();
+        String query = "SELECT id_user, nombre, apellido, expediente, carrera, clase FROM alumno WHERE expediente = " + currentUser.getNumeroExpediente();
         listaPrincipal = bd.getArrayList(query);
         bd.closeConnection();
     }
@@ -51,11 +51,11 @@ public class controladoraPerfil extends controladoraPrincipal{
     }
 
     public void pintar(ActionEvent actionEvent) {
-        nombreTextfield.setText((String) listaPrincipal.get(2));
-        apellidosTextfield.setText((String) listaPrincipal.get(3));
-        carreraTextfield.setText((String) listaPrincipal.get(5));
-        expedienteTextfield.setText((String) listaPrincipal.get(4));
-        grupoTextfield.setText((String) listaPrincipal.get(6));
+        nombreTextfield.setText((String) listaPrincipal.get(1));
+        apellidosTextfield.setText((String) listaPrincipal.get(2));
+        carreraTextfield.setText((String) listaPrincipal.get(4));
+        expedienteTextfield.setText((String) listaPrincipal.get(3));
+        grupoTextfield.setText((String) listaPrincipal.get(5));
     }
 
 }

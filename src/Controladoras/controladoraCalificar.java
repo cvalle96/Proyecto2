@@ -9,11 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class controladoraProfesor extends controladoraPrincipal {
+public class controladoraCalificar extends controladoraPrincipal {
     @FXML
     ObservableList<String> observableUsuariosString;
     @FXML
@@ -22,7 +23,8 @@ public class controladoraProfesor extends controladoraPrincipal {
     TextField textFieldNombre, textFieldAula, textFieldExpediente, textFieldCarrera, textFieldComentario, textFieldNota;
     @FXML
     Button buttonEnviarNota;
-
+    @FXML
+    AnchorPane ap;
 
     ArrayList<String> listaNombres, listaAsignaturas;
     Usuario usuarioModificar;
@@ -30,7 +32,7 @@ public class controladoraProfesor extends controladoraPrincipal {
     Asignatura currentAsignatura;
 
 
-    public controladoraProfesor(){
+    public controladoraCalificar(){
         currentUser = controladoraPrincipal.currentUser;
         listaUsuarios = new ListView();
         listaAsignatura = new ListView();
@@ -39,6 +41,7 @@ public class controladoraProfesor extends controladoraPrincipal {
         textFieldExpediente = new TextField();
         textFieldNota = new TextField();
         textFieldComentario = new TextField();
+
         getAlumnos();
 
     }

@@ -1,5 +1,6 @@
 package Controladoras;
 
+import BBDD.OracleBD;
 import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,65 +11,81 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
+import org.apache.commons.codec.digest.DigestUtils;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Login {
     @FXML
-    Button loginButton, registroButton;
+    private Button loginButton;
     @FXML
-    TextField contrasenaField, usuario ;
+    private TextField contrasenaField, usuarioField ;
     @FXML
-    Label consola;
+    private Label consola;
 
-    String contrasena, username;
-    Usuario currentUser;
+    String psw, user;
 
     public Login(){
-        username="profesor";
-        contrasena = "1234";
-        currentUser= new Usuario(username,contrasena);
+
     }
 
     
     public void login(ActionEvent actionEvent) throws Exception {
-        startApp();
-        /*
-        if (check()){
-            username = usuario.getText();
-            contrasena = contrasenaField.getText();
-            if (comprobarUsuario(username, contrasena)){
-                currentUser = new Usuario(username,contrasena);
-                startApp();
+        user = usuarioField.getText().trim();
+        psw = contrasenaField.getText().trim();
+        String pswCod = DigestUtils.sha1Hex(psw);
+
+        if(check() && comprobarUsuario(user,pswCod)){
+
+            String query = "SELECT profesor, id_user FROM usuario where username='" + user + "'";
+            OracleBD bd = new OracleBD();
+            bd.setConnection();
+            ArrayList<Double> rs = bd.getDoubleList(query);
+
+            if( rs.get(0) == 0 ){
+
+                query = "SELECT expediente from alumno where id_user = " + rs.get(1).intValue() ;
+                ArrayList rs1 = bd.getArrayList(query);
+                bd.closeConnection();
+                startApp(Integer.parseInt(rs1.get(0).toString()), false);
+            }
+            else if (rs.get(0) == 1){
+                query = "SELECT expediente from profesor where id_user = " + rs.get(1).intValue() ;
+                ArrayList rs1 = bd.getArrayList(query);
+                bd.closeConnection();
+                startApp(Integer.parseInt(rs1.get(0).toString()), true);
             }else{
-                consola.setText("nombre no encontrado en al bbdd");
+                System.out.println("bad answer from query, \n" + rs.toString());
             }
         }
-
-         */
     }
 
-    public boolean check() throws IOException {
-        if (usuario.getText().equals("") ){
+    public boolean check() throws IOException, SQLException {
+        if (usuarioField.getText().trim().equals("") ){
             consola.setText("falta nombre de usuario!");
-            startApp();
-            return true;
-        }else if (contrasenaField.getText().equals("") ){
+            return false;
+        }else if (contrasenaField.getText().trim().equals("") ){
             consola.setText("falta contraseña!");
-            return true;
+            return false;
         }
         return true;
     }
 
-    private void startApp() throws IOException {
+    private void startApp(int expediente, boolean prof) throws IOException, SQLException {
+        controladoraPrincipal controler = new controladoraPrincipal();
+        controler.setProfesor(prof);
+        controler.setExpediente(expediente);
+
+        System.out.println("usuario enviado");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         Parent root = loader.load();
-
-        //controladoraPrincipal controler = new controladoraPrincipal();
-        //controler.setCurrentUser(currentUser);
-
         Stage stage = new Stage();
-        stage.setScene(new Scene(root));
+        JMetro Jmetro = new JMetro(root, Style.DARK);
+        Scene sc = new Scene(root);
+        stage.setScene(sc);
         stage.setTitle("App");
         stage.show();
 
@@ -76,11 +93,18 @@ public class Login {
         newStage.close();
     }
 
-    private boolean comprobarUsuario(String username, String contrasenaString) {
+    private boolean comprobarUsuario(String username, String contrasenaString) throws SQLException {
+        String query = "SELECT id_user FROM usuario WHERE username='" + username + "' and password='" + contrasenaString + "'";
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        ArrayList rs = bd.getArrayList(query);
+        bd.closeConnection();
 
-        //este metodo comprueba coincidencias en la bbdd
-
+        if (rs.isEmpty()) {
+            return false;
+        }
         return true;
+
     }
 
     public void registro(ActionEvent actionEvent) {
@@ -88,6 +112,7 @@ public class Login {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Registro.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
+            JMetro Jmetro = new JMetro(root, Style.DARK);
             stage.setScene(new Scene(root));
             stage.setTitle("Registro");
             stage.show();

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraProfesor">
+<AnchorPane fx:id="ap" prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraCalificar">
 
     <children>
         <ListView fx:id="listaUsuarios" layoutX="35.0" layoutY="134.0" onMouseClicked="#selectThisUser" prefHeight="325.0" prefWidth="184.0">
@@ -14,11 +13,11 @@
                 <DropShadow />
             </effect>
         </ListView>
-        <TextField fx:id="textFieldExpediente" layoutX="558.0" layoutY="151.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
-        <TextField fx:id="textFieldNombre" layoutX="558.0" layoutY="109.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
+        <TextField fx:id="textFieldExpediente" editable="false" layoutX="558.0" layoutY="151.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
+        <TextField fx:id="textFieldNombre" editable="false" layoutX="558.0" layoutY="109.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
         <TextField fx:id="textFieldNota" layoutX="558.0" layoutY="257.0" prefHeight="26.0" prefWidth="200.0" promptText="Nota" />
         <Button fx:id="obtenerButton" alignment="CENTER" layoutX="158.0" layoutY="52.0" mnemonicParsing="false" onAction="#pintarAlumnos" prefHeight="39.0" prefWidth="142.0" text="CARGAR DATOS" textFill="#001cff" />
-        <TextField fx:id="textFieldAula" layoutX="558.0" layoutY="194.0" prefHeight="26.0" prefWidth="200.0" promptText="Aula" />
+        <TextField fx:id="textFieldAula" editable="false" layoutX="558.0" layoutY="194.0" prefHeight="26.0" prefWidth="200.0" promptText="Aula" />
         <ListView fx:id="listaAsignatura" layoutX="237.0" layoutY="134.0" onMouseClicked="#selectThisAsignatura" prefHeight="325.0" prefWidth="184.0">
             <effect>
                 <DropShadow />

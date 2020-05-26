@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
+import javafx.scene.layout.AnchorPane;
 
 public class controladoraNotas extends controladoraPrincipal{
     @FXML
@@ -24,12 +25,15 @@ public class controladoraNotas extends controladoraPrincipal{
     ObservableList<String> observableNotas;
     @FXML
     Button actualizarButton;
+    @FXML
+    AnchorPane ap;
 
     Usuario currentUser;
 
 
     public controladoraNotas() {
         currentUser = controladoraPrincipal.currentUser;
+
         notasListview = new ListView();
         labelHora = new Label();
     }

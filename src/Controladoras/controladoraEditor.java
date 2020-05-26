@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class controladoraEditor extends controladoraPrincipal {
     @FXML
     Button borrarButton, actualizarButton;
 
+
     ArrayList<String> listaNombres;
     Usuario usuarioModificar;
     Usuario currentUser;
@@ -29,6 +31,7 @@ public class controladoraEditor extends controladoraPrincipal {
     public controladoraEditor(){
         currentUser = controladoraPrincipal.currentUser;
         listaUsuarios = new ListView();
+
         getAlumnos();
     }
 

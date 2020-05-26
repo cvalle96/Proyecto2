@@ -83,6 +83,35 @@ public class OracleBD {
         return resultados;
     }
 
+    public void ejecutarst(PreparedStatement stmt) throws SQLException {
+        stmt.executeUpdate();
+    }
+
+    public PreparedStatement prepareStatement(String s) {
+        try (Statement statement = con.createStatement()) {
+            PreparedStatement stmt = con.prepareStatement(s);
+            return stmt;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public Blob getImagen(String query) throws SQLException {
+        try(Statement statement = con.createStatement()){
+            ResultSet sentencia = statement.executeQuery(query);
+            Blob foto = null;
+            if(sentencia.next())
+                foto = sentencia.getBlob(1);
+            return foto;
+        }
+        catch(SQLException e){
+            System.out.println("Error ejecutando consulta");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void makeInsert(String query) throws SQLException{
         try (Statement statement = con.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(query)) {

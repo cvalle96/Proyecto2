@@ -1,5 +1,6 @@
 package Controladoras;
 
+import BBDD.OracleBD;
 import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,14 +8,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Registro {
 
     @FXML
-    TextField usernameBox, groupBox, apellidosBox, expedienteBox;
+    TextField usernameBox, nombreBox, apellidoBox, groupBox, careerBox, aulaBox;
     @FXML
     Label consola;
     @FXML
@@ -24,67 +35,148 @@ public class Registro {
     @FXML
     Button registrarButton;
 
+    InputStream imagen;
+    private Registro ImageUtils;
+    String imagenAlumno ;
 
-    public void registrar(ActionEvent actionEvent) throws IOException {
+    public Registro(){
+        imagenAlumno = new String();
+
+    }
+
+    public void registrar(ActionEvent actionEvent) throws IOException, SQLException {
         if (check()){
+            String answer = Math.random() +"";
+            String expediente = answer.substring(2,9);
+            OracleBD bd = new OracleBD();
+            bd.setConnection();
+            PreparedStatement stmt ;
+
             if (! soyProfeCheckbox.isSelected()){
-                //introducir en la bbdd como alumno
 
-                //cargar vista de perfil personal
+                String query = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText().trim() + "','" + passwordBox.getText().trim() + "', '0')";
+                bd.makeInsert(query);
 
-            }else{
+                query = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText().trim() + "'";
+                ArrayList rs = bd.getArrayList(query);
+                int id_user = (int) rs.get(0);
 
-                //introducir en la bbdd como profesor
+                stmt = bd.prepareStatement("insert into alumno (id_user, nombre, apellido, expediente, carrera, clase, foto) values (?,?,?,?,?,?,?)");
+                stmt.setInt(1,id_user);
+
             }
-            Stage newStage = (Stage) usernameBox.getScene().getWindow();
-            newStage.close();
+            else{
+
+                String query = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText().trim() + "','" + passwordBox.getText().trim() + "', '1')";
+                bd.makeInsert(query);
+
+                query = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText().trim() + "'";
+                ArrayList rs = bd.getArrayList(query);
+                int id_user = (int) rs.get(0);
+
+                stmt = bd.prepareStatement("insert into profesor (id_user, nombre, apellido, expediente, carrera, clase, foto) values (?,?,?,?,?,?,?)");
+                stmt.setInt(1,id_user);
+            }
+
+            stmt.setString(2, nombreBox.getText().trim());
+            stmt.setString(3, apellidoBox.getText());
+            stmt.setString(4, expediente);
+            stmt.setString(5, careerBox.getText());
+            stmt.setString(6, aulaBox.getText());
+            stmt.setBinaryStream(7, imagen);
+            bd.ejecutarst(stmt);
+            bd.closeConnection();
+            letslogin(Integer.parseInt(expediente));
         }
     }
 
-    private boolean comprobarUsuario(Usuario user) {
+    public void imagen() throws IOException, SQLException {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(null);
 
-        //este metodo comprueba coincidencias en la bbdd. Devuelve TRUE si existe y FALSE si no
+        if (selectedFile == null) {
+            consola.setText("Imagen no seleccionada");
+            return;
+        }
+        System.out.println(selectedFile);
+        imagen = new FileInputStream(selectedFile);
 
-        return true;
+        File fi = new File(selectedFile.toString());
+        byte[] imagenBinario = Files.readAllBytes(fi.toPath());
+        String imagenBinarioString = new String(imagenBinario);
+        imagenAlumno = imagenBinarioString;
     }
 
-    private boolean check() {
-        if (usernameBox.getText().equals("")){
+    private boolean comprobarUsuario(String username) throws SQLException {
+
+        String query = "SELECT * FROM usuario WHERE username='" + username + "'";
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        ArrayList rs = bd.getArrayList(query);
+        bd.closeConnection();
+
+        return !rs.isEmpty();
+    }
+
+    private boolean check() throws SQLException {
+        if (usernameBox.getText().equals("")) {
             consola.setText("falta nombre!");
             return false;
-        }else if (passwordBox.getText().equals("")){
+        } else if (passwordBox.getText().equals("")) {
             consola.setText("falta contraseña!");
             return false;
-        }else if (groupBox.getText().equals("")) {
+        } else if (groupBox.getText().equals("")) {
             consola.setText("falta grupo!");
             return false;
-        }else if (apellidosBox.getText().equals("")) {
+        } else if (careerBox.getText().equals("")) {
+            consola.setText("falta carrera!");
+            return false;
+        }else if (aulaBox.getText().equals("")) {
+            consola.setText("falta aula!");
+            return false;
+        }else if (apellidoBox.getText().equals("")) {
             consola.setText("faltan apellidos!");
             return false;
-        } else {
-            Usuario aux = new Usuario(usernameBox.getText(), apellidosBox.getText(), passwordBox.getText(),
-                    groupBox.getText(), expedienteBox.getText(), soyProfeCheckbox.isSelected());
-            if(comprobarUsuario(aux)){
-                consola.setText("coincidencia encontrada en la bbdd!");
-                return false;
-            }
+        }else if ( comprobarUsuario(usernameBox.getText())){
+            consola.setText("El usuario " + usernameBox.getText() + " ya existe");
+            return false;
+
+        }else {
+            return true;
         }
-        return true;
     }
 
-    public void goLogin(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Login.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Login");
-            stage.show();
-        } catch (Exception e ){
-            System.out.println(e.getMessage());
-            System.out.println(e.getCause());
-        }
+
+    public void goLogin(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Login.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        JMetro Jmetro = new JMetro(root, Style.DARK);
+
+        stage.setScene(new Scene(root));
+        stage.setTitle("Login");
+        stage.show();
+
         Stage newStage = (Stage) usernameBox.getScene().getWindow();
+        newStage.close();
+    }
+
+    public void letslogin(int expediente) throws IOException, SQLException {
+        controladoraPrincipal controler = new controladoraPrincipal();
+        controler.setProfesor(soyProfeCheckbox.isSelected());
+        controler.setExpediente(expediente);
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        JMetro Jmetro = new JMetro(root, Style.DARK);
+        Scene sc = new Scene(root);
+        stage.setScene(sc);
+        stage.setTitle("App");
+        stage.show();
+
+        Stage newStage = (Stage) nombreBox.getScene().getWindow();
         newStage.close();
     }
 }
