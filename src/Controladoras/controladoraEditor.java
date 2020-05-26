@@ -98,7 +98,7 @@ public class controladoraEditor extends controladoraPrincipal {
 
         String update = "update alumno";
         String set = " set nombre = '" +textFieldNombre.getText()+ "', carrera= '" + textFieldCarrera.getText() + "', clase = '"+ textFieldGrupo.getText() + "', expediente ='"+ textFieldExpediente.getText() + "'";
-        String where = " where expediente='" + usuarioModificar.getNumeroExpediente() +"'";
+        String where = " where expediente=" + usuarioModificar.getNumeroExpediente() ;
         String query = update+set+where;
 
         OracleBD bd = new OracleBD();
@@ -113,7 +113,7 @@ public class controladoraEditor extends controladoraPrincipal {
     public void borrarEsteUsuario(ActionEvent actionEvent) throws SQLException {
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        bd.makeInsert("DELETE FROM alumno WHERE expediente='" + usuarioModificar.getNumeroExpediente() + "'");
+        bd.makeInsert("DELETE FROM alumno WHERE expediente=" + usuarioModificar.getNumeroExpediente());
         bd.closeConnection();
         textFieldExpediente.clear();
         textFieldNombre.clear();

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="ap" prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraEditor">
+<AnchorPane fx:id="ap" prefHeight="592.0" prefWidth="824.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraEditor">
 
     <children>
         <ListView fx:id="listaUsuarios" layoutX="42.0" layoutY="125.0" onMouseClicked="#selectThisUser" prefHeight="321.0" prefWidth="332.0">

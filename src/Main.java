@@ -14,6 +14,9 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
 
+        // TODO estan jodidos los selecUser de los listview por culpa del blob, el tamaño de la fuente no se conserva en el tema negro, no distingue profe de alumno, no muestra foto
+
+
         launch(args);
     }
 
