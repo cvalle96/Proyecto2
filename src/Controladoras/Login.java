@@ -1,5 +1,6 @@
 package Controladoras;
 
+import BBDD.OracleBD;
 import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,58 +11,73 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import org.apache.commons.codec.digest.DigestUtils;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Login {
     @FXML
-    Button loginButton, registroButton;
+    private Button loginButton, registroButton;
     @FXML
-    TextField contrasenaField, usuario ;
+    private TextField contrasenaField, usuarioField ;
     @FXML
-    Label consola;
+    private Label consola;
 
-    String contrasena, username;
-    Usuario currentUser;
+    private Usuario currentUser;
 
-    public Login(){
-        username="profesor";
-        contrasena = "1234";
-        currentUser= new Usuario(username,contrasena);
-    }
+    private int logueo;
 
-    
-    public void login(ActionEvent actionEvent) throws Exception {
-        if (check()){
-            username = usuario.getText();
-            contrasena = contrasenaField.getText();
-            if (comprobarUsuario(username, contrasena)){
-                currentUser = new Usuario(username,contrasena);
-                startApp();
-            }else{
-                consola.setText("nombre no encontrado en al bbdd");
-            }
+    private String user, psw;
+
+
+    public  boolean comprobarUsuario(String usuario, String contrasenia) throws SQLException {
+        boolean existeUsuario;
+        String query = "SELECT id_user FROM usuario WHERE username='" + usuario + "' and password='" + contrasenia + "'";
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        logueo = bd.idAlumno(query);
+        bd.closeConnection();
+        if (logueo==0) {
+            existeUsuario = false;
         }
+        else{
+            existeUsuario = true;
+        }
+        return existeUsuario;
     }
 
-    public boolean check() throws IOException {
-        if (usuario.getText().equals("") ){
-            consola.setText("falta nombre de usuario!");
+    public void log_in() throws SQLException, IOException {
+        user = usuarioField.getText().trim();
+        psw = contrasenaField.getText().trim();
+        String pswCod = DigestUtils.sha1Hex(psw);
+
+        if (usuarioField.getText().isEmpty() || contrasenaField.getText().isEmpty()){
+            System.out.println(usuarioField.getText());
+            consola.setText("Debes rellenar los campos");
+        } else if(comprobarUsuario(user,pswCod)){
+            System.out.println("Usuario Logueado");
+            String alumno = "SELECT nombre, apellido, clase, expediente FROM alumno where id_user=" + logueo + "";
+            OracleBD bd = new OracleBD();
+            bd.setConnection();
+            ArrayList resultados = bd.getArrayList(alumno);
+            //public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)
+            currentUser = new Usuario((String) resultados.get(0), (String) resultados.get(1),(String) resultados.get(2), (String) resultados.get(3), false);
+            System.out.println(currentUser.getNumeroExpediente());
+            bd.closeConnection();
             startApp();
-            return true;
-        }else if (contrasenaField.getText().equals("") ){
-            consola.setText("falta contraseña!");
-            return true;
+
+        }else{
+            consola.setText("Usuario/Contraseña incorrectos");
         }
-        return true;
     }
 
     private void startApp() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/EditorUsuarios.fxml"));
+        controladoraPrincipal controler = new controladoraPrincipal();
+        controler.setCurrentUser(currentUser);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         Parent root = loader.load();
-
-        //controladoraPrincipal controler = new controladoraPrincipal();
-        //controler.setCurrentUser(currentUser);
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -72,12 +88,6 @@ public class Login {
         newStage.close();
     }
 
-    private boolean comprobarUsuario(String username, String contrasenaString) {
-
-        //este metodo comprueba coincidencias en la bbdd
-
-        return true;
-    }
 
     public void registro(ActionEvent actionEvent) {
         try {

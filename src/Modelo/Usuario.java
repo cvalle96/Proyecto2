@@ -1,41 +1,56 @@
 package Modelo;
 
-import java.io.FileNotFoundException;
 
-
-public class Usuario extends Gestion {
-    // la clase usuario que inicializa los users de nuestra app
-    //el rol es estudiante por defecto, se cambia con el set despues de inicializar el objeto
+public class Usuario {
 
     private String nombreUser;
+    private String apellidoUser;
     private String numeroExpediente;
-    private String rolUser;
     private String contrasenia;
     private String clase;
+    private boolean esProfe;
 
     public Usuario(String nombre, String contrasenia)  {
         this.nombreUser=nombre;
-        this.rolUser="ESTUDIANTE";
         this.contrasenia =contrasenia;
         this.numeroExpediente= generarExpediente();
-
     }
-    public Usuario(String nombre, String contrasenia, String numExpediente, String clase)  {
+
+
+    public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)  {
         this.nombreUser=nombre;
-        this.rolUser="ESTUDIANTE";
+        this.apellidoUser = apellidos;
         this.contrasenia =contrasenia;
-        this.numeroExpediente= numExpediente;
-        this.clase=clase;
+        this.numeroExpediente= expediente;
+        this.clase = clase;
+        this.esProfe = profe;
     }
 
+    public Usuario(String nombre, String apellidos, String clase, String expediente, boolean profe)  {
+        this.nombreUser=nombre;
+        this.apellidoUser = apellidos;
+        this.numeroExpediente= expediente;
+        this.clase = clase;
+        this.esProfe = profe;
+    }
 
-    public String generarExpediente(){
+    public boolean esProfesor(){
+        return esProfe;
+    }
+
+    public static String generarExpediente(){
         String answer = Math.random() +"";
         answer = answer.substring(2,9);
         return answer;
     }
 
-    //las string de los roles en mayusculas
+    public void setEsProfe(boolean esProfe) {
+        this.esProfe = esProfe;
+    }
+
+    public String getApellidoUser() {
+        return apellidoUser;
+    }
 
     public String getNombreUser() {
         return nombreUser;
@@ -45,20 +60,12 @@ public class Usuario extends Gestion {
         return numeroExpediente;
     }
 
-    public String getRolUser() {
-        return rolUser;
-    }
-
     public void setNombreUser(String nombreUser) {
         this.nombreUser = nombreUser;
     }
 
     public void setNumeroExpediente(String numeroExpediente) {
         this.numeroExpediente = numeroExpediente;
-    }
-
-    public void setRolUser(String rolUser) {
-        this.rolUser = rolUser;
     }
 
     public void setContrasenia(String contra){
@@ -70,9 +77,6 @@ public class Usuario extends Gestion {
     }
 
     public String toString(){
-        if (this.rolUser.equals("PROFESOR")){
-            return "Profesor: " + this.nombreUser +"\nExpediente: " + this.numeroExpediente + "\n\n";
-        }
         return "Nombre " + this.nombreUser +"\nExpediente: " + this.numeroExpediente + "\n";
     }
 

@@ -1,29 +1,21 @@
 package Controladoras;
 
 import Modelo.Usuario;
-import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
+
 
 public class controladoraPrincipal {
-    @FXML
-    Tab editorTab;
 
-    Usuario currentUser = null;
+    public static Usuario currentUser ;
 
-    /*
     public controladoraPrincipal(){
+        //deberia llegar desde el login a traves de el setter
 
-        if (currentUser.getRolUser().equals("profesor")){
-            editorTab.setDisable(true);
-        }else{
-            editorTab.setDisable(false);
-        }
     }
-
-*/
 
     public void setCurrentUser(Usuario user){
         currentUser=user;
+        System.out.println(currentUser.getNumeroExpediente());
+
     }
     public Usuario getCurrentUser(){
         return currentUser;

@@ -14,7 +14,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Vistas/tabController.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Vistas/Registro.fxml"));
             primaryStage.setTitle("Login");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
