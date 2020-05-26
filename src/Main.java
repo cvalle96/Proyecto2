@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +24,6 @@ public class Main extends Application{
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Vistas/Registro.fxml"));
             primaryStage.setTitle("Login");
-            //panelPrueba.getStyleClass().add(JMetroStyleClass.BACKGROUND);
             JMetro Jmetro = new JMetro(root, Style.DARK);
             Jmetro.automaticallyColorPanesProperty();
             primaryStage.setScene(new Scene(root));
