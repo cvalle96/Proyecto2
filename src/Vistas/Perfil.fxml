@@ -47,12 +47,11 @@
                 <Font size="21.0" />
             </font>
         </Button>
-        <Button fx:id="actualizar" layoutX="657.0" layoutY="448.0" mnemonicParsing="false" onAction="#pintar" prefHeight="49.0" prefWidth="92.0" text="ACTUALIZAR" />
-        <ImageView fitHeight="265.0" fitWidth="265.0" layoutX="71.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-
-            </image>
-        </ImageView>
+        <Button fx:id="actualizar" layoutX="530.0" layoutY="447.0" mnemonicParsing="false" onAction="#pintar" prefHeight="50.0" prefWidth="157.0" text="ACTUALIZAR">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <ImageView fx:id="mostrarFoto" fitHeight="235.0" fitWidth="262.0" layoutX="35.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 
 </AnchorPane>

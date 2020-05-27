@@ -13,7 +13,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
 
-        // TODO  el tamaño de la fuente no se conserva en el tema negro, no distingue profe de alumno, no muestra foto
+        // TODO  el tamaño de la fuente no se conserva en el tema negro, no distingue profe de alumno
 
         launch(args);
     }
