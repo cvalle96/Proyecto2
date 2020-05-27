@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.*;
 import javafx.stage.Stage;
+import jdk.internal.util.xml.impl.Input;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -21,13 +23,13 @@ import java.util.ArrayList;
 public class controladoraPerfil extends controladoraPrincipal{
 
     @FXML
-    Button logOffButton;
+    Button logOffButton, cargarfoto;
     Usuario currentUser;
 
     @FXML
     TextField nombreTextfield, apellidosTextfield, carreraTextfield, expedienteTextfield, grupoTextfield;
     @FXML
-    ImageView visorPerfil;
+    ImageView mostrarFoto;
 
     Image fotoperfil;
     ArrayList listaPrincipal;
@@ -35,7 +37,7 @@ public class controladoraPerfil extends controladoraPrincipal{
 
     public controladoraPerfil() throws SQLException {
         currentUser = controladoraPrincipal.currentUser;
-        visorPerfil = new ImageView();
+        mostrarFoto = new ImageView();
         getDatos();
 
     }
@@ -46,19 +48,16 @@ public class controladoraPerfil extends controladoraPrincipal{
         String query = "SELECT nombre, apellido, carrera, expediente, clase FROM alumno WHERE expediente = '" + currentUser.getNumeroExpediente() +"'";
         listaPrincipal = bd.getArrayList(query);
         bd.closeConnection();
-        getFoto();
     }
 
-    private void getFoto() throws SQLException{
+    @FXML
+    private void getFoto(ActionEvent actionEvent) throws SQLException{
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        InputStream imagen = null;
         String query = "SELECT FOTO FROM ALUMNO WHERE EXPEDIENTE= '"+currentUser.getNumeroExpediente()+"'";
-        Blob imagenBlob = bd.getImagen(query);
-        imagen = imagenBlob.getBinaryStream();
-        fotoperfil = new Image (imagen,280,280,false,false);
-        visorPerfil.setImage(fotoperfil);
-        visorPerfil.setVisible(true);
+        fotoperfil = bd.getImagen(query);
+        mostrarFoto.setImage(fotoperfil);
+        System.out.println(fotoperfil);
         bd.closeConnection();
     }
 
@@ -81,7 +80,6 @@ public class controladoraPerfil extends controladoraPrincipal{
         carreraTextfield.setText((String) listaPrincipal.get(2));
         expedienteTextfield.setText((String) listaPrincipal.get(3));
         grupoTextfield.setText((String) listaPrincipal.get(4));
-        getFoto();
 
 
     }

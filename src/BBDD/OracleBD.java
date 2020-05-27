@@ -1,11 +1,18 @@
 package BBDD;
 
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import oracle.jdbc.pool.OracleDataSource;
 import oracle.jdbc.OracleConnection;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.xml.transform.Result;
 
 public class OracleBD {
@@ -106,15 +113,18 @@ public class OracleBD {
             return -1;
         }
     }
-    public Blob getImagen(String query) throws SQLException {
+    public Image getImagen(String query) throws SQLException {
         try(Statement statement = con.createStatement()){
             ResultSet sentencia = statement.executeQuery(query);
             Blob foto = null;
-            if(sentencia.next())
+            while(sentencia.next())
                 foto = sentencia.getBlob(1);
-            return foto;
+            InputStream is = foto.getBinaryStream();
+            BufferedImage imgBuffer = ImageIO.read(is);
+                Image fotografia = SwingFXUtils.toFXImage(imgBuffer, null);
+            return fotografia;
         }
-        catch(SQLException e){
+        catch(SQLException | IOException e){
             System.out.println("Error ejecutando consulta");
             e.printStackTrace();
             return null;
