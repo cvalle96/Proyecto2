@@ -5,7 +5,9 @@ import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.text.Font;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +24,7 @@ public class controladoraSensores extends controladoraPrincipal{
     Button actualizarButton;
     @FXML
     ProgressBar progressRuido, progressTemperatura, progressHumedad;
+
 
     Double temperaturaActual, ruidoActual, humedadActual;
     Usuario currentUser =  controladoraPrincipal.currentUser;

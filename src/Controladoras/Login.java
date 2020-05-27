@@ -83,14 +83,14 @@ public class Login {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
-        JMetro Jmetro = new JMetro(root, Style.DARK);
-        Scene sc = new Scene(root);
-        stage.setScene(sc);
         stage.setTitle("App");
+        JMetro Jmetro = new JMetro(root, Style.DARK);
+        Jmetro.automaticallyColorPanesProperty();
+        stage.setScene(new Scene(root));
         stage.show();
 
-        Stage newStage = (Stage) loginButton.getScene().getWindow();
-        newStage.close();
+        Stage newwStage = (Stage) loginButton.getScene().getWindow();
+        newwStage.close();
     }
 
     private boolean comprobarUsuario(String username, String contrasenaString) throws SQLException {
