@@ -39,7 +39,12 @@ public class controladoraPerfil extends controladoraPrincipal{
     private void getDatos() throws SQLException {
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        String query = "SELECT id_user, nombre, apellido, expediente, carrera, clase FROM alumno WHERE expediente = " + currentUser.getNumeroExpediente();
+        String query;
+        if(!currentUser.esProfesor()){
+             query = "SELECT id_user, nombre, apellido, expediente, carrera, clase FROM alumno WHERE expediente = " + currentUser.getNumeroExpediente();
+        }else{
+             query = "SELECT id_user, nombre, apellido, expediente, carrera, clase FROM profesor WHERE expediente = " + currentUser.getNumeroExpediente();
+        }
         listaPrincipal = bd.getArrayList(query);
         bd.closeConnection();
     }
@@ -58,7 +63,12 @@ public class controladoraPerfil extends controladoraPrincipal{
     public void pintar(ActionEvent actionEvent) throws SQLException {
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        String query = "SELECT FOTO FROM ALUMNO WHERE EXPEDIENTE= '"+currentUser.getNumeroExpediente()+"'";
+        String query;
+        if(currentUser.esProfesor()){
+            query = "SELECT FOTO FROM profesor WHERE EXPEDIENTE= '"+currentUser.getNumeroExpediente()+"'";
+        }else{
+            query = "SELECT FOTO FROM ALUMNO WHERE EXPEDIENTE= '"+currentUser.getNumeroExpediente()+"'";
+        }
         fotoperfil = bd.getImagen(query);
         mostrarFoto.setImage(fotoperfil);
         bd.closeConnection();
