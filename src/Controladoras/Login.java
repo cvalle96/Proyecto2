@@ -77,14 +77,14 @@ public class Login {
 
     private void startApp(int expediente, boolean prof) throws IOException, SQLException {
         FXMLLoader loader;
+        controladoraPrincipal controler = new controladoraPrincipal();
+        controler.setProfesor(prof);
+        controler.setExpediente(expediente);
+
         if(prof){
-            controladoraProfesor controler = new controladoraProfesor();
-            controler.setExpediente(expediente);
             System.out.println("profesor enviado");
             loader = new FXMLLoader(getClass().getResource("/Vistas/tabProfesor.fxml"));
         }else{
-            controladoraPrincipal controler = new controladoraPrincipal();
-            controler.setExpediente(expediente);
             System.out.println("usuario enviado");
             loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         }
