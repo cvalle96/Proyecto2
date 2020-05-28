@@ -1,0 +1,8 @@
+.tituloPerfil{
+    -fx-font-size: 3em;
+    -fx-font-weight: bold;
+}
+.textoPerfil{
+    -fx-font-size: 1em;
+    -fx-font-weight: bold;
+}

@@ -27,7 +27,7 @@ public class controladoraPerfil extends controladoraPrincipal{
     @FXML
     TextField nombreTextfield, apellidosTextfield, carreraTextfield, expedienteTextfield, grupoTextfield;
     @FXML
-    ImageView visorPerfil;
+    ImageView imgpanel;
 
     Image fotoperfil;
     ArrayList listaPrincipal;
@@ -35,7 +35,7 @@ public class controladoraPerfil extends controladoraPrincipal{
 
     public controladoraPerfil() throws SQLException {
         currentUser = controladoraPrincipal.currentUser;
-        visorPerfil = new ImageView();
+        imgpanel = new ImageView();
         getDatos();
 
     }
@@ -54,11 +54,8 @@ public class controladoraPerfil extends controladoraPrincipal{
         bd.setConnection();
         InputStream imagen = null;
         String query = "SELECT FOTO FROM ALUMNO WHERE EXPEDIENTE= '"+currentUser.getNumeroExpediente()+"'";
-        Blob imagenBlob = bd.getImagen(query);
-        imagen = imagenBlob.getBinaryStream();
-        fotoperfil = new Image (imagen,280,280,false,false);
-        visorPerfil.setImage(fotoperfil);
-        visorPerfil.setVisible(true);
+        fotoperfil = bd.getImagen(query);
+        imgpanel.setImage(fotoperfil);
         bd.closeConnection();
     }
 
