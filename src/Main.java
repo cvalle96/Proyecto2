@@ -13,7 +13,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
 
-        // TODO  el tamaño de la fuente no se conserva en el tema negro, no distingue profe de alumno
+        // TODO  el tamaño de la fuente no se conserva en el tema negro, sleects jodidos si entras como rpofesor
 
         launch(args);
     }
@@ -28,7 +28,7 @@ public class Main extends Application {
             Jmetro.automaticallyColorPanesProperty();
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
-            Jmetro.reApplyTheme();
+
         } catch (Exception e ){
             System.out.println(e.getMessage());
             System.out.println(e.getCause());

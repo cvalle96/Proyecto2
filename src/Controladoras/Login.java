@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -75,12 +76,19 @@ public class Login {
     }
 
     private void startApp(int expediente, boolean prof) throws IOException, SQLException {
-        controladoraPrincipal controler = new controladoraPrincipal();
-        controler.setProfesor(prof);
-        controler.setExpediente(expediente);
+        FXMLLoader loader;
+        if(prof){
+            controladoraProfesor controler = new controladoraProfesor();
+            controler.setExpediente(expediente);
+            System.out.println("profesor enviado");
+            loader = new FXMLLoader(getClass().getResource("/Vistas/tabProfesor.fxml"));
+        }else{
+            controladoraPrincipal controler = new controladoraPrincipal();
+            controler.setExpediente(expediente);
+            System.out.println("usuario enviado");
+            loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
+        }
 
-        System.out.println("usuario enviado");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setTitle("App");
@@ -92,6 +100,7 @@ public class Login {
         Stage newwStage = (Stage) loginButton.getScene().getWindow();
         newwStage.close();
     }
+
 
     private boolean comprobarUsuario(String username, String contrasenaString) throws SQLException {
         String query = "SELECT id_user FROM usuario WHERE username='" + username + "' and password='" + contrasenaString + "'";

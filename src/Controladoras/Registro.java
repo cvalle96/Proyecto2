@@ -163,9 +163,8 @@ public class Registro {
 
     public void letslogin(int expediente) throws IOException, SQLException {
         controladoraPrincipal controler = new controladoraPrincipal();
-        controler.setProfesor(soyProfeCheckbox.isSelected());
         controler.setExpediente(expediente);
-
+        System.out.println("usuario enviado");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         Parent root = loader.load();
