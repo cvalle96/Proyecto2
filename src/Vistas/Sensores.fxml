@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="592.0" prefWidth="824.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraSensores">
+<AnchorPane prefHeight="592.0" prefWidth="824.0" styleClass="background" stylesheets="@../Estilos/estilos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraSensores">
     <children>
-        <Label fx:id="labelSensores" layoutX="308.0" layoutY="14.0" prefHeight="74.0" prefWidth="206.0" text="SENSORES">
+        <Label fx:id="tituloSensores" layoutX="308.0" layoutY="14.0" prefHeight="74.0" prefWidth="206.0" style="-fx-font-size: 3.3em;" text="SENSORES">
             <font>
                 <Font size="40.0" />
             </font>
         </Label>
-        <Label layoutX="74.0" layoutY="88.0" prefHeight="27.0" prefWidth="119.0" text="Humedad:">
+        <Label fx:id="descripcion" layoutX="74.0" layoutY="88.0" prefHeight="27.0" prefWidth="119.0" text="Humedad:">
             <font>
                 <Font size="20.0" />
             </font>
         </Label>
-        <Label layoutX="74.0" layoutY="245.0" prefHeight="28.0" prefWidth="137.0" text="Temperatura:">
+        <Label fx:id="descripcion" layoutX="74.0" layoutY="245.0" prefHeight="28.0" prefWidth="137.0" text="Temperatura:">
             <font>
                 <Font size="20.0" />
             </font>
         </Label>
-        <Label layoutX="74.0" layoutY="393.0" prefHeight="27.0" prefWidth="72.0" text="Ruido:">
+        <Label fx:id="descripcion" layoutX="74.0" layoutY="393.0" prefHeight="27.0" prefWidth="72.0" text="Ruido:">
             <font>
                 <Font size="20.0" />
             </font>
         </Label>
-        <Text layoutX="78.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0%                |                 25%                  |                 50%                  |            75%             |                 100%" wrappingWidth="667.0">
+        <Text fx:id="porcentajeSensores" layoutX="78.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.1em;" text="0%                |                 25%                  |                 50%                  |            75%             |                 100%" wrappingWidth="667.0">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
         <ProgressBar fx:id="progressHumedad" layoutX="68.0" layoutY="123.0" prefHeight="41.0" prefWidth="671.0" progress="0.0" />
         <ProgressBar fx:id="progressTemperatura" layoutX="64.0" layoutY="283.0" prefHeight="41.0" prefWidth="672.0" progress="0.0" />
-        <Text layoutX="71.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10                         |                         20                         |                          30                        |                           40" wrappingWidth="681.0">
+        <Text fx:id="porcentajeSensores" layoutX="71.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10                         |                         20                         |                          30                        |                           40" wrappingWidth="681.0">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
         <ProgressBar fx:id="progressRuido" layoutX="64.0" layoutY="428.0" prefHeight="41.0" prefWidth="674.0" progress="0.0" />
-        <Text layoutX="65.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  10                    |                  20                    |                       40                   |                   60                    |                     80         " wrappingWidth="711.0">
+        <Text fx:id="porcentajeSensores" layoutX="65.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  10                    |                  20                    |                       40                   |                   60                    |                 80         " wrappingWidth="711.0">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
@@ -48,6 +54,16 @@
          <font>
             <Font size="17.0" />
          </font>
+         <effect>
+            <Lighting diffuseConstant="2.0" specularExponent="20.47" surfaceScale="0.0">
+               <bumpInput>
+                  <Shadow color="#246be5" height="0.0" radius="0.0" width="0.0" />
+               </bumpInput>
+               <light>
+                  <Light.Distant color="#246be5" />
+               </light>
+            </Lighting>
+         </effect>
       </Button>
     </children>
 

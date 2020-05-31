@@ -5,34 +5,34 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="592.0" prefWidth="824.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraPerfil">
+<AnchorPane prefHeight="592.0" prefWidth="824.0" styleClass="background" stylesheets="@../Estilos/estilos.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraPerfil">
     <children>
-        <Label layoutX="369.0" layoutY="231.0" prefHeight="27.0" prefWidth="119.0" text="Carrera:">
+        <Label fx:id="descripcion" layoutX="369.0" layoutY="231.0" prefHeight="27.0" prefWidth="119.0" text="Carrera:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="179.0" prefHeight="27.0" prefWidth="119.0" text="Apellidos:">
+        <Label fx:id="descripcion" layoutX="369.0" layoutY="179.0" prefHeight="27.0" prefWidth="119.0" text="Apellidos:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="127.0" prefHeight="27.0" prefWidth="119.0" text="Nombre:">
+        <Label fx:id="descripcion" layoutX="369.0" layoutY="127.0" prefHeight="27.0" prefWidth="119.0" style="-fx-font-size: 1.5em;" text="Nombre:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="84.0" layoutY="14.0" prefHeight="74.0" prefWidth="119.0" text="PERFIL">
+        <Label fx:id="tituloPerfil" layoutX="84.0" layoutY="14.0" prefHeight="74.0" prefWidth="119.0" text="PERFIL">
             <font>
                 <Font size="36.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="289.0" prefHeight="27.0" prefWidth="119.0" text="Expediente:">
+        <Label fx:id="descripcion" layoutX="369.0" layoutY="289.0" prefHeight="27.0" prefWidth="119.0" text="Expediente:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="342.0" prefHeight="27.0" prefWidth="119.0" text="Grupo:">
+        <Label fx:id="descripcion" layoutX="369.0" layoutY="342.0" prefHeight="27.0" prefWidth="119.0" text="Grupo:">
             <font>
                 <Font size="18.0" />
             </font>
