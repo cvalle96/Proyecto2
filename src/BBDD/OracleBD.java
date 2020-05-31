@@ -13,7 +13,6 @@ import oracle.jdbc.pool.OracleDataSource;
 import oracle.jdbc.OracleConnection;
 
 import javax.imageio.ImageIO;
-import javax.xml.transform.Result;
 
 public class OracleBD {
 
@@ -92,27 +91,20 @@ public class OracleBD {
         return resultados;
     }
 
-    public void makeInsert(String query) throws SQLException{
-        try (Statement statement = con.createStatement()) {
-            try (ResultSet resultSet = statement.executeQuery(query)) {
-                System.out.println("insertado");
-            }catch (SQLException e){
-                System.out.println(e.getSQLState() + "\n" + e.getMessage() );
-            }
-        }
+    public void ejecutarst(PreparedStatement stmt) throws SQLException {
+        stmt.executeUpdate();
+    }
 
-    }
-    public int ejecutarQuery(String query) throws SQLException {
-        try(Statement statement = con.createStatement()){
-            PreparedStatement stmt = con.prepareStatement(query);
-            return stmt.executeUpdate();
+    public PreparedStatement prepareStatement(String s) {
+        try (Statement statement = con.createStatement()) {
+            PreparedStatement stmt = con.prepareStatement(s);
+            return stmt;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        catch(SQLException e){
-            System.out.println("Error ejecutando consulta");
-            e.printStackTrace();
-            return -1;
-        }
+        return null;
     }
+
     public Image getImagen(String query) throws SQLException {
         try(Statement statement = con.createStatement()){
             ResultSet sentencia = statement.executeQuery(query);
@@ -131,34 +123,14 @@ public class OracleBD {
         }
     }
 
-
-    public int idAlumno(String query) throws SQLException {
-        try(Statement statement = con.createStatement()){
-            ResultSet sentencia = statement.executeQuery(query);
-            int resultado = 0;
-            if(sentencia.next())
-                resultado = sentencia.getInt(1);
-            return resultado;
-        }
-        catch(SQLException e){
-            System.out.println("Error ejecutando consulta");
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    public PreparedStatement prepareStatement(String s) {
+    public void makeInsert(String query) throws SQLException{
         try (Statement statement = con.createStatement()) {
-            PreparedStatement stmt = con.prepareStatement(s);
-            return stmt;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            try (ResultSet resultSet = statement.executeQuery(query)) {
+                System.out.println("insertado");
+            }catch (SQLException e){
+                System.out.println(e.getSQLState() + "\n" + e.getMessage() );
+            }
         }
-        return null;
-    }
-
-    public void ejecutarst(PreparedStatement stmt) throws SQLException {
-        stmt.executeUpdate();
 
     }
 }

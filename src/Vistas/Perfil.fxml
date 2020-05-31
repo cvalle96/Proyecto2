@@ -5,35 +5,34 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="592.0" prefWidth="824.0" styleClass="background" stylesheets="@../Estilos/Estilos.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraPerfil">
+<AnchorPane prefHeight="592.0" prefWidth="824.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraPerfil">
     <children>
-        <Label layoutX="369.0" layoutY="231.0" prefHeight="27.0" prefWidth="119.0" styleClass="textoPerfil" text="Carrera:">
+        <Label layoutX="369.0" layoutY="231.0" prefHeight="27.0" prefWidth="119.0" text="Carrera:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="179.0" prefHeight="27.0" prefWidth="119.0" style="-fx-background-size: 1em;" styleClass="textoPerfil" text="Apellidos:">
+        <Label layoutX="369.0" layoutY="179.0" prefHeight="27.0" prefWidth="119.0" text="Apellidos:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="127.0" prefHeight="27.0" prefWidth="119.0" style="-fx-background-size: 1em;" styleClass="textoPerfil" text="Nombre:">
+        <Label layoutX="369.0" layoutY="127.0" prefHeight="27.0" prefWidth="119.0" text="Nombre:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="84.0" layoutY="14.0" prefHeight="74.0" prefWidth="119.0" style="-fx-font-size: 3em;" styleClass="tituloPerfil" text="PERFIL">
+        <Label layoutX="84.0" layoutY="14.0" prefHeight="74.0" prefWidth="119.0" text="PERFIL">
             <font>
-                <Font size="9.0" />
+                <Font size="36.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="289.0" prefHeight="27.0" prefWidth="119.0" styleClass="textoPerfil" text="Expediente:">
+        <Label layoutX="369.0" layoutY="289.0" prefHeight="27.0" prefWidth="119.0" text="Expediente:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="342.0" prefHeight="27.0" prefWidth="119.0" styleClass="textoPerfil" text="Grupo:">
+        <Label layoutX="369.0" layoutY="342.0" prefHeight="27.0" prefWidth="119.0" text="Grupo:">
             <font>
                 <Font size="18.0" />
             </font>
@@ -48,9 +47,11 @@
                 <Font size="21.0" />
             </font>
         </Button>
-        <Button fx:id="actualizar" layoutX="657.0" layoutY="448.0" mnemonicParsing="false" onAction="#pintar" prefHeight="49.0" prefWidth="92.0" text="ACTUALIZAR" />
-      <ImageView fx:id="imgpanel" fitHeight="242.0" fitWidth="264.0" layoutX="35.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-
+        <Button fx:id="actualizar" layoutX="530.0" layoutY="447.0" mnemonicParsing="false" onAction="#pintar" prefHeight="50.0" prefWidth="157.0" text="ACTUALIZAR">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <ImageView fx:id="mostrarFoto" fitHeight="235.0" fitWidth="262.0" layoutX="35.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 
 </AnchorPane>

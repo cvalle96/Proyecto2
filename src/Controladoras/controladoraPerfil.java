@@ -9,57 +9,45 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 
 public class controladoraPerfil extends controladoraPrincipal{
 
     @FXML
-    Button logOffButton;
+    Button logOffButton, cargarfoto;
     Usuario currentUser;
 
     @FXML
-    TextField nombreTextfield, apellidosTextfield, carreraTextfield, expedienteTextfield, grupoTextfield;
+    ImageView mostrarFoto;
     @FXML
-    ImageView imgpanel;
+    TextField nombreTextfield, apellidosTextfield, carreraTextfield, expedienteTextfield, grupoTextfield;
 
     Image fotoperfil;
     ArrayList listaPrincipal;
 
-
     public controladoraPerfil() throws SQLException {
         currentUser = controladoraPrincipal.currentUser;
-        imgpanel = new ImageView();
+        mostrarFoto = new ImageView();
         getDatos();
-
     }
 
     private void getDatos() throws SQLException {
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        String query = "SELECT nombre, apellido, carrera, expediente, clase FROM alumno WHERE expediente = '" + currentUser.getNumeroExpediente() +"'";
+        String query;
+        if(!currentUser.esProfesor()){
+             query = "SELECT id_user, nombre, apellido, expediente, carrera, clase FROM alumno WHERE expediente = " + currentUser.getNumeroExpediente();
+        }else{
+             query = "SELECT id_user, nombre, apellido, expediente, carrera, clase FROM profesor WHERE expediente = " + currentUser.getNumeroExpediente();
+        }
         listaPrincipal = bd.getArrayList(query);
         bd.closeConnection();
-        getFoto();
     }
-
-    private void getFoto() throws SQLException{
-        OracleBD bd = new OracleBD();
-        bd.setConnection();
-        InputStream imagen = null;
-        String query = "SELECT FOTO FROM ALUMNO WHERE EXPEDIENTE= '"+currentUser.getNumeroExpediente()+"'";
-        fotoperfil = bd.getImagen(query);
-        imgpanel.setImage(fotoperfil);
-        bd.closeConnection();
-    }
-
-
 
     public void logOut(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Login.fxml"));
@@ -73,14 +61,22 @@ public class controladoraPerfil extends controladoraPrincipal{
     }
 
     public void pintar(ActionEvent actionEvent) throws SQLException {
-        nombreTextfield.setText((String) listaPrincipal.get(0));
-        apellidosTextfield.setText((String) listaPrincipal.get(1));
-        carreraTextfield.setText((String) listaPrincipal.get(2));
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        String query;
+        if(currentUser.esProfesor()){
+            query = "SELECT FOTO FROM profesor WHERE EXPEDIENTE= '"+currentUser.getNumeroExpediente()+"'";
+        }else{
+            query = "SELECT FOTO FROM ALUMNO WHERE EXPEDIENTE= '"+currentUser.getNumeroExpediente()+"'";
+        }
+        fotoperfil = bd.getImagen(query);
+        mostrarFoto.setImage(fotoperfil);
+        bd.closeConnection();
+
+        nombreTextfield.setText((String) listaPrincipal.get(1));
+        apellidosTextfield.setText((String) listaPrincipal.get(2));
+        carreraTextfield.setText((String) listaPrincipal.get(4));
         expedienteTextfield.setText((String) listaPrincipal.get(3));
-        grupoTextfield.setText((String) listaPrincipal.get(4));
-        getFoto();
-
-
+        grupoTextfield.setText((String) listaPrincipal.get(5));
     }
-
 }

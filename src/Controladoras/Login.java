@@ -9,87 +9,112 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Login {
     @FXML
-    private Button loginButton, registroButton;
+    private Button loginButton;
     @FXML
     private TextField contrasenaField, usuarioField ;
     @FXML
     private Label consola;
 
-    private Usuario currentUser;
+    String psw, user;
 
-    private int logueo;
+    public Login(){
 
-    private String user, psw;
-
-
-    public  boolean comprobarUsuario(String usuario, String contrasenia) throws SQLException {
-        boolean existeUsuario;
-        String query = "SELECT id_user FROM usuario WHERE username='" + usuario + "' and password='" + contrasenia + "'";
-        OracleBD bd = new OracleBD();
-        bd.setConnection();
-        logueo = bd.idAlumno(query);
-        bd.closeConnection();
-        if (logueo==0) {
-            existeUsuario = false;
-        }
-        else{
-            existeUsuario = true;
-        }
-        return existeUsuario;
     }
 
-    public void log_in() throws SQLException, IOException {
+    
+    public void login(ActionEvent actionEvent) throws Exception {
         user = usuarioField.getText().trim();
         psw = contrasenaField.getText().trim();
         String pswCod = DigestUtils.sha1Hex(psw);
 
-        if (usuarioField.getText().isEmpty() || contrasenaField.getText().isEmpty()){
-            System.out.println(usuarioField.getText());
-            consola.setText("Debes rellenar los campos");
-        } else if(comprobarUsuario(user,pswCod)){
-            System.out.println("Usuario Logueado");
-            String alumno = "SELECT nombre, apellido, clase, expediente FROM alumno where id_user=" + logueo + "";
+        if(check() && comprobarUsuario(user,pswCod)){
+
+            String query = "SELECT profesor, id_user FROM usuario where username='" + user + "'";
             OracleBD bd = new OracleBD();
             bd.setConnection();
-            ArrayList resultados = bd.getArrayList(alumno);
-            //public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)
-            currentUser = new Usuario((String) resultados.get(0), (String) resultados.get(1),(String) resultados.get(2), (String) resultados.get(3), false);
-            System.out.println(currentUser.getNumeroExpediente());
-            bd.closeConnection();
-            startApp();
+            ArrayList<Double> rs = bd.getDoubleList(query);
 
-        }else{
-            consola.setText("Usuario/Contraseña incorrectos");
+            if( rs.get(0) == 0 ){
+
+                query = "SELECT expediente from alumno where id_user = " + rs.get(1).intValue() ;
+                ArrayList rs1 = bd.getArrayList(query);
+                bd.closeConnection();
+                startApp(Integer.parseInt(rs1.get(0).toString()), false);
+            }
+            else if (rs.get(0) == 1){
+                query = "SELECT expediente from profesor where id_user = " + rs.get(1).intValue() ;
+                ArrayList rs1 = bd.getArrayList(query);
+                bd.closeConnection();
+                startApp(Integer.parseInt(rs1.get(0).toString()), true);
+            }else{
+                System.out.println("bad answer from query, \n" + rs.toString());
+            }
         }
     }
 
-    private void startApp() throws IOException {
-        controladoraPrincipal controler = new controladoraPrincipal();
-        controler.setCurrentUser(currentUser);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        JMetro Jmetro = new JMetro(root, Style.DARK);
-        Scene sc = new Scene(root);
-        stage.setScene(sc);
-        stage.show();
-
-        Stage newStage = (Stage) loginButton.getScene().getWindow();
-        newStage.close();
+    public boolean check() throws IOException, SQLException {
+        if (usuarioField.getText().trim().equals("") ){
+            consola.setText("falta nombre de usuario!");
+            return false;
+        }else if (contrasenaField.getText().trim().equals("") ){
+            consola.setText("falta contraseña!");
+            return false;
+        }
+        return true;
     }
 
+    private void startApp(int expediente, boolean prof) throws IOException, SQLException {
+        FXMLLoader loader;
+        controladoraPrincipal controler = new controladoraPrincipal();
+        controler.setProfesor(prof);
+        controler.setExpediente(expediente);
+
+        if(prof){
+            System.out.println("profesor enviado");
+            loader = new FXMLLoader(getClass().getResource("/Vistas/tabProfesor.fxml"));
+        }else{
+            System.out.println("usuario enviado");
+            loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
+        }
+
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("App");
+        JMetro Jmetro = new JMetro(root, Style.DARK);
+        Jmetro.automaticallyColorPanesProperty();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        Stage newwStage = (Stage) loginButton.getScene().getWindow();
+        newwStage.close();
+    }
+
+
+    private boolean comprobarUsuario(String username, String contrasenaString) throws SQLException {
+        String query = "SELECT id_user FROM usuario WHERE username='" + username + "' and password='" + contrasenaString + "'";
+        OracleBD bd = new OracleBD();
+        bd.setConnection();
+        ArrayList rs = bd.getArrayList(query);
+        bd.closeConnection();
+
+        if (rs.isEmpty()) {
+            return false;
+        }
+        return true;
+
+    }
 
     public void registro(ActionEvent actionEvent) {
         try {
@@ -97,8 +122,8 @@ public class Login {
             Parent root = loader.load();
             Stage stage = new Stage();
             JMetro Jmetro = new JMetro(root, Style.DARK);
-            Scene sc = new Scene(root);
-            stage.setScene(sc);
+            stage.setScene(new Scene(root));
+            stage.setTitle("Registro");
             stage.show();
         } catch (Exception e ){
             System.out.println(e.getMessage());

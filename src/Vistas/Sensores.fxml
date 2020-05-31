@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="592.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraSensores">
+<AnchorPane prefHeight="592.0" prefWidth="824.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraSensores">
     <children>
-        <Label layoutX="308.0" layoutY="14.0" prefHeight="74.0" prefWidth="206.0" text="SENSORES">
+        <Label fx:id="labelSensores" layoutX="308.0" layoutY="14.0" prefHeight="74.0" prefWidth="206.0" text="SENSORES">
             <font>
                 <Font size="40.0" />
             </font>

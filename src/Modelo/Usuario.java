@@ -18,17 +18,10 @@ public class Usuario {
 
 
     public Usuario(String nombre, String apellidos, String contrasenia, String clase, String expediente, boolean profe)  {
+
         this.nombreUser=nombre;
         this.apellidoUser = apellidos;
         this.contrasenia =contrasenia;
-        this.numeroExpediente= expediente;
-        this.clase = clase;
-        this.esProfe = profe;
-    }
-
-    public Usuario(String nombre, String apellidos, String clase, String expediente, boolean profe)  {
-        this.nombreUser=nombre;
-        this.apellidoUser = apellidos;
         this.numeroExpediente= expediente;
         this.clase = clase;
         this.esProfe = profe;
@@ -38,7 +31,7 @@ public class Usuario {
         return esProfe;
     }
 
-    public static String generarExpediente(){
+    public String generarExpediente(){
         String answer = Math.random() +"";
         answer = answer.substring(2,9);
         return answer;

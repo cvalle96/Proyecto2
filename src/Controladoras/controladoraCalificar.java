@@ -9,11 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class controladoraProfesor extends controladoraPrincipal {
+public class controladoraCalificar extends controladoraPrincipal {
     @FXML
     ObservableList<String> observableUsuariosString;
     @FXML
@@ -22,7 +23,8 @@ public class controladoraProfesor extends controladoraPrincipal {
     TextField textFieldNombre, textFieldAula, textFieldExpediente, textFieldCarrera, textFieldComentario, textFieldNota;
     @FXML
     Button buttonEnviarNota;
-
+    @FXML
+    AnchorPane ap;
 
     ArrayList<String> listaNombres, listaAsignaturas;
     Usuario usuarioModificar;
@@ -30,7 +32,7 @@ public class controladoraProfesor extends controladoraPrincipal {
     Asignatura currentAsignatura;
 
 
-    public controladoraProfesor(){
+    public controladoraCalificar(){
         currentUser = controladoraPrincipal.currentUser;
         listaUsuarios = new ListView();
         listaAsignatura = new ListView();
@@ -39,6 +41,7 @@ public class controladoraProfesor extends controladoraPrincipal {
         textFieldExpediente = new TextField();
         textFieldNota = new TextField();
         textFieldComentario = new TextField();
+
         getAlumnos();
 
     }
@@ -57,24 +60,18 @@ public class controladoraProfesor extends controladoraPrincipal {
     }
 
     private Usuario obtenerUsuariodeBBDD(String nombre, String apellidos) throws SQLException {
-        ArrayList resultados = null;
-        try {
-            OracleBD bd = new OracleBD();
-            String query = "select * from alumno where nombre = '" + nombre + "' and apellido = '"+ apellidos + "'";
-            bd.setConnection();
-            resultados = bd.getArrayList(query);
-            bd.closeConnection();
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        String carrera = (String) resultados.get(5);
-        String grupo = (String) resultados.get(6);
-        String expediente =(String) resultados.get(4);
+        OracleBD bd = new OracleBD();
+        String query = "select carrera, clase, expediente from alumno where nombre = '" + nombre + "' and apellido = '"+ apellidos + "'";
+        bd.setConnection();
+        ArrayList rs = bd.getArrayList(query);
+        bd.closeConnection();
+
+        String carrera = (String) rs.get(0);
+        String grupo = (String) rs.get(1);
+        String expediente =(String) rs.get(2);
 
         //le estoy pasando la carrera como si fuera la contraseña porque no tengo el campo en el constructor y contraseña no se utilizaba
-        Usuario user = new Usuario(nombre, apellidos, carrera, grupo, expediente, false );
-
-        return user;
+        return new Usuario(nombre, apellidos, carrera, grupo, expediente, false );
     }
 
     private void seleccionarAlumnoModificar(Usuario usuario) {

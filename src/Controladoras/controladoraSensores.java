@@ -5,14 +5,10 @@ import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 
@@ -22,6 +18,7 @@ public class controladoraSensores extends controladoraPrincipal{
     Button actualizarButton;
     @FXML
     ProgressBar progressRuido, progressTemperatura, progressHumedad;
+
 
     Double temperaturaActual, ruidoActual, humedadActual;
     Usuario currentUser =  controladoraPrincipal.currentUser;
@@ -63,17 +60,4 @@ public class controladoraSensores extends controladoraPrincipal{
         actualizar();
     }
 
-    public void howtoinsert() throws SQLException {
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String hora = dtf.format(now);
-
-        OracleBD BD = new OracleBD();
-        BD.setConnection();
-        String query = "insert into registro (aula, temperatura,ruido,humedad,hora) VALUES (1,30,0.8,32,'"+dtf.format(now) +"')";
-        BD.makeInsert(query);
-        System.out.println(query);
-        BD.closeConnection();
-    }
 }

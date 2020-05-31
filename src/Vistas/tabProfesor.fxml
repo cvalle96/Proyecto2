@@ -14,15 +14,20 @@
                     </content>
                 </Tab>
 
-                <Tab fx:id="notasTab" text="NOTAS">
-                    <content>
-                        <fx:include fx:id="notasAP" source="Notas.fxml" />
-                    </content>
-                </Tab>
-
                 <Tab fx:id="sensoresTab" text="SENSORES">
                     <content>
                         <fx:include source="Sensores.fxml" />
+                    </content>
+                </Tab>
+                <Tab fx:id="editorTab" text="EDITOR">
+                    <content>
+                        <fx:include source="Editor.fxml" />
+                    </content>
+                </Tab>
+
+                <Tab fx:id="calificarTab" text="CALIFICAR">
+                    <content>
+                        <fx:include source="Calificar.fxml" />
                     </content>
                 </Tab>
 
