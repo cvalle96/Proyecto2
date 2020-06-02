@@ -42,7 +42,7 @@
         <TextField fx:id="carreraTextfield" layoutX="515.0" layoutY="235.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;" />
         <TextField fx:id="expedienteTextfield" layoutX="515.0" layoutY="287.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;" />
         <TextField fx:id="grupoTextfield" layoutX="515.0" layoutY="342.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;" />
-        <Button fx:id="logOffButton" layoutX="35.0" layoutY="448.0" mnemonicParsing="false" onAction="#logOut" prefHeight="50.0" prefWidth="146.0" text="Log Off" textFill="#fd3a3a">
+        <Button fx:id="logOffButton" layoutX="35.0" layoutY="448.0" mnemonicParsing="false" onAction="#logOut" prefHeight="50.0" prefWidth="146.0" style="-fx-border-color: #C92A08;" text="Log Off" >
             <font>
                 <Font size="21.0" />
             </font>

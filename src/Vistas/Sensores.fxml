@@ -45,20 +45,10 @@
                 <Font name="System Bold" size="13.0" />
             </font>
         </Text>
-        <Button fx:id="actualizarButton" alignment="CENTER" defaultButton="true" layoutX="624.0" layoutY="32.0" mnemonicParsing="false" onAction="#act" text="ACTUALIZAR">
+        <Button fx:id="actualizarButton" alignment="CENTER" defaultButton="true" layoutX="624.0" layoutY="32.0" mnemonicParsing="false" onAction="#act" style="-fx-border-color: #246be5;" text="ACTUALIZAR">
             <font>
                 <Font size="17.0" />
             </font>
-            <effect>
-                <Lighting diffuseConstant="2.0" specularExponent="20.47" surfaceScale="0.0">
-                    <bumpInput>
-                        <Shadow color="#246be5" height="0.0" radius="0.0" width="0.0" />
-                    </bumpInput>
-                    <light>
-                        <Light.Distant color="#246be5" />
-                    </light>
-                </Lighting>
-            </effect>
         </Button>
     </children>
 

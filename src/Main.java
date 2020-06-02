@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -12,7 +11,6 @@ import java.sql.SQLException;
 public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
-
 
         launch(args);
     }
