@@ -36,16 +36,17 @@ public class Registro {
     Button registrarButton;
 
     InputStream imagen;
-    private Registro ImageUtils;
     String imagenAlumno ;
 
     public Registro(){
         imagenAlumno = new String();
-
+        inicializar();
     }
 
     public void registrar(ActionEvent actionEvent) throws IOException, SQLException {
-        if (check()){
+        // if check
+        if (true){
+            Boolean prof = false;
             String answer = Math.random() +"";
             String expediente = answer.substring(2,9);
             OracleBD bd = new OracleBD();
@@ -58,21 +59,21 @@ public class Registro {
                 bd.makeInsert(query);
 
                 query = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText().trim() + "'";
-                ArrayList rs = bd.getArrayList(query);
-                int id_user = (int) rs.get(0);
+                ArrayList<Double> rs = bd.getDoubleList(query);
+                int id_user = rs.get(0).intValue();
 
                 stmt = bd.prepareStatement("insert into alumno (id_user, nombre, apellido, expediente, carrera, clase, foto) values (?,?,?,?,?,?,?)");
                 stmt.setInt(1,id_user);
 
             }
             else{
-
+                prof=true;
                 String query = "INSERT INTO usuario (username, password, profesor) VALUES ('" + usernameBox.getText().trim() + "','" + passwordBox.getText().trim() + "', '1')";
                 bd.makeInsert(query);
 
                 query = "SELECT id_user FROM usuario WHERE username='" + usernameBox.getText().trim() + "'";
-                ArrayList rs = bd.getArrayList(query);
-                int id_user = (int) rs.get(0);
+                ArrayList<Double> rs = bd.getDoubleList(query);
+                int id_user = rs.get(0).intValue();
 
                 stmt = bd.prepareStatement("insert into profesor (id_user, nombre, apellido, expediente, carrera, clase, foto) values (?,?,?,?,?,?,?)");
                 stmt.setInt(1,id_user);
@@ -86,7 +87,7 @@ public class Registro {
             stmt.setBinaryStream(7, imagen);
             bd.ejecutarst(stmt);
             bd.closeConnection();
-            letslogin(Integer.parseInt(expediente));
+            letslogin(Integer.parseInt(expediente), prof);
         }
     }
 
@@ -146,6 +147,15 @@ public class Registro {
         }
     }
 
+    private void inicializar() {
+        usernameBox = new TextField();
+        nombreBox = new TextField();
+        apellidoBox = new TextField();
+        groupBox = new TextField();
+        careerBox = new TextField();
+        aulaBox= new TextField();
+    }
+
 
     public void goLogin(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Login.fxml"));
@@ -161,10 +171,10 @@ public class Registro {
         newStage.close();
     }
 
-    public void letslogin(int expediente) throws IOException, SQLException {
+    public void letslogin(int expediente, boolean prof) throws IOException, SQLException {
         controladoraPrincipal controler = new controladoraPrincipal();
+        controler.setProfesor(prof);
         controler.setExpediente(expediente);
-        System.out.println("usuario enviado");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/tabController.fxml"));
         Parent root = loader.load();

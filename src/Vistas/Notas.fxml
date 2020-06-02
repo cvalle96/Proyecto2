@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
@@ -10,7 +9,7 @@
 <AnchorPane fx:id="ap" prefHeight="592.0" prefWidth="824.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraNotas">
 
     <children>
-        <ListView fx:id="notasListview" layoutX="37.0" layoutY="191.0" prefHeight="287.0" prefWidth="729.0">
+        <ListView fx:id="notasListview" layoutX="37.0" layoutY="191.0" prefHeight="273.0" prefWidth="730.0">
 
             <effect>
                 <DropShadow />
@@ -29,12 +28,12 @@
                 <Font size="24.0" />
             </font>
         </Label>
-      <Label fx:id="labelHora" alignment="CENTER" layoutX="613.0" layoutY="78.0" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #d6e6fa;" text="Hora" textFill="#1308e5">
+      <Label fx:id="labelHora" alignment="CENTER" layoutX="613.0" layoutY="78.0" prefHeight="32.0" prefWidth="110.0" text="Hora" style="-fx-border-color: #3fa255;">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="actualizarButton" alignment="CENTER" layoutX="514.0" layoutY="509.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="35.0" prefWidth="179.0" text="ACTUALIZAR" textFill="#4431f5">
+      <Button fx:id="actualizarButton" alignment="CENTER" layoutX="523.0" layoutY="478.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="52.0" prefWidth="202.0" text="ACTUALIZAR" textFill="#4431f5">
          <font>
             <Font size="18.0" />
          </font>

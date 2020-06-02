@@ -18,6 +18,8 @@ public class controladoraSensores extends controladoraPrincipal{
     Button actualizarButton;
     @FXML
     ProgressBar progressRuido, progressTemperatura, progressHumedad;
+    @FXML
+    Label labelSensores;
 
 
     Double temperaturaActual, ruidoActual, humedadActual;
@@ -25,21 +27,19 @@ public class controladoraSensores extends controladoraPrincipal{
     String claseActual ;
     ArrayList<Double> resultados;
 
-    public controladoraSensores() throws SQLException {
+    public controladoraSensores() {
         progressRuido = new ProgressBar();
         progressTemperatura = new ProgressBar();
         progressHumedad = new ProgressBar();
         claseActual = currentUser.getClase();
 
-        actualizar();
     }
 
 
     public void actualizar() throws SQLException {
-//falta que discrimine clases, que solo muestre la clase del usuario logueado
         OracleBD bd = new OracleBD();
         bd.setConnection();
-        resultados = bd.getDoubleList("SELECT temperatura, ruido, humedad FROM registro ") ;
+        resultados = bd.getDoubleList("SELECT temperatura, ruido, humedad FROM registro WHERE aula = " + currentUser.getClase()) ;
         Collections.reverse(resultados);
         temperaturaActual = resultados.get(0);
         ruidoActual = resultados.get(1);
@@ -50,6 +50,7 @@ public class controladoraSensores extends controladoraPrincipal{
     }
 
     private void dibujar() {
+        labelSensores.setText("mostrando aula: " + currentUser.getClase());
         progressHumedad.setProgress(humedadActual / 100);
         progressRuido.setProgress((ruidoActual * 102) /100);         //voltios
         progressTemperatura.setProgress((temperaturaActual *1.25) /100);

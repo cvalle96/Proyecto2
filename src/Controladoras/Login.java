@@ -1,7 +1,6 @@
 package Controladoras;
 
 import BBDD.OracleBD;
-import Modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -54,9 +52,11 @@ public class Login {
                 startApp(Integer.parseInt(rs1.get(0).toString()), false);
             }
             else if (rs.get(0) == 1){
+
                 query = "SELECT expediente from profesor where id_user = " + rs.get(1).intValue() ;
                 ArrayList rs1 = bd.getArrayList(query);
                 bd.closeConnection();
+                System.out.println("enviando " + rs1.get(0).toString());
                 startApp(Integer.parseInt(rs1.get(0).toString()), true);
             }else{
                 System.out.println("bad answer from query, \n" + rs.toString());
@@ -103,17 +103,16 @@ public class Login {
 
 
     private boolean comprobarUsuario(String username, String contrasenaString) throws SQLException {
-        String query = "SELECT id_user FROM usuario WHERE username='" + username + "' and password='" + contrasenaString + "'";
+        String query = "SELECT password FROM usuario WHERE username='" + username + "'";
         OracleBD bd = new OracleBD();
         bd.setConnection();
         ArrayList rs = bd.getArrayList(query);
         bd.closeConnection();
 
-        if (rs.isEmpty()) {
+        if (rs.get(0).equals(contrasenaString)) {
             return false;
         }
         return true;
-
     }
 
     public void registro(ActionEvent actionEvent) {

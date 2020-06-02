@@ -12,6 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -52,10 +55,14 @@ public class controladoraPerfil extends controladoraPrincipal{
     public void logOut(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Login.fxml"));
         Parent root = loader.load();
+
+        JMetro Jmetro = new JMetro(root, Style.DARK);
+        Jmetro.automaticallyColorPanesProperty();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Login");
         stage.show();
+
         Stage newStage = (Stage) logOffButton.getScene().getWindow();
         newStage.close();
     }

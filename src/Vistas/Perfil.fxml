@@ -37,11 +37,11 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <TextField fx:id="nombreTextfield" layoutX="503.0" layoutY="125.0" prefHeight="31.0" prefWidth="232.0" />
-        <TextField fx:id="apellidosTextfield" layoutX="503.0" layoutY="177.0" prefHeight="31.0" prefWidth="232.0" />
-        <TextField fx:id="carreraTextfield" layoutX="503.0" layoutY="233.0" prefHeight="31.0" prefWidth="232.0" />
-        <TextField fx:id="expedienteTextfield" layoutX="503.0" layoutY="285.0" prefHeight="31.0" prefWidth="232.0" />
-        <TextField fx:id="grupoTextfield" layoutX="503.0" layoutY="340.0" prefHeight="31.0" prefWidth="232.0" />
+        <TextField fx:id="nombreTextfield" layoutX="503.0" layoutY="125.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;"/>
+        <TextField fx:id="apellidosTextfield" layoutX="503.0" layoutY="177.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;"/>
+        <TextField fx:id="carreraTextfield" layoutX="503.0" layoutY="233.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;"/>
+        <TextField fx:id="expedienteTextfield" layoutX="503.0" layoutY="285.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;"/>
+        <TextField fx:id="grupoTextfield" layoutX="503.0" layoutY="340.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;"/>
         <Button fx:id="logOffButton" layoutX="35.0" layoutY="448.0" mnemonicParsing="false" onAction="#logOut" prefHeight="49.0" prefWidth="92.0" text="LogOff" textFill="#fd3a3a">
             <font>
                 <Font size="21.0" />
