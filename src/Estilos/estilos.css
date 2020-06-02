@@ -1,0 +1,22 @@
+#registroButton, #loginButton, #registrarButton, #logButton, #logOffButton, #actualizar, #actualizarButton{
+    -fx-font-size: 1.4em;
+    -fx-font-weight: bold;
+}
+#tituloPerfil, #tituloSensores, #tituloNotas{
+    -fx-font-size: 3em;
+    -fx-font-weight: bold;
+}
+#descripcion, #actualizadoNotas, #labelHora{
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+}
+#tabpanel{
+    -fx-font-weight: bold;
+}
+#tituloSensores{
+    -fx-font-size: 3.3em;
+}
+#porcentajeSensores{
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+}

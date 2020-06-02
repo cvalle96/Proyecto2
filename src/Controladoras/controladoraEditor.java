@@ -72,7 +72,7 @@ public class controladoraEditor extends controladoraPrincipal {
     private void getAlumnos() {
         listaNombres = new ArrayList<String>();
         try {
-            String query = "select nombre, apellido from alumno " ;
+            String query = "select nombre, apellido from alumno where clase = "+ currentUser.getClase() ;
             OracleBD bd = new OracleBD();
             bd.setConnection();
             ArrayList resultados =  bd.getArrayList(query);

@@ -3,16 +3,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="937.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.Login">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="937.0" styleClass="background" stylesheets="@../Estilos/estilos.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.Login">
     <children>
-        <Button fx:id="loginButton" defaultButton="true" layoutX="371.0" layoutY="376.0" mnemonicParsing="false" onAction="#login" prefHeight="45.0" prefWidth="196.0" text="INICIAR SESION" style="-fx-border-color: #3fa255;">
+        <Button fx:id="loginButton" defaultButton="true" layoutX="371.0" layoutY="376.0" mnemonicParsing="false" onAction="#login" prefHeight="45.0" prefWidth="196.0" styleClass="botonLogueo" text="INICIAR SESION">
             <font>
                 <Font size="18.0" />
             </font>
-            </Button>
+            <effect>
+                <Lighting bumpInput="$null" diffuseConstant="2.0" surfaceScale="0.0">
+                    <light>
+                        <Light.Distant color="#246be5" />
+                    </light>
+                </Lighting>
+            </effect></Button>
         <TextField id="userBox" fx:id="usuarioField" layoutX="371.0" layoutY="222.0" prefHeight="45.0" prefWidth="196.0" promptText="Usuario" />
         <Text layoutX="1.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professional University System Interface" textAlignment="CENTER" wrappingWidth="937.0">
             <font>
@@ -25,19 +30,19 @@
             </font>
         </Text>
         <PasswordField id="passwordBox" fx:id="contrasenaField" layoutX="371.0" layoutY="290.0" prefHeight="45.0" prefWidth="196.0" promptText="Contraseña" />
-      <Button fx:id="registroButton" layoutX="697.0" layoutY="512.0" mnemonicParsing="false" onAction="#registro" prefHeight="34.0" prefWidth="106.0" style="-fx-border-color: #3fa255;" text="REGISTRO">
-         <effect>
-            <Lighting bumpInput="$null">
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect></Button>
-      <Label layoutX="517.0" layoutY="519.0" text="¿NO ESTÁS REGISTRADO?">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="consola" layoutX="377.0" layoutY="350.0" prefHeight="18.0" prefWidth="186.0" textAlignment="CENTER" textFill="#e51111" />
+        <Button fx:id="registroButton" layoutX="697.0" layoutY="512.0" mnemonicParsing="false" onAction="#registro" prefHeight="46.0" prefWidth="152.0" styleClass="botonLogueo" text="REGISTRO">
+            <effect>
+                <Lighting bumpInput="$null" diffuseConstant="2.0" surfaceScale="0.0">
+                    <light>
+                        <Light.Distant color="#246be5" />
+                    </light>
+                </Lighting>
+            </effect></Button>
+        <Label layoutX="517.0" layoutY="519.0" text="¿NO ESTÁS REGISTRADO?">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="consola" layoutX="377.0" layoutY="350.0" prefHeight="18.0" prefWidth="186.0" textAlignment="CENTER" textFill="#e51111" />
     </children>
 </AnchorPane>

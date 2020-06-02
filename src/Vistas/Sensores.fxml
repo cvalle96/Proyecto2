@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="592.0" prefWidth="824.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraSensores">
+<AnchorPane prefHeight="592.0" prefWidth="824.0" styleClass="background" stylesheets="@../Estilos/estilos.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraSensores">
     <children>
-        <Label fx:id="labelSensores" alignment="CENTER" layoutX="187.0" layoutY="14.0" prefHeight="74.0" prefWidth="427.0" text="SENSORES">
+        <Label fx:id="tituloSensores" alignment="CENTER" layoutX="211.0" layoutY="14.0" prefHeight="74.0" prefWidth="395.0" style="-fx-font-size: 3.3em;" text="SENSORES">
             <font>
                 <Font size="40.0" />
             </font>
@@ -26,7 +27,7 @@
                 <Font size="20.0" />
             </font>
         </Label>
-        <Text layoutX="78.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0%                |                 25%                  |                 50%                  |            75%             |                 100%" wrappingWidth="667.0">
+        <Text layoutX="78.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.1em;" text="0%                |                 25%                  |                 50%                  |            75%             |                 100%" wrappingWidth="667.0">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -39,16 +40,26 @@
             </font>
         </Text>
         <ProgressBar fx:id="progressRuido" layoutX="64.0" layoutY="428.0" prefHeight="41.0" prefWidth="674.0" progress="0.0" />
-        <Text layoutX="65.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  10                    |                  20                    |                       40                   |                   60                    |                     80         " wrappingWidth="711.0">
+        <Text fx:id="porcentajeSensores" layoutX="65.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  10                    |                  20                    |                       40                   |                   60                    |                 80         " wrappingWidth="711.0">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
         </Text>
-      <Button fx:id="actualizarButton" alignment="CENTER" defaultButton="true" layoutX="624.0" layoutY="32.0" mnemonicParsing="false" onAction="#act" text="ACTUALIZAR">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Button>
+        <Button fx:id="actualizarButton" alignment="CENTER" defaultButton="true" layoutX="624.0" layoutY="32.0" mnemonicParsing="false" onAction="#act" text="ACTUALIZAR">
+            <font>
+                <Font size="17.0" />
+            </font>
+            <effect>
+                <Lighting diffuseConstant="2.0" specularExponent="20.47" surfaceScale="0.0">
+                    <bumpInput>
+                        <Shadow color="#246be5" height="0.0" radius="0.0" width="0.0" />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant color="#246be5" />
+                    </light>
+                </Lighting>
+            </effect>
+        </Button>
     </children>
 
 </AnchorPane>
