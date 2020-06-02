@@ -13,18 +13,18 @@
                 <DropShadow />
             </effect>
         </ListView>
-        <TextField fx:id="textFieldExpediente" layoutX="476.0" layoutY="214.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" />
-        <TextField fx:id="textFieldNombre" layoutX="476.0" layoutY="107.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" />
-        <Button fx:id="actualizarButton" layoutX="484.0" layoutY="330.0" mnemonicParsing="false" onAction="#modificarValores" prefHeight="56.0" prefWidth="200.0" text="ENVIAR CAMBIOS" textFill="#3fa255">
+        <TextField fx:id="textFieldExpediente" layoutX="476.0" layoutY="214.0" prefHeight="26.0" prefWidth="200.0" promptText="Expediente" style="-fx-border-color: #3fa255;" />
+        <TextField fx:id="textFieldNombre" layoutX="476.0" layoutY="107.0" prefHeight="26.0" prefWidth="200.0" promptText="Nombre" style="-fx-border-color: #3fa255;" />
+        <Button fx:id="actualizarButton" layoutX="484.0" layoutY="330.0" mnemonicParsing="false" onAction="#modificarValores" prefHeight="56.0" prefWidth="200.0" style="-fx-border-color: #246be5;" text="MODIFICAR">
             <font>
-                <Font size="18.0" />
+                <Font size="16.0" />
             </font></Button>
-        <Button fx:id="borrarButton" layoutX="484.0" layoutY="410.0" mnemonicParsing="false" onAction="#borrarEsteUsuario" prefHeight="56.0" prefWidth="200.0" text="BORRAR USUARIO" textFill="#ea0101">
+        <Button fx:id="borrarButton" layoutX="484.0" layoutY="410.0" mnemonicParsing="false" onAction="#borrarEsteUsuario" prefHeight="56.0" prefWidth="200.0" style="-fx-border-color: #C92A08;" text="BORRAR USUARIO" >
             <font>
-                <Font size="18.0" />
+                <Font size="16.0" />
             </font></Button>
-        <TextField fx:id="textFieldGrupo" layoutX="476.0" layoutY="269.0" prefHeight="26.0" prefWidth="200.0" promptText="Clase" />
-        <TextField fx:id="textFieldCarrera" layoutX="476.0" layoutY="160.0" prefHeight="26.0" prefWidth="200.0" promptText="Carrera" />
+        <TextField fx:id="textFieldGrupo" layoutX="476.0" layoutY="269.0" prefHeight="26.0" prefWidth="200.0" promptText="Clase" style="-fx-border-color: #3fa255;" />
+        <TextField fx:id="textFieldCarrera" layoutX="476.0" layoutY="160.0" prefHeight="26.0" prefWidth="200.0" promptText="Carrera" style="-fx-border-color: #3fa255;" />
         <Button fx:id="obtenerButton" alignment="CENTER" layoutX="141.0" layoutY="54.0" mnemonicParsing="false" onAction="#pintarAlumnos" text="Obtener alumnos" textFill="#001cff" />
     </children>
 </AnchorPane>

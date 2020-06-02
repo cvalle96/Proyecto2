@@ -27,20 +27,20 @@
                 <Font size="20.0" />
             </font>
         </Label>
-        <Text layoutX="78.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.1em;" text="0%                |                 25%                  |                 50%                  |            75%             |                 100%" wrappingWidth="667.0">
+        <Text layoutX="78.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 0.9em;" text="0%                |                 25%                  |                 50%                  |            75%             |                 100%" wrappingWidth="667.0">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
         <ProgressBar fx:id="progressHumedad" layoutX="68.0" layoutY="123.0" prefHeight="41.0" prefWidth="671.0" progress="0.0" />
         <ProgressBar fx:id="progressTemperatura" layoutX="64.0" layoutY="283.0" prefHeight="41.0" prefWidth="672.0" progress="0.0" />
-        <Text layoutX="71.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10                         |                         20                         |                          30                        |                           40" wrappingWidth="681.0">
+        <Text layoutX="71.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 0.9em;" text="10                         |                         20                         |                          30                        |                           40" wrappingWidth="681.0">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
         <ProgressBar fx:id="progressRuido" layoutX="64.0" layoutY="428.0" prefHeight="41.0" prefWidth="674.0" progress="0.0" />
-        <Text fx:id="porcentajeSensores" layoutX="65.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  10                    |                  20                    |                       40                   |                   60                    |                 80         " wrappingWidth="711.0">
+        <Text fx:id="porcentajeSensores" layoutX="65.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 0.9em;" text=" 10                   |                 20                   |                      40                  |                  60                   |                80" wrappingWidth="711.0">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>

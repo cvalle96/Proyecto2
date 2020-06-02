@@ -7,12 +7,12 @@
 
 <AnchorPane prefHeight="592.0" prefWidth="824.0" styleClass="background" stylesheets="@../Estilos/estilos.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladoras.controladoraPerfil">
     <children>
-        <Label layoutX="369.0" layoutY="231.0" prefHeight="27.0" prefWidth="119.0" text="Carrera:">
+        <Label layoutX="369.0" layoutY="231.0" prefHeight="27.0" prefWidth="119.0" style="-fx-font-size: 1.5em;" text="Carrera:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="179.0" prefHeight="27.0" prefWidth="119.0" text="Apellidos:">
+        <Label layoutX="369.0" layoutY="179.0" prefHeight="27.0" prefWidth="119.0" style="-fx-font-size: 1.5em;" text="Apellidos:">
             <font>
                 <Font size="18.0" />
             </font>
@@ -27,27 +27,27 @@
                 <Font size="36.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="289.0" prefHeight="27.0" prefWidth="119.0" text="Expediente:">
+        <Label layoutX="369.0" layoutY="289.0" prefHeight="27.0" prefWidth="146.0" style="-fx-font-size: 1.5em;" text="Expediente:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="369.0" layoutY="342.0" prefHeight="27.0" prefWidth="119.0" text="Grupo:">
+        <Label layoutX="369.0" layoutY="342.0" prefHeight="27.0" prefWidth="119.0" style="-fx-font-size: 1.5em;" text="Grupo:">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <TextField fx:id="nombreTextfield" layoutX="503.0" layoutY="125.0" prefHeight="31.0" prefWidth="232.0" />
-        <TextField fx:id="apellidosTextfield" layoutX="503.0" layoutY="177.0" prefHeight="31.0" prefWidth="232.0" />
-        <TextField fx:id="carreraTextfield" layoutX="503.0" layoutY="233.0" prefHeight="31.0" prefWidth="232.0" />
-        <TextField fx:id="expedienteTextfield" layoutX="503.0" layoutY="285.0" prefHeight="31.0" prefWidth="232.0" />
-        <TextField fx:id="grupoTextfield" layoutX="503.0" layoutY="340.0" prefHeight="31.0" prefWidth="232.0" />
+        <TextField fx:id="nombreTextfield" layoutX="515.0" layoutY="127.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;" />
+        <TextField fx:id="apellidosTextfield" layoutX="515.0" layoutY="179.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;" />
+        <TextField fx:id="carreraTextfield" layoutX="515.0" layoutY="235.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;" />
+        <TextField fx:id="expedienteTextfield" layoutX="515.0" layoutY="287.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;" />
+        <TextField fx:id="grupoTextfield" layoutX="515.0" layoutY="342.0" prefHeight="31.0" prefWidth="232.0" style="-fx-border-color: #3fa255;" />
         <Button fx:id="logOffButton" layoutX="35.0" layoutY="448.0" mnemonicParsing="false" onAction="#logOut" prefHeight="50.0" prefWidth="146.0" text="Log Off" textFill="#fd3a3a">
             <font>
                 <Font size="21.0" />
             </font>
         </Button>
-        <Button fx:id="actualizar" layoutX="478.0" layoutY="433.0" mnemonicParsing="false" onAction="#pintar" prefHeight="64.0" prefWidth="210.0" text="ACTUALIZAR">
+        <Button fx:id="actualizar" layoutX="478.0" layoutY="433.0" mnemonicParsing="false" onAction="#pintar" prefHeight="64.0" prefWidth="210.0" style="-fx-border-color: #246be5;" text="ACTUALIZAR">
             <font>
                 <Font size="18.0" />
             </font></Button>

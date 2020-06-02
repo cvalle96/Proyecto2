@@ -13,15 +13,15 @@
                 <DropShadow />
             </effect>
         </ListView>
-        <TextField fx:id="textFieldNota" layoutX="558.0" layoutY="191.0" prefHeight="39.0" prefWidth="216.0" promptText="Nota" />
+        <TextField fx:id="textFieldNota" layoutX="558.0" layoutY="191.0" prefHeight="39.0" prefWidth="216.0" promptText="Nota" style="-fx-border-color: #3fa255;"/>
         <Button fx:id="obtenerButton" alignment="CENTER" layoutX="158.0" layoutY="52.0" mnemonicParsing="false" onAction="#pintarAlumnos" prefHeight="39.0" prefWidth="142.0" text="CARGAR DATOS" textFill="#001cff" />
         <ListView fx:id="listaAsignatura" layoutX="237.0" layoutY="134.0" onMouseClicked="#selectThisAsignatura" prefHeight="325.0" prefWidth="184.0">
             <effect>
                 <DropShadow />
             </effect>
         </ListView>
-        <TextField fx:id="textFieldComentario" layoutX="558.0" layoutY="272.0" prefHeight="47.0" prefWidth="216.0" promptText="Comentario" />
-        <Button fx:id="buttonEnviarNota" layoutX="566.0" layoutY="359.0" mnemonicParsing="false" onAction="#enviaNota" prefHeight="38.0" prefWidth="184.0" text="ENVIAR NOTA" textFill="#3fa255">
+        <TextField fx:id="textFieldComentario" layoutX="558.0" layoutY="272.0" prefHeight="47.0" prefWidth="216.0" promptText="Comentario" style="-fx-border-color: #3fa255;"/>
+        <Button fx:id="buttonEnviarNota" layoutX="566.0" layoutY="359.0" mnemonicParsing="false" onAction="#enviaNota" prefHeight="38.0" prefWidth="184.0" text="ENVIAR NOTA" style="-fx-border-color: #246be5;" >
             <font>
                 <Font size="18.0" />
             </font>

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class Registro {
 
     @FXML
-    TextField usernameBox, nombreBox, apellidoBox, groupBox, careerBox, aulaBox;
+    TextField usernameBox, nombreBox, apellidoBox, careerBox, aulaBox;
     @FXML
     Label consola;
     @FXML
@@ -44,8 +44,8 @@ public class Registro {
     }
 
     public void registrar(ActionEvent actionEvent) throws IOException, SQLException {
-        // if check
-        if (true){
+
+        if (check()){
             Boolean prof = false;
             String answer = Math.random() +"";
             String expediente = answer.substring(2,9);
@@ -126,14 +126,11 @@ public class Registro {
         } else if (passwordBox.getText().equals("")) {
             consola.setText("falta contraseña!");
             return false;
-        } else if (groupBox.getText().equals("")) {
-            consola.setText("falta grupo!");
-            return false;
         } else if (careerBox.getText().equals("")) {
             consola.setText("falta carrera!");
             return false;
         }else if (aulaBox.getText().equals("")) {
-            consola.setText("falta aula!");
+            consola.setText("falta grupo!");
             return false;
         }else if (apellidoBox.getText().equals("")) {
             consola.setText("faltan apellidos!");
@@ -151,7 +148,6 @@ public class Registro {
         usernameBox = new TextField();
         nombreBox = new TextField();
         apellidoBox = new TextField();
-        groupBox = new TextField();
         careerBox = new TextField();
         aulaBox= new TextField();
     }
