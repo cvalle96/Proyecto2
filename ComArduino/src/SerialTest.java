@@ -103,7 +103,7 @@ public class SerialTest extends parsearFecha implements SerialPortEventListener 
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                 LocalDateTime now = LocalDateTime.now();
                 String hora = dtf.format(now);
-                if (aula >= 6){
+                if (aula >= 5){
                     aula =1;
                 }
                 String query = "INSERT INTO registro (aula, temperatura, ruido, humedad,hora) VALUES ("+aula+", " + temperatura + ", " + ruido + ", " + humedad + ", '"+ hora +"')";
