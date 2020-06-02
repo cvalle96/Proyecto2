@@ -32,7 +32,7 @@ public class controladoraSensores extends controladoraPrincipal{
         progressTemperatura = new ProgressBar();
         progressHumedad = new ProgressBar();
         claseActual = currentUser.getClase();
-
+        labelSensores = new Label();
     }
 
 
@@ -52,7 +52,7 @@ public class controladoraSensores extends controladoraPrincipal{
     private void dibujar() {
         labelSensores.setText("mostrando aula: " + currentUser.getClase());
         progressHumedad.setProgress(humedadActual / 100);
-        progressRuido.setProgress((ruidoActual * 102) /100);         //voltios
+        progressRuido.setProgress((ruidoActual * 204) /100);         //voltios
         progressTemperatura.setProgress((temperaturaActual *1.25) /100);
 
     }
