@@ -16,7 +16,15 @@
 #tituloSensores{
     -fx-font-size: 3.3em;
 }
-#porcentajeSensores{
+#porcentajeTemperatura{
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+}
+#porcentajeHumedad{
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+}
+#porcentajeRuido{
     -fx-font-size: 1.1em;
     -fx-font-weight: bold;
 }
