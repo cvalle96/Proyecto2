@@ -42,7 +42,6 @@ public class controladoraCalificar extends controladoraPrincipal {
         textFieldNota = new TextField();
         textFieldComentario = new TextField();
 
-        getAlumnos();
     }
 
     public void selectThisUser(MouseEvent mouseEvent) throws SQLException {
@@ -130,6 +129,7 @@ public class controladoraCalificar extends controladoraPrincipal {
     }
 
     public void pintarAlumnos(ActionEvent actionEvent) {
+        getAlumnos();
         observableUsuariosString = FXCollections.observableArrayList(listaNombres);
         listaUsuarios.setItems(observableUsuariosString);
         listaUsuarios.refresh();
